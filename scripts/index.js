@@ -98,24 +98,25 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    const emp = getEmployeeByID(username, password);
+    const emp = getEmployeeByLogin(username, password);
     console.log(emp);
+
 
     if (emp) {
         alert(`Welcome ${emp.username}! Logged in as ${emp.role}.`);
         // Redirect based on role
-        switch (role) {
+        switch (emp.role) {
             case "Employee":
-                window.location.href = "employee.html";
+                window.location.href = "/pages/layers/employee.html";
                 break;
             case "Manager":
-                window.location.href = "manager.html";
+                window.location.href = "/pages/layers/manager.html";
                 break;
             case "Security":
-                window.location.href = "security.html";
+                window.location.href = "/pages/layers/security.html";
                 break;
             case "HR":
-                window.location.href = "hr.html";
+                window.location.href = "/pages/layers/hr.html";
                 break;
             default:
                 alert("Please select a valid role!");
