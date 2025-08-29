@@ -1,1 +1,76 @@
-/*# sourceMappingURL=security.css.map */
+* {
+  margin: 0 !important;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+body {
+  background-color: #ccc;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.navbar {
+  background-color: #fff;
+}
+.navbar .today {
+  background-color: aqua;
+  padding: 5px 13px !important;
+  border-radius: 23px;
+}
+.navbar .route {
+  color: aqua;
+}
+
+#footer-security {
+  background-color: #fff;
+  height: 8vh;
+}
+
+#main-security {
+  height: 84vh;
+  position: relative;
+}
+#main-security .table-responsive {
+  max-height: 50vh;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+#main-security .card-security {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#main-security .card-security .search-input {
+  border: none;
+  outline: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+#main-security .card-security .table thead,
+#main-security .card-security .table .submit .btn {
+  white-space: nowrap;
+}
+#main-security .card-security .table tbody th {
+  font-weight: unset !important;
+}
+
+input[type=time] {
+  border: 1px solid #ccc;
+}
+
+.submit .btn {
+  white-space: nowrap;
+}/*# sourceMappingURL=security.css.map */

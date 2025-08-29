@@ -16,12 +16,120 @@
 </head>
 
 <body>
-   
+    <div id="navbar-elm"></div>
     <!-- html here -->
+    <div class="container-fluid">
+        <div class="row d-flex align-items-stretch">
 
+
+            <div class="col-md-7 d-flex">
+                <div class="p-3 border rounded w-100">
+                    <h4 class="mb-3">Employee Management</h4>
+                    <div class="d-flex justify-content-between mb-3">
+                        <input type="text" class="form-control w-50" placeholder="Search employee...">
+                        <div>
+                            <button class="btn border btn-sm">Add Employee</button>
+                            <button class="btn border btn-sm">Edit</button>
+                            <button class="btn border btn-sm">Delete</button>
+                        </div>
+                    </div>
+                    <hr class="my-4" />
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    <input type="checkbox">
+                                </th>
+                                <th scope="col">Emp ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Department</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Leave Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"> <input type="checkbox"></th>
+                                <td>1</td>
+                                <td>Ahmed Ali</td>
+                                <td>IT</td>
+                                <td>
+                                    <button class="btn border">
+                                        Present
+                                    </button>
+                                </td>
+                                <td>10 days</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> <input type="checkbox"></th>
+                                <td>2</td>
+                                <td>Mahmoud Ali</td>
+                                <td>HR</td>
+                                <td>
+                                    <button class="btn border">
+                                        Leave
+                                    </button>
+                                </td>
+                                <td>7 days</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> <input type="checkbox"></th>
+                                <td>3</td>
+                                <td>Sara Ali</td>
+                                <td>Finance</td>
+                                <td>
+                                    <button class="btn border">
+                                        Absent
+                                    </button>
+                                </td>
+                                <td>12 days</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="col-md-5 d-flex">
+                <div class="p-3 border rounded w-100">
+                    <h4 class="mb-3">Reports & Performance</h4>
+                    <div class="d-flex justify-content-between mb-3">
+                        <select class="form-select w-50">
+                            <option>Monthly Report</option>
+                            <option>Years</option>
+                            <option>Days</option>
+                        </select>
+                        <button class="btn border btn-sm">Export</button>
+                    </div>
+                    <h5>Total Employees: 3</h5>
+                    <h5>Present: 1</h5>
+                    <h5>Late: 0</h5>
+                    <h5>Absent: 1</h5>
+                    <hr class="my-4" />
+                    <h6 class="mt-3">Rewards & Penalties</h6>
+                    <div class="d-flex gap-2">
+                        <button class="btn border btn-sm">+ Bonus</button>
+                        <button class="btn border btn-sm">- Deduction</button>
+                        <button class="btn border btn-sm text-dark">Give Award</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="container-fluid px-0 my-4 ">
+        <div class="d-flex justify-content-between p-4 align-items-center mb-4 mx-auto shadow">
+            <h5>Home</h5>
+            <h5> Logout</h5>
+        </div>
+
+    </div>
     <!-- JS Tags -->
-    <script src="../../frameworks/bootstrap-5.3.8-dist/js/bootstrap.bundle.js"></script> <!-- Bootstrap JS -->
-    <script src="../../scripts/index.js"></script> <!-- Base JS -->
+    <script src="../../frameworks/bootstrap/js/bootstrap.bundle.js"></script> <!-- Bootstrap JS -->
+    <script type="module" src="../../scripts/layers/hrFunctions.js"></script> <!-- HR JS -->
 </body>
 
 </html>

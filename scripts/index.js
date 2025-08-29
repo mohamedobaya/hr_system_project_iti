@@ -8,26 +8,48 @@ const Data = {
     payrolls: []
 };
 
+let loggedEmployee = {}
+
 // automatically load when window is ready
 window.addEventListener("load", async () => {
-    await loadData();
-    console.log(getEmployeeByID(1));
+    await loadToLocalStorage(); // store default data from server.json to local-storage 
+    sotreDataRunTime(); // storing data for run-time usage
 
-    // console.log("loaded employees", Data.employees);
-    // console.log("loaded attendanceRecords", Data.attendanceRecords);
-    // console.log("loaded tasks", Data.tasks);
-    // console.log("loaded requests", Data.requests);
-    // console.log("loaded payrolls", Data.payrolls);
-
-    // console.log(Data);
 });
 
-const loadData = async () => {
-    Data.employees = await loadEmployees();
-    Data.attendanceRecords = await loadAttendanceRecords();
-    Data.tasks = await loadTasks();
-    Data.requests = await loadRequests();
-    Data.payrolls = await loadPayrolls();
+
+const loadToLocalStorage = async () => {
+    // clearing local-storage
+    localStorage.clear(); 
+    // storing employees data in local-storage
+    localStorage.setItem("employees", JSON.stringify(
+        await loadEmployees()
+    ));
+    // storing employees data in local-storage
+    localStorage.setItem("attendanceRecords", JSON.stringify(
+        await loadAttendanceRecords()
+    ));
+    // storing employees data in local-storage
+    localStorage.setItem("tasks", JSON.stringify(
+        await loadTasks()
+    ));
+    // storing employees data in local-storage
+    localStorage.setItem("requests", JSON.stringify(
+        await loadRequests()
+    ));
+    // storing employees data in local-storage
+    localStorage.setItem("payrolls", JSON.stringify(
+        await loadPayrolls()
+    ));
+}
+
+const sotreDataRunTime = () => {
+    Data.employees = JSON.parse(localStorage.getItem("employees"));
+    Data.attendanceRecords = JSON.parse(localStorage.getItem("attendanceRecords"));
+    Data.tasks = JSON.parse(localStorage.getItem("tasks"));
+    Data.requests = JSON.parse(localStorage.getItem("requests"));
+    Data.payrolls = JSON.parse(localStorage.getItem("payrolls"));
+    console.log(Data.employees);
 };
 
 const loadEmployees = async () => {
@@ -104,6 +126,8 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
 
     if (emp) {
         alert(`Welcome ${emp.username}! Logged in as ${emp.role}.`);
+        localStorage.setItem("loggedEmployeeID", emp.id);
+        // loggedEmployee = emp;
         // Redirect based on role
         switch (emp.role) {
             case "Employee":
@@ -128,4 +152,4 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
 
 });
 
-export { Data };
+export { Data, loggedEmployee };
