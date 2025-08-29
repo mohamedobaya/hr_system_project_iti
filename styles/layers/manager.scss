@@ -1,0 +1,31 @@
+.manager {
+    background-color: black;
+    &-task {
+        &-assign {
+            &-employee {
+                margin-top: 1em;
+                margin-bottom: 1em;
+                width: 20em;
+            }
+        }
+    }
+
+    table {
+        background-color: aqua;
+        width: 100%;
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+        /* ensures proper border rendering */
+    }
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        /* horizontal centering */
+        vertical-align: middle;
+        /* vertical centering */
+    }
+    
+}

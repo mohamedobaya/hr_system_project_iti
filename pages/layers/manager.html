@@ -17,9 +17,78 @@
 </head>
 
 <body>
-   
-    <!-- html here -->
 
+    <!-- html here -->
+    <div class="manager container bg-body-secondary">
+        <div class="manager-welcome py-3">
+            <h3>Manager Portal</h3>
+            <p>Welcome, Manager Mohamed Obaya</p>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="table my-5">
+                <thead>
+                    <tr>
+                        <th scope="col" class="bg-body-secondary">Employee</th>
+                        <th scope="col" class="bg-body-secondary">Type</th>
+                        <th scope="col" class="bg-body-secondary">Date</th>
+                        <th scope="col" class="bg-body-secondary">Reason</th>
+                        <th scope="col" class="bg-body-secondary">Status</th>
+                        <th scope="col" class="bg-body-secondary">Comment</th>
+                        <th scope="col" class="bg-body-secondary">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Ahmed Ali</th>
+                        <td>Leave</td>
+                        <td>2025-08-25</td>
+                        <td>Family emergency</td>
+                        <td>Pending</td>
+                        <td>
+                            <textarea name="" id=""></textarea>
+                        </td>
+                        <td>
+                            <div class="manager-btns d-flex">
+                                <a class="btn btn-success me-1">accept</a>
+                                <a class="btn btn-danger ms-1">reject</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Sara Hassan</th>
+                        <td>Late</td>
+                        <td>2025-08-25</td>
+                        <td>Traffic jam</td>
+                        <td>Pending</td>
+                        <td>
+                            <textarea name="" id=""></textarea>
+                        </td>
+                        <td>
+                            <div class="manager-btns d-flex">
+                                <a class="btn btn-success me-1">accept</a>
+                                <a class="btn btn-danger ms-1">reject</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="manager-task py-3">
+            <div class="manager-task-assign">
+                <h3>Assign Task</h3>
+                <select class="form-select manager-task-assign-employee" aria-label="Default select example">
+                    <option selected>Choose Employee</option>
+                    <option value="emp-id">${emp name}</option>
+                    <option value="emp-id">${emp name}</option>
+                    <option value="emp-id">${emp name}</option>
+                </select>
+                <input type="text" class="form-control manager-task-assign-employee" id="task-id" placeholder="Task title">
+                <a class="btn btn-success">assign</a>
+            </div>
+        </div>
+
+    </div>
     <!-- JS Tags -->
     <script src="../../frameworks/bootstrap-5.3.8-dist/js/bootstrap.bundle.js"></script> <!-- Bootstrap JS -->
     <script src="../../scripts/index.js"></script> <!-- Base JS -->
