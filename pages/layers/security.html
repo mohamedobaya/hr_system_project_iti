@@ -12,10 +12,12 @@
     <link rel="stylesheet" href="../../frameworks/bootstrap/css/bootstrap.min.css"> <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../../frameworks/fontawesome/css/fontawesome.min.css"> <!-- FontAwesome CSS -->
     <link rel="stylesheet" href="../../frameworks/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="../../styles/index.css"> <!-- Base CSS style -->
+    <link rel="stylesheet" href="../../styles/layers/security.css"> <!-- Base CSS style -->
 </head>
 
 <body>
+    <div id="content">
+
     <div id="navbar-elm"></div>
     <!-- html here -->
     <!-- body -->
@@ -40,45 +42,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-center">
-                            <th scope="row"><input type="checkbox" class="cursor"></th>
-                            <th scope="row">ranem</th>
-                            <th scope="row">ranem</th>
-                            <th scope="row">ranem</th>
-                            <th scope="row"><button class="btn btn-danger w-100 py-0 px-2">Absent</button></th>
-                            <th scope="row"><input type="time" value="00:00" class="rounded-2 py-0 px-2"></th>
-                            <th scope="row"><input type="time" value="00:00" class="rounded-2 py-0 px-2"></th>
-                            <th scope="row" class="text-capitalize">req:late</th>
-                        </tr>
-
-                        <tr class="text-center">
-                            <th scope="row"><input type="checkbox" class="cursor"></th>
-                            <th scope="row">ranem</th>
-                            <th scope="row">ranem</th>
-                            <th scope="row">ranem</th>
-                            <th scope="row"><button class="btn btn-primary w-100 py-0 px-2">Leave</button></th>
-                            <th scope="row"><input type="time" value="00:00" class="rounded-2 py-0 px-2"></th>
-                            <th scope="row"><input type="time" value="00:00" class="rounded-2 py-0 px-2"></th>
-                            <th scope="row" class="text-capitalize">req:leave</th>
-                        </tr>
-
-                        <tr class="text-center">
-                            <th scope="row"><input type="checkbox" class="cursor"></th>
-                            <th scope="row">ranem</th>
-                            <th scope="row">ranem</th>
-                            <th scope="row">ranem</th>
-                            <th scope="row"><button class="btn btn-warning text-white w-100 py-0 px-2">Late</button>
-                            </th>
-                            <th scope="row"><input type="time" value="00:00" class="rounded-2 py-0 px-2"></th>
-                            <th scope="row"><input type="time" value="00:00" class="rounded-2 py-0 px-2"></th>
-                            <th scope="row" class="text-capitalize">req:leave</th>
-                        </tr>
+                       
                     </tbody>
                 </table>
             </div>
             <!-- button submit -->
             <div class="submit w-25">
-                <button class="btn btn-primary "> Submit Change</button>
+                <button class="btn btn-primary " id="Updata"> Submit Change</button>
             </div>
         </div>
     </section>
@@ -86,6 +56,10 @@
     <footer id="footer-security" class="align-items-center d-flex px-3 ">
         <p class="text-capitalize fw-bold cursor">home/logout</p>
     </footer>
+        </div>
+
+
+
     <!-- JS Tags -->
     <script src="../../frameworks/bootstrap/js/bootstrap.bundle.js"></script> <!-- Bootstrap JS -->
     <script type="module" src="../../scripts/layers/securityFunctions.js"></script> <!-- Security JS -->

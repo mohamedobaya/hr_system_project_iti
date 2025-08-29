@@ -1,1 +1,9 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"hr.css"}
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "hr.scss"
+    ],
+    "names": [],
+    "file": "hr.css"
+}

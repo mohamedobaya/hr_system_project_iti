@@ -1,11 +1,13 @@
 .manager {
   background-color: black;
 }
+
 .manager-task-assign-employee {
   margin-top: 1em;
   margin-bottom: 1em;
   width: 20em;
 }
+
 .manager table {
   background-color: aqua;
   width: 100%;
@@ -13,6 +15,7 @@
   border-collapse: collapse;
   /* ensures proper border rendering */
 }
+
 .manager th,
 .manager td {
   border: 1px solid #ddd;
@@ -21,4 +24,5 @@
   /* horizontal centering */
   vertical-align: middle;
   /* vertical centering */
-}/*# sourceMappingURL=manager.css.map */
+}
+/*# sourceMappingURL=manager.css.map */

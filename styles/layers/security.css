@@ -1,7 +1,8 @@
 * {
   margin: 0 !important;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 ::-webkit-scrollbar {
@@ -25,11 +26,13 @@ body {
 .navbar {
   background-color: #fff;
 }
+
 .navbar .today {
   background-color: aqua;
   padding: 5px 13px !important;
   border-radius: 23px;
 }
+
 .navbar .route {
   color: aqua;
 }
@@ -43,34 +46,58 @@ body {
   height: 84vh;
   position: relative;
 }
+
 #main-security .table-responsive {
   max-height: 50vh;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
+
 #main-security .card-security {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
+
 #main-security .card-security .search-input {
   border: none;
   outline: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
+
 #main-security .card-security .table thead,
 #main-security .card-security .table .submit .btn {
   white-space: nowrap;
 }
+
 #main-security .card-security .table tbody th {
   font-weight: unset !important;
 }
 
-input[type=time] {
+input[type="time"] {
   border: 1px solid #ccc;
 }
 
 .submit .btn {
   white-space: nowrap;
-}/*# sourceMappingURL=security.css.map */
+}
+
+#content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  min-height: 100vh;
+}
+/*# sourceMappingURL=security.css.map */
