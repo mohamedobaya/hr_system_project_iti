@@ -36,3 +36,8 @@ const getEmployeeByID = (empID) => {
     return Data.employees.filter(emp => emp.id == empID)[0];
 }
 
+const getRequestByEmployeeID = (empID) => {
+    // TODO: logic
+    let req = {}
+    return req;
+}
