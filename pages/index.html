@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <div class="card shadow-lg border-0 rounded-4 mx-auto my-auto" style="max-width: 400px; width: 100%;">
+    <div class="card shadow-lg border-0 rounded-4 mx-auto my-5" style="max-width: 400px; width: 100%;">
         <div class="card-body p-4">
             <h3 class="card-title text-center mb-4">Login</h3>
 
@@ -32,7 +32,7 @@
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Enter password" required>
                 </div>
-                
+
                 <!-- Submit -->
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary btn-lg">Login</button>
@@ -44,8 +44,8 @@
     <script src="../frameworks/bootstrap/js/bootstrap.bundle.js"></script> <!-- Bootstrap JS -->
     <script type="module" src="../scripts/index.js"></script> <!-- Base JS -->
     <script>
-        document.getElementById("loginForm").addEventListener("submit", function (e) {
-            e.preventDefault();
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault();
             const username = document.getElementById("username").value;
             const role = document.getElementById("role").value;
 
