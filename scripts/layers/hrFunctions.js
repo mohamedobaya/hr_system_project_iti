@@ -15,7 +15,10 @@ let loggedEmployee = {}
 window.addEventListener("load", async () => {
     loadDataFromStorage();
     loggedEmployee = getEmployeeByID(localStorage.getItem("loggedEmployeeID"));
-    navbar.innerHTML = getNavbar(loggedEmployee.role, loggedEmployee.name);    
+    if (loggedEmployee == undefined) {
+        window.location.href = "/pages/index.html";
+    }
+    navbar.innerHTML = getNavbar(loggedEmployee.role, loggedEmployee.name, loggedEmployee.preferences.theme);
 });
 
 
