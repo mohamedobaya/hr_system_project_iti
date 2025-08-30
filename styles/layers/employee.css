@@ -1,1 +1,16 @@
 /*# sourceMappingURL=employee.css.map */
+
+
+      .dragging {
+        opacity: 0.5;
+      }
+
+      ul.list-unstyled {
+        min-height: 50px;
+        padding: 10px;
+        border: 2px dashed transparent;
+      }
+
+      ul.list-unstyled.drag-over {
+        border: 2px dashed #00bcd4;
+      }
