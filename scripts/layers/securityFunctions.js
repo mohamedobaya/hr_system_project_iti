@@ -46,10 +46,16 @@ function statusEmployeeOption(statusOption) {
 
     return statuses.map(status => {
         let style = "";
-        if (status === "Late") style = "background-color:#ffc107; color:#000;";
-        else if (status === "Present") style = "background-color:#0d6efd; color:#fff;";
-        else if (status === "Absent") style = "background-color:#dc3545; color:#fff;";
-
+        if (status === "Late") 
+            { 
+                style = "background-color:#ffc107; color:#000;";
+            }
+        else if (status === "Present"){
+             style = "background-color:#0d6efd; color:#fff;";
+        }
+        else if (status === "Absent"){
+             style = "background-color:#dc3545; color:#fff;";
+        }
         return `<option style="${style}" ${status === statusOption ? "selected" : ""}>${status}</option>`;
     });
 }
@@ -154,6 +160,10 @@ searchEmployees();
 function updateChanges() {
     let savebtn = document.getElementById("Updata");
     savebtn.addEventListener('click', function () {
+        let tablebody = document.querySelector('tbody')
+        let newrow = createNewRow(emp);
+
+        
 
     })
 }
