@@ -11,6 +11,16 @@ const Data = {
 };
 let loggedEmployee = {};
 
+
+window.addEventListener("load", async () => {
+    loadDataFromStorage();
+    loggedEmployee = getEmployeeByID(localStorage.getItem("loggedEmployeeID"));
+    if (loggedEmployee == undefined) {
+        window.location.href = "/pages/index.html";
+    }
+    navbar.innerHTML = getNavbar(loggedEmployee.role, loggedEmployee.name, loggedEmployee.preferences.theme);
+});
+
 // Function to get employee by ID
 const getEmployeeByID = (empID) => {
     return Data.employees.filter(emp => emp.id == empID)[0];
