@@ -154,7 +154,7 @@ const createAttendancelRow = (attendanceRecordID) => {
         <td id="checkOut-${attendanceRecord.id}">${attendanceRecord.checkOut}</td>
         <td id="status-${attendanceRecord.id}">${attendanceRecord.status}</td>
         <td id="minutesLate-${attendanceRecord.id}">${attendanceRecord.minutesLate}</td>
-        <td id="isWFH-${attendanceRecord.id}">${attendanceRecord.isWFH}</td>
+        <td id="isWFH-${attendanceRecord.id}">${attendanceRecord.isWFH ? "Work from Home": "Office"}</td>
         <td id="isLeave-${attendanceRecord.id}">${attendanceRecord.isLeave}</td>
         <td id="notes-${attendanceRecord.id}">${attendanceRecord.notes}</td>
     </tr>
