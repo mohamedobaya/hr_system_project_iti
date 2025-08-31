@@ -42,3 +42,6 @@ const getEmployeeByID = (empID) => {
 const searchEmployeeByName = (empName) => {
     return Data.employees;
 }
+
+
+// getEmployee
