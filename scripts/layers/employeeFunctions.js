@@ -1,4 +1,3 @@
-//js 
 import { getNavbar } from "../components/navbar.js";
 
 const Data = {
@@ -63,15 +62,23 @@ function makeDraggable(li) {
     dragged = null;
   });
 }
-// get tasks conditonally and render them (waled)
+
+// get tasks condition and render them (waled)
 function renderTasks() {
   const loggedEmployeeID = parseInt(localStorage.getItem("loggedEmployeeID"));
   const myTasks = Data.tasks.filter((t) => t.employeeId === loggedEmployeeID);
+
+  document.getElementById("todo").innerHTML = "";
+  document.getElementById("doing").innerHTML = "";
+  document.getElementById("done").innerHTML = "";
 
   myTasks.forEach((task) => {
     let li = document.createElement("li");
     li.className = "bg-primary-subtle rounded p-2 my-2";
     li.textContent = task.description;
+
+    li.setAttribute("data-id", task.id);
+
     makeDraggable(li);
 
     if (task.status === "Pending") {
@@ -98,11 +105,26 @@ function renderTasks() {
       if (dragged) {
         ul.appendChild(dragged);
         makeDraggable(dragged);
+
+        const taskId = parseInt(dragged.getAttribute("data-id"));
+        let task = Data.tasks.find((t) => t.id === taskId);
+
+        if (task) {
+          if (ul.id === "todo") {
+            task.status = "Pending";
+          } else if (ul.id === "doing") {
+            task.status = "In Progress";
+          } else if (ul.id === "done") {
+            task.status = "Done";
+          }
+          localStorage.setItem("tasks", JSON.stringify(Data.tasks));
+        }
       }
       ul.style.backgroundColor = "";
     });
   });
 }
+
 
 // Attendance center (omar)
 function renderAttendance() {
@@ -196,3 +218,24 @@ if (requestForm) {
     requestForm.reset();
   });
 }
+
+const currentDate = document.getElementById("request-date");
+
+if (currentDate) {
+  const today = new Date().toISOString().split("T")[0];
+  currentDate.setAttribute("min", today);
+}
+const tabs = document.querySelectorAll("#center-tabs .nav-link");
+const sections = document.querySelectorAll(".center-section");
+
+tabs.forEach((tab, index) => {
+  tab.style.cursor = "pointer";
+
+  tab.addEventListener("click", () => {
+    sections.forEach(sec => sec.style.display = "none");
+    tabs.forEach(t => t.classList.remove("active"));
+
+    tab.classList.add("active");
+    sections[index].style.display = "block";
+  });
+});
