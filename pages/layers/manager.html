@@ -27,12 +27,14 @@
             <h3>Manager Portal</h3>
             <p>Welcome, Manager Mohamed Obaya</p>
         </div>
+        <!-- Approval Center -->
         <div style="overflow-x:auto;">
             <h4 class="mb-0">Approval Center</h4>
             <table class="table my-5">
                 <thead>
                     <tr>
                         <th scope="col" class="bg-body-secondary">Employee</th>
+                        <th scope="col" class="bg-body-secondary">Department</th>
                         <th scope="col" class="bg-body-secondary">Request</th>
                         <th scope="col" class="bg-body-secondary">Date</th>
                         <th scope="col" class="bg-body-secondary">Notes</th>
@@ -41,6 +43,47 @@
                     </tr>
                 </thead>
                 <tbody id="approval-table"></tbody>
+            </table>
+        </div>
+
+        <!-- Attendance Center -->
+        <div style="overflow-x:auto;">
+            <h4 class="mb-0">Attendance Center</h4>
+            <table class="table my-5">
+                <thead>
+                    <tr>
+                        <th scope="col" class="bg-body-secondary">Employee</th>
+                        <th scope="col" class="bg-body-secondary">Department</th>
+                        <th scope="col" class="bg-body-secondary">Date</th>
+                        <th scope="col" class="bg-body-secondary">Check In</th>
+                        <th scope="col" class="bg-body-secondary">Check Out</th>
+                        <th scope="col" class="bg-body-secondary">Status</th>
+                        <th scope="col" class="bg-body-secondary">Minutes Late</th>
+                        <th scope="col" class="bg-body-secondary">Work From Home</th>
+                        <th scope="col" class="bg-body-secondary">Leave</th>
+                        <th scope="col" class="bg-body-secondary">Notes</th>
+                    </tr>
+                </thead>
+                <tbody id="attendance-table"></tbody>
+            </table>
+        </div>
+
+        <!-- Task Center -->
+        <div style="overflow-x:auto;">
+            <h4 class="mb-0">Task Center</h4>
+            <table class="table my-5">
+                <thead>
+                    <tr>
+                        <th scope="col" class="bg-body-secondary">Task ID</th>
+                        <th scope="col" class="bg-body-secondary">Task Title</th>
+                        <th scope="col" class="bg-body-secondary">Task Description</th>
+                        <th scope="col" class="bg-body-secondary">Employee</th>
+                        <th scope="col" class="bg-body-secondary">Department</th>
+                        <th scope="col" class="bg-body-secondary">Status</th>
+                        <th scope="col" class="bg-body-secondary">Due Date</th>
+                    </tr>
+                </thead>
+                <tbody id="task-table"></tbody>
             </table>
         </div>
 
