@@ -198,7 +198,7 @@ function getAllEmployees() {
   const savedChanges = JSON.parse(
     localStorage.getItem("employeeChanges") || "[]"
   );
-//updat change in localstorage
+  //updat change in localstorage
   Data.attendanceRecords.forEach((emp) => {
     const saved = savedChanges.find((e) => e.id == emp.id);
     if (saved) {
@@ -212,7 +212,7 @@ function getAllEmployees() {
     tablebody.append(NewRow);
   });
 }
- 
+
 //  search  employee
 function searchEmployees() {
   let searchinput = document.querySelector('input[type="search"]');
@@ -236,14 +236,14 @@ function searchEmployees() {
       } else {
         tablebody.innerHTML = `<tr><td colspan="8" class="text-center text-danger fw-bold fs-5">No employee found</td></tr>`;
       }
-    } 
+    }
     //search by name
     else {
       let employeeByName = Data.attendanceRecords.filter((emp) => {
         const allemp = Data.employees.find((e) => e.id == emp.employeeId);
         return allemp && allemp.name.toLowerCase().includes(value);
       });
-        //get employee
+      //get employee
       if (employeeByName.length > 0) {
         employeeByName.forEach((emp) => {
           let newrow = createNewRow(emp);
@@ -352,12 +352,12 @@ function calculateAttendance(emp) {
   const totalMinutes = hours * 60 + minutes;
 
   const officialStart = 9 * 60;
-  const lateThreshold = 11 * 60; 
+  const lateThreshold = 11 * 60;
 
   if (totalMinutes <= officialStart) {
     emp.status = "Present";
     emp.minutesLate = 0;
-  } else if (totalMinutes < lateThreshold) { 
+  } else if (totalMinutes < lateThreshold) {
     emp.status = "Late";
     emp.minutesLate = totalMinutes - officialStart;
     emp.notes = "Arrived late";
@@ -395,11 +395,11 @@ function initAttendanceByDate() {
       const employee = Data.employees.find(e => e.id == record.employeeId);
       if (!employee) return;
 
-      const row = createNewRow(record); 
+      const row = createNewRow(record);
 
       if (!isToday) {
         row.querySelectorAll("select, input, textarea, checkbox")
-           .forEach(el => el.disabled = true);
+          .forEach(el => el.disabled = true);
       }
 
       tableBody.appendChild(row);
@@ -414,4 +414,34 @@ function initAttendanceByDate() {
 initAttendanceByDate();
 
 
+///////////////////////////
+function todayAttendance() {
+  let attendanceRecordsToday = [];
 
+
+
+  const today = new Date().toISOString().split("T")[0];
+  for (emp of Data.employees) {
+    // TODO: fix the code below
+    let record = {
+      id: Data.attendanceRecords.length + 1,
+      date: today,
+      employeeId: emp.id,
+      checkIn: null,
+      checkOut: null,
+      // rest of data 
+    }
+    attendanceRecordsToday.push(record);
+  }
+
+
+
+
+
+
+
+  // attendancerecords run time update
+  Data.attendanceRecords = Data.attendanceRecords.concat(attendanceRecordsToday);
+  // update localstorage
+  localStorage.setItem("attendanceRecords", Data.attendanceRecords);
+} 
