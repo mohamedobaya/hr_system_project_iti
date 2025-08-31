@@ -12,15 +12,18 @@ let loggedEmployee = {}
 
 // automatically load when window is ready
 window.addEventListener("load", async () => {
-    await loadToLocalStorage(); // store default data from server.json to local-storage 
+    if (localStorage.length === 0) {
+        console.log("hello");
+        
+        await loadToLocalStorage(); // store default data from server.json to local-storage 
+    }
+
     sotreDataRunTime(); // storing data for run-time usage
 
 });
 
 
-const loadToLocalStorage = async () => {
-    // clearing local-storage
-    localStorage.clear(); 
+export const loadToLocalStorage = async () => {
     // storing employees data in local-storage
     localStorage.setItem("employees", JSON.stringify(
         await loadEmployees()
@@ -42,6 +45,7 @@ const loadToLocalStorage = async () => {
         await loadPayrolls()
     ));
 }
+
 
 const sotreDataRunTime = () => {
     Data.employees = JSON.parse(localStorage.getItem("employees"));

@@ -1,8 +1,7 @@
 import { lightColorTheme, darkColorTheme, themeStyle, dangerStyle, primaryStyle } from "./themes.js";
 
 export const getNavbar = (empRole, empName, empTheme) => {
-    const navbarTheme = empTheme == 'light' ? lightColorTheme: darkColorTheme;
-    
+    const navbarTheme = empTheme == 'light' ? lightColorTheme : darkColorTheme;
 
     return `
     <nav class="navbar navbar-expand-lg" ${themeStyle(navbarTheme)}">
@@ -22,6 +21,9 @@ export const getNavbar = (empRole, empName, empTheme) => {
                             <i class="fa-solid fa-circle-half-stroke"></i>
                         </a>
                     </li>
+                    <li class="nav-item mx-2 my-1">
+                        <a class="btn btn-warning" onclick="{localStorage.clear()}">Reset Local Storage</a>
+                    </li>
                     <li class="nav-item mx-auto my-1">
                         <a class="btn btn-danger" ${dangerStyle(navbarTheme)} href="../index.html">Logout</a>
                     </li>
@@ -30,4 +32,5 @@ export const getNavbar = (empRole, empName, empTheme) => {
         </div>
     </nav>
     `
-}; 
+};
+
