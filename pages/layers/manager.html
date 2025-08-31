@@ -20,15 +20,31 @@
     <div class="mx-auto">
         <div id="navbar-elm" class="mx-auto"></div>
     </div>
-    
+
     <!-- html here -->
+
     <div class="manager container bg-body-secondary mt-5 mx-auto">
         <div class="manager-welcome py-3">
             <h3>Manager Portal</h3>
             <p>Welcome, Manager Mohamed Obaya</p>
         </div>
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs mb-2" id="center-tabs">
+            <li class="nav-item">
+                <a class="nav-link active">Approvals</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Attendance Records</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Tasks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Assign New Task</a>
+            </li>
+        </ul>
         <!-- Approval Center -->
-        <div style="overflow-x:auto;">
+        <div style="overflow-x:auto;" class="py-3 center-section">
             <h4 class="mb-0">Approval Center</h4>
             <table class="table my-5">
                 <thead>
@@ -47,7 +63,7 @@
         </div>
 
         <!-- Attendance Center -->
-        <div style="overflow-x:auto;">
+        <div style="overflow-x:auto;" class="py-3 center-section">
             <h4 class="mb-0">Attendance Center</h4>
             <table class="table my-5">
                 <thead>
@@ -69,7 +85,7 @@
         </div>
 
         <!-- Task Center -->
-        <div style="overflow-x:auto;">
+        <div style="overflow-x:auto;" class="py-3 center-section">
             <h4 class="mb-0">Task Center</h4>
             <table class="table my-5">
                 <thead>
@@ -88,17 +104,20 @@
         </div>
 
         <!-- Assign New Task Center -->
-        <div id="manager-assign" class="manager-task py-3">
+        <div id="manager-assign" class="manager-task py-3 center-section">
             <div class="manager-task-assign">
-                <h3 class="mb-4">Assign New Task Center</h3>
+                <h4 class="mb-4">Assign New Task Center</h4>
                 <label for="employee-assign-task-selector" class="form-label">Choose Employee</label>
-                <select class="form-select manager-task-assign-employee my-3" id="employee-assign-task-selector" aria-label="Default select example">
+                <select class="form-select manager-task-assign-employee my-3" id="employee-assign-task-selector"
+                    aria-label="Default select example">
                     <option selected value="">Choose Employee</option>
                 </select>
                 <label for="new-task-title" class="form-label">Task Title</label>
-                <input type="text" class="form-control manager-task-assign-employee my-3" id="new-task-title" placeholder="Task title">
+                <input type="text" class="form-control manager-task-assign-employee my-3" id="new-task-title"
+                    placeholder="Task title">
                 <label for="new-task-description" class="form-label">Task Description</label>
-                <input type="text" class="form-control manager-task-assign-employee my-3" id="new-task-description" placeholder="Task Description">
+                <input type="text" class="form-control manager-task-assign-employee my-3" id="new-task-description"
+                    placeholder="Task Description">
                 <label for="new-task-date" class="form-label">Task Due Date</label>
                 <input type="date" class="form-control manager-task-assign-employee my-3" id="new-task-date">
                 <a id="assign-task-btn" class="btn btn-success">Assign Task</a>
@@ -109,6 +128,23 @@
     <!-- JS Tags -->
     <script src="../../frameworks/bootstrap/js/bootstrap.bundle.js"></script> <!-- Bootstrap JS -->
     <script type="module" src="../../scripts/layers/managerFunctions.js"></script> <!-- Manager JS -->
+    <!-- Navigation of Content -->
+    <script>
+        const tabs = document.querySelectorAll("#center-tabs .nav-link");
+        const sections = document.querySelectorAll(".center-section");
+
+        tabs.forEach((tab, index) => {
+            tab.style.cursor = "pointer";
+
+            tab.addEventListener("click", () => {
+                sections.forEach(sec => sec.style.display = "none");
+                tabs.forEach(t => t.classList.remove("active"));
+
+                tab.classList.add("active");
+                sections[index].style.display = "block";
+            });
+        });
+    </script>
 </body>
 
 </html>
