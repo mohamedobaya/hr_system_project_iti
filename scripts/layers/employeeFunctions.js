@@ -28,6 +28,22 @@ window.addEventListener("load", async () => {
   renderQuota();
 });
 
+// ---------------- Tabs Functionality ----------------
+const tabs = document.querySelectorAll("#center-tabs .nav-link");
+const sections = document.querySelectorAll(".center-section");
+
+tabs.forEach((tab, index) => {
+  tab.style.cursor = "pointer";
+
+  tab.addEventListener("click", () => {
+    sections.forEach(sec => sec.style.display = "none");
+    tabs.forEach(t => t.classList.remove("active"));
+
+    tab.classList.add("active");
+    sections[index].style.display = "block";
+  });
+});
+
 // ---------------- Load & Get Data ----------------
 const loadDataFromStorage = () => {
   Data.employees = JSON.parse(localStorage.getItem("employees") || "[]");
@@ -68,9 +84,9 @@ function renderTasks() {
   const loggedEmployeeID = parseInt(localStorage.getItem("loggedEmployeeID"));
   const myTasks = Data.tasks.filter((t) => t.employeeId === loggedEmployeeID);
 
-  document.getElementById("todo").innerHTML = "";
-  document.getElementById("doing").innerHTML = "";
-  document.getElementById("done").innerHTML = "";
+  document.getElementById("Pending").innerHTML = "";
+  document.getElementById("In Progress").innerHTML = "";
+  document.getElementById("Completed").innerHTML = "";
 
   myTasks.forEach((task) => {
     let li = document.createElement("li");
@@ -82,11 +98,11 @@ function renderTasks() {
     makeDraggable(li);
 
     if (task.status === "Pending") {
-      document.getElementById("todo").appendChild(li);
+      document.getElementById("Pending").appendChild(li);
     } else if (task.status === "In Progress") {
-      document.getElementById("doing").appendChild(li);
+      document.getElementById("In Progress").appendChild(li);
     } else {
-      document.getElementById("done").appendChild(li);
+      document.getElementById("Completed").appendChild(li);
     }
   });
 
@@ -110,12 +126,12 @@ function renderTasks() {
         let task = Data.tasks.find((t) => t.id === taskId);
 
         if (task) {
-          if (ul.id === "todo") {
+          if (ul.id === "Pending") {
             task.status = "Pending";
-          } else if (ul.id === "doing") {
+          } else if (ul.id === "In Progress") {
             task.status = "In Progress";
-          } else if (ul.id === "done") {
-            task.status = "Done";
+          } else if (ul.id === "Completed") {
+            task.status = "Completed";
           }
           localStorage.setItem("tasks", JSON.stringify(Data.tasks));
         }
@@ -189,6 +205,12 @@ function renderQuota() {
     ul.appendChild(li);
   });
 }
+const currentDate = document.getElementById("request-date");
+
+if (currentDate) {
+  const today = new Date().toISOString().split("T")[0];
+  currentDate.setAttribute("min", today);
+}
 
 // add New Request  (omar)
 const requestForm = document.getElementById("request-form");
@@ -219,23 +241,3 @@ if (requestForm) {
   });
 }
 
-const currentDate = document.getElementById("request-date");
-
-if (currentDate) {
-  const today = new Date().toISOString().split("T")[0];
-  currentDate.setAttribute("min", today);
-}
-const tabs = document.querySelectorAll("#center-tabs .nav-link");
-const sections = document.querySelectorAll(".center-section");
-
-tabs.forEach((tab, index) => {
-  tab.style.cursor = "pointer";
-
-  tab.addEventListener("click", () => {
-    sections.forEach(sec => sec.style.display = "none");
-    tabs.forEach(t => t.classList.remove("active"));
-
-    tab.classList.add("active");
-    sections[index].style.display = "block";
-  });
-});
