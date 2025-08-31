@@ -47,12 +47,12 @@ window.addEventListener("load", async () => {
     renderEmployeeTable();
     setupReportsSection();
 
-    // Event listeners
+    
     searchInput.addEventListener("keyup", renderEmployeeTable);
     employeeTableBody.addEventListener("click", handleTableButtonClick);
 });
 
-// Main Data Initialization Function
+
 const initializeData = async () => {
     const storedEmployees = JSON.parse(localStorage.getItem("employees"));
     
@@ -79,7 +79,7 @@ const initializeData = async () => {
     }
 };
 
-// Data handling functions
+
 const loadDataFromStorage = () => {
     Data.employees = JSON.parse(localStorage.getItem("employees") || '[]');
     Data.attendanceRecords = JSON.parse(localStorage.getItem("attendanceRecords") || '[]');
@@ -97,7 +97,7 @@ const saveDataToStorage = () => {
 };
 
 const getEmployeeByID = (empID) => {
-    // Ensure empID is a number for strict comparison
+    
     return Data.employees.find(emp => emp.id === Number(empID));
 };
 
@@ -122,14 +122,14 @@ function getLatestStatus(attendanceRecords, employeeId) {
 }
 
 function updateLeaveBalance(employeeId, daysToAdd) {
-    // Find the employee by ID and ensure ID is a number
+    
     const employee = Data.employees.find(emp => emp.id === Number(employeeId));
     if (employee) {
         employee.leaveBalance += daysToAdd;
         if (employee.leaveBalance < 0) {
             employee.leaveBalance = 0;
         }
-        // Save the changes to localStorage immediately
+        
         saveDataToStorage();
         renderEmployeeTable();
         showMessage(`Updated leave balance for employee ${employee.name}.`, 'success');
@@ -191,7 +191,7 @@ const handleBulkAction = (daysToAdd) => {
     });
 };
 
-// Reports Section
+//**********************  Reports  ****************************** */
 const setupReportsSection = () => {
     document.getElementById('totalEmployees').textContent = Data.employees.length;
     
@@ -218,7 +218,7 @@ const setupReportsSection = () => {
 };
 
 function populateFilters(employees, reports) {
-    // Clear previous options
+    
     filterDepartment.innerHTML = '<option value="">All Departments</option>';
     filterMonth.innerHTML = '<option value="">All Months</option>';
 
@@ -340,7 +340,7 @@ function renderCharts(employees, tasks, attendanceRecords) {
 }
 
 function exportToExcel() {
-    // Note: The HTML table for reports needs an ID, e.g., id="reportTable"
+   
     const table = document.getElementById('reportTable'); 
     if (!table) {
         showMessage('Reports table not found. Make sure the HTML table has id="reportTable".', 'danger');
@@ -369,7 +369,7 @@ function exportToExcel() {
 
 function exportToPDF() {
     window.jsPDF = window.jspdf.jsPDF;
-    // Note: The HTML table for reports needs an ID, e.g., id="reportTable"
+    
     const doc = new window.jsPDF('p', 'pt', 'a4');
     const element = document.querySelector('#reportTable');
     
