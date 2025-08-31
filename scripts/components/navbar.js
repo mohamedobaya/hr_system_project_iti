@@ -17,7 +17,7 @@ export const getNavbar = (empRole, empName, empTheme) => {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto me-md-0 me-auto mb-2 mb-lg-0">
                     <li class="nav-item me-md-1 me-auto mx-auto my-1">
-                        <a class="btn btn-primary" ${primaryStyle(navbarTheme)} href="../index.html">
+                        <a class="btn btn-primary" ${primaryStyle(navbarTheme)}>
                             <i class="fa-solid fa-circle-half-stroke"></i>
                         </a>
                     </li>
