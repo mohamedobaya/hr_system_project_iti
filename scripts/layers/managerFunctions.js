@@ -21,6 +21,8 @@ window.addEventListener("load", async () => {
     navbar.innerHTML = getNavbar(loggedEmployee.role, loggedEmployee.name, loggedEmployee.preferences.theme);
 
     loadApprovalTable();
+    loadAttendanceTable();
+    loadTaskTable();
 });
 
 
@@ -42,6 +44,15 @@ const getRequestByID = (reqID) => {
     return Data.requests.filter(req => req.id == reqID)[0];
 }
 
+const getAttendanceRecordsByID = (arID) => {
+    return Data.attendanceRecords.filter(ar => ar.id == arID)[0];
+}
+
+const getTaskByID = (taskID) => {
+    return Data.tasks.filter(task => task.id == taskID)[0];
+}
+
+// Approval Center logic
 const approveRequest = (reqID) => {
     let req = getRequestByID(reqID);
     // TODO: accept logic
@@ -58,13 +69,14 @@ const rejectRequest = (reqID) => {
     loadApprovalTable();
 }
 
-const createRow = (reqID) => {
+const createApprovalRow = (reqID) => {
     let req = getRequestByID(reqID);
     const emp = getEmployeeByID(req.employeeId);
     const department = emp.department;
     return `
     <tr>
         <th scope="row" id="employee-${req.id}">${emp.name}</th>
+        <td id="department-${req.id}">${emp.department}</td>
         <td id="type-${req.id}">${req.type}</td>
         <td id="date-${req.id}">${req.date}</td>
         <td id="notes-${req.id}">${req.notes}</td>
@@ -83,7 +95,7 @@ const loadApprovalTable = () => {
     const approvalTable = document.getElementById("approval-table");
     approvalTable.innerHTML = "";
     for (let req of Data.requests) {
-        const row = createRow(req.id);
+        const row = createApprovalRow(req.id);
         approvalTable.innerHTML += row;
     }
 
@@ -91,8 +103,6 @@ const loadApprovalTable = () => {
     localStorage.setItem("requests", JSON.stringify(Data.requests));   
 }
 
-// event-listenrs
-// event-listners, for a request accept or reject
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("accept-req")) {
     approveRequest(e.target.dataset.id);
@@ -103,3 +113,71 @@ document.addEventListener("click", (e) => {
   }
 });
 
+// Attendance Center logic
+const createAttendancelRow = (attendanceRecordID) => {
+    let attendanceRecord = getAttendanceRecordsByID(attendanceRecordID);
+    // console.log(attendanceRecord);
+    
+    const emp = getEmployeeByID(attendanceRecord.employeeId);
+    // console.log(emp);
+    
+    return `
+    <tr>
+        <th scope="row" id="employee-${attendanceRecordID.id}">${emp.name}</th>
+        <td id="department-${attendanceRecord.id}">${emp.department}</td>
+        <td id="date-${attendanceRecord.id}">${attendanceRecord.date}</td>
+        <td id="checkIn-${attendanceRecord.id}">${attendanceRecord.checkIn}</td>
+        <td id="checkOut-${attendanceRecord.id}">${attendanceRecord.checkOut}</td>
+        <td id="status-${attendanceRecord.id}">${attendanceRecord.status}</td>
+        <td id="minutesLate-${attendanceRecord.id}">${attendanceRecord.minutesLate}</td>
+        <td id="isWFH-${attendanceRecord.id}">${attendanceRecord.isWFH}</td>
+        <td id="isLeave-${attendanceRecord.id}">${attendanceRecord.isLeave}</td>
+        <td id="notes-${attendanceRecord.id}">${attendanceRecord.notes}</td>
+    </tr>
+    `;
+}
+
+const loadAttendanceTable = () => {
+    const attendanceTable = document.getElementById("attendance-table");
+    attendanceTable.innerHTML = "";
+    for (let ar of Data.attendanceRecords) {
+        const row = createAttendancelRow(ar.id);
+        attendanceTable.innerHTML += row;
+    }
+
+    console.log(Data.attendanceRecords);
+    // localStorage.setItem("attendanceRecords", JSON.stringify(Data.attendanceRecords));   
+}
+
+// Task Center logic
+const creatTaskRow = (taskID) => {
+    let task = getTaskByID(taskID);
+    console.log(task);
+    
+    const emp = getEmployeeByID(task.employeeId);
+    console.log(emp);
+    
+    return `
+    <tr>
+        <th scope="row" id="task-${taskID}">${task.id}</th>
+        <td id="title-${taskID}">${task.title}</td>
+        <td id="description-${taskID}">${task.description}</td>
+        <td id="employee-${taskID}">${emp.name}</td>
+        <td id="department-${taskID}">${emp.department}</td>
+        <td id="status-${taskID}">${task.status}</td>
+        <td id="dueDate-${taskID}">${task.dueDate}</td>
+    </tr>
+    `;
+}
+
+const loadTaskTable = () => {
+    const taskTable = document.getElementById("task-table");
+    taskTable.innerHTML = "";
+    for (let task of Data.tasks) {
+        const row = creatTaskRow(task.id);
+        taskTable.innerHTML += row;
+    }
+
+    console.log(Data.tasks);
+    // localStorage.setItem("attendanceRecords", JSON.stringify(Data.attendanceRecords));   
+}
