@@ -54,6 +54,11 @@ hr {
 }
 
 .nav {
+    @media (max-width: 768px) {
+        font-size: 0.7em;
+        margin: 0em;
+
+    }
     &-item {
         background-color: var(--base-variant) !important;
         border-radius: 1em;
@@ -85,8 +90,6 @@ hr {
         color: var(--base-color) !important;
         border: none;
     }
-
-    border-color: var(--primary-color);
     border: none;
 }
 
