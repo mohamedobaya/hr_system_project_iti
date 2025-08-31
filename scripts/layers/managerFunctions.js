@@ -23,6 +23,7 @@ window.addEventListener("load", async () => {
     loadApprovalTable();
     loadAttendanceTable();
     loadTaskTable();
+    loadAssignTaskForm();
 });
 
 
@@ -100,27 +101,27 @@ const loadApprovalTable = () => {
     }
 
     console.log(Data.requests);
-    localStorage.setItem("requests", JSON.stringify(Data.requests));   
+    localStorage.setItem("requests", JSON.stringify(Data.requests));
 }
 
 document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("accept-req")) {
-    approveRequest(e.target.dataset.id);
-    
-  }
-  if (e.target.classList.contains("reject-req")) {
-    rejectRequest(e.target.dataset.id);
-  }
+    if (e.target.classList.contains("accept-req")) {
+        approveRequest(e.target.dataset.id);
+
+    }
+    if (e.target.classList.contains("reject-req")) {
+        rejectRequest(e.target.dataset.id);
+    }
 });
 
 // Attendance Center logic
 const createAttendancelRow = (attendanceRecordID) => {
     let attendanceRecord = getAttendanceRecordsByID(attendanceRecordID);
     // console.log(attendanceRecord);
-    
+
     const emp = getEmployeeByID(attendanceRecord.employeeId);
     // console.log(emp);
-    
+
     return `
     <tr>
         <th scope="row" id="employee-${attendanceRecordID.id}">${emp.name}</th>
@@ -153,10 +154,10 @@ const loadAttendanceTable = () => {
 const creatTaskRow = (taskID) => {
     let task = getTaskByID(taskID);
     console.log(task);
-    
+
     const emp = getEmployeeByID(task.employeeId);
     console.log(emp);
-    
+
     return `
     <tr>
         <th scope="row" id="task-${taskID}">${task.id}</th>
@@ -179,5 +180,68 @@ const loadTaskTable = () => {
     }
 
     console.log(Data.tasks);
-    // localStorage.setItem("attendanceRecords", JSON.stringify(Data.attendanceRecords));   
+}
+
+// Assign New Tasks
+const loadAssignTaskForm = () => {
+    // const form = document.getElementById("manager-assign");
+    const employeeSelector = document.getElementById("employee-assign-task-selector");
+    const newTaskTitle = document.getElementById("new-task-title");
+    const newTaskDescription = document.getElementById("new-task-description");
+    const newTaskDate = document.getElementById("new-task-date");
+    const assignTaskBtn = document.getElementById("assign-task-btn");
+
+    // employee-selector logic
+    Data.employees.forEach(emp => {
+        const option = document.createElement("option");
+        option.value = emp.id;
+        option.textContent = emp.name;
+        employeeSelector.appendChild(option);
+    })
+
+    // date base logic
+    const today = new Date().toISOString().split("T")[0];
+    newTaskDate.value = today;
+    newTaskDate.min = today;
+
+    // assign-btn logic
+    assignTaskBtn.addEventListener('click', () => {
+        // simple validation
+        if (!employeeSelector.value) {
+            alert("Please select an employee.");
+            return;
+        }
+        if (!newTaskTitle.value) {
+            alert("Please enter a task title.");
+            return;
+        }
+        if (!newTaskDescription.value) {
+            alert("Please enter a task description.");
+            return;
+        }
+        if (!newTaskDate.value) {
+            alert("Please select a due date.");
+            return;
+        }
+        
+        // collect task data
+        const newTask = {
+            id: Data.tasks.length + 1,
+            employeeId: employeeSelector.value,
+            title: newTaskTitle.value,
+            description: newTaskDescription.value,
+            status: "Pending",
+            dueDate: newTaskDate.value
+        };
+
+        // save to local storage
+        console.log("Task assigned:", newTask);
+        Data.tasks.push(newTask);
+        localStorage.setItem("tasks", JSON.stringify(Data.tasks));
+        // reload Task Center
+        loadTaskTable();
+        // alert that a new task have been assigned
+        const selectedEmployee = getEmployeeByID(employeeSelector.value);
+        alert(`Task assigned to ${selectedEmployee.name} successfully!`);
+    });
 }

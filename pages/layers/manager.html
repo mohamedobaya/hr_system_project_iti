@@ -87,17 +87,21 @@
             </table>
         </div>
 
-        <div class="manager-task py-3">
+        <!-- Assign New Task Center -->
+        <div id="manager-assign" class="manager-task py-3">
             <div class="manager-task-assign">
-                <h3>Assign Task</h3>
-                <select class="form-select manager-task-assign-employee" aria-label="Default select example">
-                    <option selected>Choose Employee</option>
-                    <option value="emp-id">${emp name}</option>
-                    <option value="emp-id">${emp name}</option>
-                    <option value="emp-id">${emp name}</option>
+                <h3 class="mb-4">Assign New Task Center</h3>
+                <label for="employee-assign-task-selector" class="form-label">Choose Employee</label>
+                <select class="form-select manager-task-assign-employee my-3" id="employee-assign-task-selector" aria-label="Default select example">
+                    <option selected value="">Choose Employee</option>
                 </select>
-                <input type="text" class="form-control manager-task-assign-employee" id="task-id" placeholder="Task title">
-                <a class="btn btn-success">assign</a>
+                <label for="new-task-title" class="form-label">Task Title</label>
+                <input type="text" class="form-control manager-task-assign-employee my-3" id="new-task-title" placeholder="Task title">
+                <label for="new-task-description" class="form-label">Task Description</label>
+                <input type="text" class="form-control manager-task-assign-employee my-3" id="new-task-description" placeholder="Task Description">
+                <label for="new-task-date" class="form-label">Task Due Date</label>
+                <input type="date" class="form-control manager-task-assign-employee my-3" id="new-task-date">
+                <a id="assign-task-btn" class="btn btn-success">Assign Task</a>
             </div>
         </div>
 
