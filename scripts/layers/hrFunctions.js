@@ -12,31 +12,104 @@ const Data = {
 let loggedEmployee = {};
 
 
+const employeeTableBody = document.getElementById("employee-table-body");
+const searchInput = document.getElementById("searchInput");
+const showReportsLink = document.getElementById('show-reports-link');
+const showEmployeesLink = document.getElementById('show-employees-link');
+const addBonusBtn = document.getElementById("add-bonus-btn");
+const deductBonusBtn = document.getElementById("deduct-bonus-btn");
+const reportTableBody = document.getElementById('reportTableBody');
+const filterDepartment = document.getElementById('filterDepartment');
+const filterMonth = document.getElementById('filterMonth');
+const filterStatus = document.getElementById('filterStatus');
+const exportExcelBtn = document.getElementById('exportExcel');
+const exportPDFBtn = document.getElementById('exportPDF');
+const messageBox = document.getElementById('message-box');
+
+
+const showMessage = (message, type = 'info') => {
+    messageBox.textContent = message;
+    messageBox.className = `alert alert-${type}`;
+    messageBox.style.display = 'block';
+    setTimeout(() => {
+        messageBox.style.display = 'none';
+    }, 3000);
+};
+
 window.addEventListener("load", async () => {
-    loadDataFromStorage();
+    await initializeData();
     loggedEmployee = getEmployeeByID(localStorage.getItem("loggedEmployeeID"));
     if (loggedEmployee == undefined) {
         window.location.href = "/pages/index.html";
+        return;
     }
     navbar.innerHTML = getNavbar(loggedEmployee.role, loggedEmployee.name, loggedEmployee.preferences.theme);
+    
+    // Initial rendering of all sections based on loaded data
+    updateEmployeeStatusAndLeaveBalance();
+    renderEmployeeTable();
+    setupReportsSection();
+
+    // Event listeners for Employee Management
+    if (showReportsLink) {
+        showReportsLink.addEventListener('click', showReports);
+    }
+    if (showEmployeesLink) {
+        showEmployeesLink.addEventListener('click', showEmployeeManagement);
+    }
+    searchInput.addEventListener("keyup", renderEmployeeTable);
+    employeeTableBody.addEventListener("click", handleTableButtonClick);
+    addBonusBtn.addEventListener("click", () => handleBulkAction(1));
+    deductBonusBtn.addEventListener("click", () => handleBulkAction(-1));
 });
 
-// Function to get employee by ID
-const getEmployeeByID = (empID) => {
-    return Data.employees.filter(emp => emp.id == empID)[0];
-}
+// Main Data Initialization Function
+const initializeData = async () => {
+    const storedEmployees = JSON.parse(localStorage.getItem("employees"));
+    
+    if (storedEmployees && storedEmployees.length > 0) {
+        loadDataFromStorage();
+        console.log("Data loaded from localStorage.");
+    } else {
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            Data.employees = data.employees;
+            Data.attendanceRecords = data.attendanceRecords;
+            Data.tasks = data.tasks;
+            Data.requests = data.requests;
+            Data.payrolls = data.payrolls;
+            saveDataToStorage();
+            console.log("Data fetched from server and saved to localStorage.");
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            showMessage('Error fetching data from server.', 'danger');
+        }
+    }
+};
 
-// Function to load all data from localStorage
+// Data handling functions
 const loadDataFromStorage = () => {
     Data.employees = JSON.parse(localStorage.getItem("employees") || '[]');
     Data.attendanceRecords = JSON.parse(localStorage.getItem("attendanceRecords") || '[]');
     Data.tasks = JSON.parse(localStorage.getItem("tasks") || '[]');
     Data.requests = JSON.parse(localStorage.getItem("requests") || '[]');
     Data.payrolls = JSON.parse(localStorage.getItem("payrolls") || '[]');
-    console.log("Loaded Data in hrFunctions.js:", Data);
-}
+};
 
+const saveDataToStorage = () => {
+    localStorage.setItem("employees", JSON.stringify(Data.employees));
+    localStorage.setItem("attendanceRecords", JSON.stringify(Data.attendanceRecords));
+    localStorage.setItem("tasks", JSON.stringify(Data.tasks));
+    localStorage.setItem("requests", JSON.stringify(Data.requests));
+    localStorage.setItem("payrolls", JSON.stringify(Data.payrolls));
+};
 
+const getEmployeeByID = (empID) => {
+    return Data.employees.find(emp => emp.id == empID);
+};
+
+// Section visibility
 const showReports = () => {
     document.getElementById('employee-management-section').style.display = 'none';
     document.getElementById('reports-section').style.display = 'block';
@@ -50,378 +123,285 @@ const showEmployeeManagement = () => {
 };
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    const tableBody = document.getElementById("employee-table-body");
-    const searchInput = document.getElementById("searchInput");
-    let employeesData = [];
-    const stylyeData = 'employeeManagementData';
-
-    
-    const showReportsLink = document.getElementById('show-reports-link');
-    const showEmployeesLink = document.getElementById('show-employees-link');
-
-    if (showReportsLink) {
-        showReportsLink.addEventListener('click', showReports);
-    }
-    if (showEmployeesLink) {
-        showEmployeesLink.addEventListener('click', showEmployeeManagement);
-    }
-
-    
-    const saveData = (data) => {
-        localStorage.setItem(stylyeData, JSON.stringify(data));
-    };
-
-    
-    const loadData = () => {
-        const storedData = localStorage.getItem(stylyeData);
-        return storedData ? JSON.parse(storedData) : null;
-    };
-
-    
-    const initializeData = () => {
-        const storedEmployees = loadData();
-
-        if (storedEmployees) {
-            employeesData = storedEmployees;
-            renderTable(employeesData);
-            console.log("Data loaded from localStorage.");
-        } else {
-            
-            fetch("/server/server.json")
-                .then(response => response.json())
-                .then(data => {
-                    const employees = data.employees;
-                    const attendance = data.attendanceRecords;
-                    employeesData = employees.map(emp => {
-                        const absenceDays = attendance.filter(a => a.employeeId === emp.id && a.status === "Absent").length;
-                        const leaveBalance = emp.annualVacationDays - absenceDays;
-                        return {
-                            ...emp,
-                            status: getLatestStatus(attendance, emp.id),
-                            leaveBalance: leaveBalance >= 0 ? leaveBalance : 0
-                        };
-                    });
-                    renderTable(employeesData);
-                    saveData(employeesData); 
-                    console.log("Data fetched from server and saved to localStorage.");
-                })
-                .catch(error => console.error("Error fetching data:", error));
+const updateEmployeeStatusAndLeaveBalance = () => {
+    Data.employees.forEach(emp => {
+        const absenceDays = Data.attendanceRecords.filter(a => a.employeeId === emp.id && a.status === "Absent").length;
+        emp.leaveBalance = emp.annualVacationDays - absenceDays;
+        if (emp.leaveBalance < 0) {
+            emp.leaveBalance = 0;
         }
-    };
-
-    function getLatestStatus(attendance, employeeId) {
-        const employeeRecords = attendance.filter(a => a.employeeId === employeeId);
-        if (employeeRecords.length > 0) {
-            const latestRecord = employeeRecords.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
-            return latestRecord.status;
-        }
-        return "Undefined";
-    }
-
-    function updateLeaveBalance(employeeId, daysToAdd) {
-        const employee = employeesData.find(emp => emp.id === employeeId);
-        if (employee) {
-            employee.leaveBalance += daysToAdd;
-            if (employee.leaveBalance < 0) {
-                employee.leaveBalance = 0;
-            }
-            renderTable(employeesData);
-            saveData(employeesData);
-        }
-    }
-    //************************************************************************* */
-
-    function renderTable(data) {
-        tableBody.innerHTML = "";
-        data.forEach(emp => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <th scope="row"><input type="checkbox"></th>
-                <td>${emp.id}</td>
-                <td>${emp.name}</td>
-                <td>${emp.department}</td>
-                <td><button class="btn border">${emp.status}</button></td>
-                <td>${emp.leaveBalance} days</td>
-                <td>
-                    <button class="btn btn-sm btn-success bonus-btn" data-employee-id="${emp.id}">+Bonus</button>
-                </td>
-                <td>
-                    <button class="btn btn-sm btn-danger deduction-btn" data-employee-id="${emp.id}">-Deduction</button>
-                </td>
-               
-                
-            `;
-            tableBody.appendChild(row);
-        });
-    }
-    //************************************************************************* */
-
-    searchInput.addEventListener("keyup", () => {
-        const value = searchInput.value.toLowerCase();
-        const filtered = employeesData.filter(emp =>
-            emp.name.toLowerCase().includes(value) ||
-            emp.department.toLowerCase().includes(value)
-        );
-        renderTable(filtered);
+        emp.status = getLatestStatus(Data.attendanceRecords, emp.id);
     });
-//************************************************************************* */
-    tableBody.addEventListener("click", (event) => {
-        if (event.target.classList.contains("bonus-btn")) {
-            const employeeId = parseInt(event.target.dataset.employeeId);
-            updateLeaveBalance(employeeId, 1);
+};
+
+function getLatestStatus(attendanceRecords, employeeId) {
+    const employeeRecords = attendanceRecords.filter(a => a.employeeId === employeeId);
+    if (employeeRecords.length > 0) {
+        const latestRecord = employeeRecords.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
+        return latestRecord.status;
+    }
+    return "Undefined";
+}
+
+function updateLeaveBalance(employeeId, daysToAdd) {
+    const employee = Data.employees.find(emp => emp.id === employeeId);
+    if (employee) {
+        employee.leaveBalance += daysToAdd;
+        if (employee.leaveBalance < 0) {
+            employee.leaveBalance = 0;
         }
-        if (event.target.classList.contains("deduction-btn")) {
-            const employeeId = parseInt(event.target.dataset.employeeId);
-            updateLeaveBalance(employeeId, -1);
-        }
+        saveDataToStorage();
+        renderEmployeeTable();
+        showMessage(`Updated leave balance for employee ${employee.name}.`, 'success');
+    }
+}
+
+function renderEmployeeTable() {
+    employeeTableBody.innerHTML = "";
+    const value = searchInput.value.toLowerCase();
+    const filteredData = Data.employees.filter(emp =>
+        emp.name.toLowerCase().includes(value) ||
+        emp.department.toLowerCase().includes(value)
+    );
+
+    filteredData.forEach(emp => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <th scope="row"><input type="checkbox"></th>
+            <td>${emp.id}</td>
+            <td>${emp.name}</td>
+            <td>${emp.department}</td>
+            <td><button class="btn border">${emp.status}</button></td>
+            <td>${emp.leaveBalance} days</td>
+            <td>
+                <button class="btn btn-sm btn-success bonus-btn" data-employee-id="${emp.id}">+Bonus</button>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-danger deduction-btn" data-employee-id="${emp.id}">-Deduction</button>
+            </td>
+        `;
+        employeeTableBody.appendChild(row);
     });
-//************************************************************************* */
-    document.getElementById("add-bonus-btn").addEventListener("click", () => {
-        const selectedEmployees = Array.from(tableBody.querySelectorAll("tr input[type='checkbox']:checked")).map(checkbox => {
-            const row = checkbox.closest("tr");
-            return parseInt(row.querySelector("td").textContent);
-        });
+}
 
-        if (selectedEmployees.length === 0) {
-            alert("Please select at least one employee.");
-            return;
-        }
+const handleTableButtonClick = (event) => {
+    if (event.target.classList.contains("bonus-btn")) {
+        const employeeId = parseInt(event.target.dataset.employeeId);
+        updateLeaveBalance(employeeId, 1);
+    }
+    if (event.target.classList.contains("deduction-btn")) {
+        const employeeId = parseInt(event.target.dataset.employeeId);
+        updateLeaveBalance(employeeId, -1);
+    }
+};
 
-        selectedEmployees.forEach(employeeId => {
-            updateLeaveBalance(employeeId, 1);
-        });
-    });
-//************************************************************************* */
-    document.getElementById("deduct-bonus-btn").addEventListener("click", () => {
-        const selectedEmployees = Array.from(tableBody.querySelectorAll("tr input[type='checkbox']:checked")).map(checkbox => {
-            const row = checkbox.closest("tr");
-            return parseInt(row.querySelector("td").textContent);
-        });
-
-        if (selectedEmployees.length === 0) {
-            alert("Please select at least one employee.");
-            return;
-        }
-
-        selectedEmployees.forEach(employeeId => {
-            updateLeaveBalance(employeeId, -1);
-        });
+const handleBulkAction = (daysToAdd) => {
+    const selectedEmployees = Array.from(employeeTableBody.querySelectorAll("tr input[type='checkbox']:checked")).map(checkbox => {
+        const row = checkbox.closest("tr");
+        return parseInt(row.querySelector("td").textContent);
     });
 
+    if (selectedEmployees.length === 0) {
+        showMessage("Please select at least one employee.", 'warning');
+        return;
+    }
+
+    selectedEmployees.forEach(employeeId => {
+        updateLeaveBalance(employeeId, daysToAdd);
+    });
+};
+
+// Reports Section
+const setupReportsSection = () => {
+    document.getElementById('totalEmployees').textContent = Data.employees.length;
     
-    initializeData();
+    const allReports = Data.attendanceRecords.map(rec => {
+        const employee = Data.employees.find(e => e.id === rec.employeeId);
+        return {
+            name: employee ? employee.name : 'Unknown',
+            department: employee ? employee.department : 'Unknown',
+            date: rec.date,
+            status: rec.status,
+            notes: rec.notes
+        };
+    });
 
+    populateFilters(Data.employees, allReports);
+    applyFilters(allReports);
+    renderCharts(Data.employees, Data.tasks, Data.attendanceRecords);
     
+    filterDepartment.addEventListener('change', () => applyFilters(allReports));
+    filterMonth.addEventListener('change', () => applyFilters(allReports));
+    filterStatus.addEventListener('change', () => applyFilters(allReports));
+    exportExcelBtn.addEventListener('click', exportToExcel);
+    exportPDFBtn.addEventListener('click', exportToPDF);
+};
+
+function populateFilters(employees, reports) {
+    // Clear previous options
+    filterDepartment.innerHTML = '<option value="">All Departments</option>';
+    filterMonth.innerHTML = '<option value="">All Months</option>';
+
+    const departments = [...new Set(employees.map(e => e.department))];
+    departments.forEach(dept => {
+        const option = document.createElement('option');
+        option.value = dept;
+        option.textContent = dept;
+        filterDepartment.appendChild(option);
+    });
+
+    const months = [...new Set(reports.map(r => r.date.substring(0, 7)))];
+    months.forEach(month => {
+        const option = document.createElement('option');
+        option.value = month;
+        option.textContent = month;
+        filterMonth.appendChild(option);
+    });
+}
+
+function renderReportTable(dataToRender) {
+    reportTableBody.innerHTML = '';
+    dataToRender.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${row.name}</td>
+            <td>${row.department}</td>
+            <td>${row.date}</td>
+            <td>${row.status}</td>
+            <td>${row.notes}</td>
+        `;
+        reportTableBody.appendChild(tr);
+    });
+}
+
+function applyFilters(allReports) {
+    const selectedDepartment = filterDepartment.value;
+    const selectedMonth = filterMonth.value;
+    const selectedStatus = filterStatus.value;
+
+    let filteredData = allReports;
+    if (selectedDepartment) {
+        filteredData = filteredData.filter(r => r.department === selectedDepartment);
+    }
+    if (selectedMonth) {
+        filteredData = filteredData.filter(r => r.date.startsWith(selectedMonth));
+    }
+    if (selectedStatus) {
+        filteredData = filteredData.filter(r => r.status === selectedStatus);
+    }
+    renderReportTable(filteredData);
+}
+
+function renderCharts(employees, tasks, attendanceRecords) {
+    // Destroy previous chart instances to avoid conflicts
+    Chart.getChart('barChart')?.destroy();
+    Chart.getChart('pieChart')?.destroy();
+    Chart.getChart('lineChart')?.destroy();
+
+    const deptCounts = employees.reduce((acc, emp) => {
+        acc[emp.department] = (acc[emp.department] || 0) + 1;
+        return acc;
+    }, {});
     
+    new Chart(document.getElementById('barChart'), {
+        type: 'bar',
+        data: {
+            labels: Object.keys(deptCounts),
+            datasets: [{
+                label: 'Number of Employees',
+                data: Object.values(deptCounts),
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
 
+    if (tasks.length > 0) {
+        const taskCounts = tasks.reduce((acc, task) => {
+            acc[task.status] = (acc[task.status] || 0) + 1;
+            return acc;
+        }, {});
+        new Chart(document.getElementById('pieChart'), {
+            type: 'pie',
+            data: {
+                labels: Object.keys(taskCounts),
+                datasets: [{
+                    label: 'Task Status',
+                    data: Object.values(taskCounts),
+                    backgroundColor: ['#4bc0c0', '#ffcd56', '#ff6384']
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+    }
 
+    const monthlyLateMinutes = attendanceRecords.reduce((acc, rec) => {
+        if (rec.status === 'Late') {
+            const month = rec.date.substring(0, 7);
+            acc[month] = (acc[month] || 0) + rec.minutesLate;
+        }
+        return acc;
+    }, {});
+    new Chart(document.getElementById('lineChart'), {
+        type: 'line',
+        data: {
+            labels: Object.keys(monthlyLateMinutes).sort(),
+            datasets: [{
+                label: 'Total Late Minutes',
+                data: Object.keys(monthlyLateMinutes).sort().map(month => monthlyLateMinutes[month]),
+                borderColor: 'rgba(153, 102, 255, 1)',
+                tension: 0.1
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+}
 
-//************************************************************************* */
+function exportToExcel() {
+    const table = document.getElementById('reportTable');
+    if (!table) {
+        showMessage('Reports table not found.', 'danger');
+        return;
+    }
+    const csv = [];
+    const rows = table.querySelectorAll('tr');
 
+    for (let i = 0; i < rows.length; i++) {
+        let row = [], cols = rows[i].querySelectorAll('th, td');
+        for (let j = 0; j < cols.length; j++) {
+            let data = cols[j].innerText.replace(/"/g, '""');
+            row.push('"' + data + '"');
+        }
+        csv.push(row.join(','));
+    }
 
+    const csvString = csv.join('\n');
+    const a = document.createElement('a');
+    a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvString);
+    a.download = 'company_reports.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
 
-    fetch('/server/server.json')
-        .then(response => response.json())
-        .then(data => {
-            const employees = data.employees;
-            const totalEmployees = employees.length;
-            const attendanceRecords = data.attendanceRecords || [];
-            const tasks = data.tasks || [];
+function exportToPDF() {
+    window.jsPDF = window.jspdf.jsPDF;
+    const doc = new window.jsPDF('p', 'pt', 'a4');
+    const element = document.querySelector('#reportTable');
+    
+    if (!element) {
+        showMessage('Reports table not found.', 'danger');
+        return;
+    }
 
-            document.getElementById('totalEmployees').textContent = totalEmployees;
-            const filterDepartment = document.getElementById('filterDepartment');
-            const filterMonth = document.getElementById('filterMonth');
-            const filterStatus = document.getElementById('filterStatus');
-            const reportTableBody = document.getElementById('reportTableBody');
-            const exportExcelBtn = document.getElementById('exportExcel');
-            const exportPDFBtn = document.getElementById('exportPDF');
-
-          
-            const allReports = attendanceRecords.map(rec => {
-                const employee = employees.find(e => e.id === rec.employeeId);
-                return {
-                    name: employee ? employee.name : 'Unknown',
-                    department: employee ? employee.department : 'Unknown',
-                    date: rec.date,
-                    status: rec.status,
-                    notes: rec.notes
-                };
-            });
-
-            //************************************************************************* */
-            function populateFilters() {
-                const departments = [...new Set(employees.map(e => e.department))];
-                departments.forEach(dept => {
-                    const option = document.createElement('option');
-                    option.value = dept;
-                    option.textContent = dept;
-                    filterDepartment.appendChild(option);
-                });
-
-                const months = [...new Set(allReports.map(r => r.date.substring(0, 7)))];
-                months.forEach(month => {
-                    const option = document.createElement('option');
-                    option.value = month;
-                    option.textContent = month;
-                    filterMonth.appendChild(option);
-                });
-            }
-
-            //************************************************************************* */
-            function renderReportTable(dataToRender) {
-                reportTableBody.innerHTML = '';
-                dataToRender.forEach(row => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td>${row.name}</td>
-                        <td>${row.department}</td>
-                        <td>${row.date}</td>
-                        <td>${row.status}</td>
-                        <td>${row.notes}</td>
-                    `;
-                    reportTableBody.appendChild(tr);
-                });
-            }
-
-            //************************************************************************* */
-            function applyFilters() {
-                const selectedDepartment = filterDepartment.value;
-                const selectedMonth = filterMonth.value;
-                const selectedStatus = filterStatus.value;
-
-                let filteredData = allReports;
-
-                if (selectedDepartment) {
-                    filteredData = filteredData.filter(r => r.department === selectedDepartment);
-                }
-                if (selectedMonth) {
-                    filteredData = filteredData.filter(r => r.date.startsWith(selectedMonth));
-                }
-                if (selectedStatus) {
-                    filteredData = filteredData.filter(r => r.status === selectedStatus);
-                }
-
-                renderReportTable(filteredData);
-            }
-
-            //************************************************************************* */
-            function renderCharts() {
-                const deptCounts = employees.reduce((acc, emp) => {
-                    acc[emp.department] = (acc[emp.department] || 0) + 1;
-                    return acc;
-                }, {});
-                new Chart(document.getElementById('barChart'), {
-                    type: 'bar',
-                    data: {
-                        labels: Object.keys(deptCounts),
-                        datasets: [{
-                            label: 'Number of Employees',
-                            data: Object.values(deptCounts),
-                            backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: { responsive: true, maintainAspectRatio: false }
-                });
-
-                if (tasks.length > 0) {
-                    const taskCounts = tasks.reduce((acc, task) => {
-                        acc[task.status] = (acc[task.status] || 0) + 1;
-                        return acc;
-                    }, {});
-                    new Chart(document.getElementById('pieChart'), {
-                        type: 'pie',
-                        data: {
-                            labels: Object.keys(taskCounts),
-                            datasets: [{
-                                label: 'Task Status',
-                                data: Object.values(taskCounts),
-                                backgroundColor: ['#4bc0c0', '#ffcd56', '#ff6384']
-                            }]
-                        },
-                        options: { responsive: true, maintainAspectRatio: false }
-                    });
-                }
-
-                const monthlyLateMinutes = attendanceRecords.reduce((acc, rec) => {
-                    if (rec.status === 'Late') {
-                        const month = rec.date.substring(0, 7);
-                        acc[month] = (acc[month] || 0) + rec.minutesLate;
-                    }
-                    return acc;
-                }, {});
-                new Chart(document.getElementById('lineChart'), {
-                    type: 'line',
-                    data: {
-                        labels: Object.keys(monthlyLateMinutes).sort(),
-                        datasets: [{
-                            label: 'Total Late Minutes',
-                            data: Object.keys(monthlyLateMinutes).sort().map(month => monthlyLateMinutes[month]),
-                            borderColor: 'rgba(153, 102, 255, 1)',
-                            tension: 0.1
-                        }]
-                    },
-                    options: { responsive: true, maintainAspectRatio: false }
-                });
-            }
-
-            //************************************************************************* */
-            function exportToExcel() {
-                let table = document.getElementById('reportTableBody');
-                let csv = [];
-                let rows = table.querySelectorAll('tr');
-                
-                const headerRow = document.querySelector('.table-dark tr');
-                const headers = Array.from(headerRow.querySelectorAll('th')).map(th => `"${th.innerText}"`);
-                csv.push(headers.join(','));
-
-                for (let i = 0; i < rows.length; i++) {
-                    let row = [], cols = rows[i].querySelectorAll('td');
-                    for (let j = 0; j < cols.length; j++) {
-                        let data = cols[j].innerText.replace(/"/g, '""');
-                        row.push('"' + data + '"');
-                    }
-                    csv.push(row.join(','));
-                }
-
-                let csvString = csv.join('\n');
-                let a = document.createElement('a');
-                a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvString);
-                a.download = 'company_reports.csv';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-            }
-
-            //************************************************************************* */
-            function exportToPDF() {
-                window.jsPDF = window.jspdf.jsPDF;
-                const doc = new window.jsPDF('p', 'pt', 'a4');
-                const element = document.querySelector('table');
-                
-                doc.html(element, {
-                    callback: function(pdf) {
-                        pdf.save('company_reports.pdf');
-                    },
-                    x: 10,
-                    y: 10,
-                    html2canvas: { scale: 0.8 }
-                });
-            }
-
-            //************************************************************************* */
-            filterDepartment.addEventListener('change', applyFilters);
-            filterMonth.addEventListener('change', applyFilters);
-            filterStatus.addEventListener('change', applyFilters);
-            exportExcelBtn.addEventListener('click', exportToExcel);
-            exportPDFBtn.addEventListener('click', exportToPDF);
-
-            // Initial render
-            populateFilters();
-            renderCharts();
-            applyFilters();
-        })
-        .catch(err => console.error('Error fetching data:', err));
-});
+    doc.html(element, {
+        callback: function(pdf) {
+            pdf.save('company_reports.pdf');
+        },
+        x: 10,
+        y: 10,
+        html2canvas: { scale: 0.8 }
+    });
+}
