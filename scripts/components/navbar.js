@@ -1,13 +1,12 @@
 import { lightColorTheme, darkColorTheme, themeStyle, dangerStyle, primaryStyle } from "./themes.js";
 
-export const getNavbar = (empRole, empName, empTheme) => {
-    const navbarTheme = empTheme == 'light' ? lightColorTheme : darkColorTheme;
-
+export const getNavbar = (empRole, empName) => {
+    
     return `
-    <nav class="navbar navbar-expand-lg" ${themeStyle(navbarTheme)}">
-        <div class="container d-flex" ${themeStyle(navbarTheme)}>
-            <a class="navbar-brand" href="#" ${themeStyle(navbarTheme)}>
-                ${empRole || 'Not found'} / ${empName || 'Not found'}
+    <nav class="navbar navbar-expand-lg" ">
+        <div class="container d-flex">
+            <a class="navbar-brand" href="#">
+                <span class="emp-title">${empRole || 'Not found'} /</span> <span class="emp-name">${empName || 'Not found'}</span>
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,15 +16,15 @@ export const getNavbar = (empRole, empName, empTheme) => {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto me-md-0 me-auto mb-2 mb-lg-0">
                     <li class="nav-item me-md-1 me-auto mx-auto my-1">
-                        <a class="btn btn-primary" ${primaryStyle(navbarTheme)}>
+                        <a class="btn btn-theme" id="btn-theme">
                             <i class="fa-solid fa-circle-half-stroke"></i>
                         </a>
                     </li>
-                    <li class="nav-item mx-2 my-1">
+                    <li class="nav-item mx-md-2 mx-auto my-1">
                         <a class="btn btn-warning" onclick="{localStorage.clear()}">Reset Local Storage</a>
                     </li>
                     <li class="nav-item mx-auto my-1">
-                        <a class="btn btn-danger" ${dangerStyle(navbarTheme)} href="../index.html">Logout</a>
+                        <a class="btn btn-danger" href="../index.html">Logout</a>
                     </li>
                 </ul>
             </div>

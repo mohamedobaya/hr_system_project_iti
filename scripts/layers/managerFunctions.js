@@ -20,11 +20,34 @@ window.addEventListener("load", async () => {
     }
     navbar.innerHTML = getNavbar(loggedEmployee.role, loggedEmployee.name, loggedEmployee.preferences.theme);
 
+    const themeBtn = document.getElementById("btn-theme");
+
+    // theme button logic
+    const enableDarkmode = () => {
+        document.body.classList.add('darkmode');
+    }
+
+    const disableDarkmode = () => {
+        document.body.classList.remove('darkmode');
+    }
+    themeBtn.addEventListener('click', () => {
+        if (loggedEmployee.preferences.theme == 'light') {
+            loggedEmployee.preferences.theme = 'dark';
+            enableDarkmode();
+        } else {
+            loggedEmployee.preferences.theme = 'light';
+            disableDarkmode();
+        }
+    });
+
     loadApprovalTable();
     loadAttendanceTable();
     loadTaskTable();
     loadAssignTaskForm();
 });
+
+
+
 
 
 // Function to load data from localStorage
@@ -76,16 +99,16 @@ const createApprovalRow = (reqID) => {
     const department = emp.department;
     return `
     <tr>
-        <th scope="row" id="employee-${req.id}">${emp.name}</th>
+        <td scope="row" id="employee-${req.id}">${emp.name}</td>
         <td id="department-${req.id}">${emp.department}</td>
         <td id="type-${req.id}">${req.type}</td>
         <td id="date-${req.id}">${req.date}</td>
         <td id="notes-${req.id}">${req.notes}</td>
         <td id="status-${req.id}">${req.status}</td>
         <td id="btns-${req.id}">
-            <div class="manager-btns d-flex">
-                <a class="btn btn-success accept-req me-1" data-id='${reqID}'>accept</a>
-                <a class="btn btn-danger reject-req ms-1" data-id='${reqID}'>reject</a>
+            <div class="manager-btns">
+                <a class="btn btn-success accept-req my-1" data-id='${reqID}'>accept</a>
+                <a class="btn btn-danger reject-req my-1" data-id='${reqID}'>reject</a>
             </div>
         </td>
     </tr>
@@ -124,7 +147,7 @@ const createAttendancelRow = (attendanceRecordID) => {
 
     return `
     <tr>
-        <th scope="row" id="employee-${attendanceRecordID.id}">${emp.name}</th>
+        <td scope="row" id="employee-${attendanceRecordID.id}">${emp.name}</td>
         <td id="department-${attendanceRecord.id}">${emp.department}</td>
         <td id="date-${attendanceRecord.id}">${attendanceRecord.date}</td>
         <td id="checkIn-${attendanceRecord.id}">${attendanceRecord.checkIn}</td>
@@ -160,7 +183,7 @@ const creatTaskRow = (taskID) => {
 
     return `
     <tr>
-        <th scope="row" id="task-${taskID}">${task.id}</th>
+        <td scope="row" id="task-${taskID}">${task.id}</td>
         <td id="title-${taskID}">${task.title}</td>
         <td id="description-${taskID}">${task.description}</td>
         <td id="employee-${taskID}">${emp.name}</td>
@@ -223,7 +246,7 @@ const loadAssignTaskForm = () => {
             alert("Please select a due date.");
             return;
         }
-        
+
         // collect task data
         const newTask = {
             id: Data.tasks.length + 1,

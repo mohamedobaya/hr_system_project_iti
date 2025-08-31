@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../../styles/layers/manager.css"> <!-- Base CSS style -->
 </head>
 
+<!-- <body class="darkmode"> -->
 <body>
     <div class="mx-auto">
         <div id="navbar-elm" class="mx-auto"></div>
@@ -24,9 +25,9 @@
     <!-- html here -->
 
     <div class="manager container bg-body-secondary mt-5 mx-auto">
-        <div class="manager-welcome py-3">
+        <div class="manager-welcome py-3 emp-title">
             <h3>Manager Portal</h3>
-            <p>Welcome, Manager Mohamed Obaya</p>
+            <p><span class="emp-name">Welcome, Manager!</span></p>
         </div>
         <!-- Navigation Tabs -->
         <ul class="nav nav-tabs mb-2" id="center-tabs">
@@ -43,19 +44,20 @@
                 <a class="nav-link">Assign New Task</a>
             </li>
         </ul>
+        <hr>
         <!-- Approval Center -->
         <div style="overflow-x:auto;" class="py-3 center-section">
-            <h4 class="mb-0">Approval Center</h4>
+            <h4 class="mb-0 table-title">Approval Center</h4>
             <table class="table my-5">
                 <thead>
                     <tr>
-                        <th scope="col" class="bg-body-secondary">Employee</th>
-                        <th scope="col" class="bg-body-secondary">Department</th>
-                        <th scope="col" class="bg-body-secondary">Request</th>
-                        <th scope="col" class="bg-body-secondary">Date</th>
-                        <th scope="col" class="bg-body-secondary">Notes</th>
-                        <th scope="col" class="bg-body-secondary">Status</th>
-                        <th scope="col" class="bg-body-secondary">Action</th>
+                        <th scope="col" class="table-header">Employee</th>
+                        <th scope="col" class="table-header">Department</th>
+                        <th scope="col" class="table-header">Request</th>
+                        <th scope="col" class="table-header">Date</th>
+                        <th scope="col" class="table-header">Notes</th>
+                        <th scope="col" class="table-header">Status</th>
+                        <th scope="col" class="table-header">Action</th>
                     </tr>
                 </thead>
                 <tbody id="approval-table"></tbody>
@@ -64,20 +66,20 @@
 
         <!-- Attendance Center -->
         <div style="overflow-x:auto;display: none;" class="py-3 center-section">
-            <h4 class="mb-0">Attendance Center</h4>
+            <h4 class="mb-0 table-title">Attendance Center</h4>
             <table class="table my-5">
                 <thead>
                     <tr>
-                        <th scope="col" class="bg-body-secondary">Employee</th>
-                        <th scope="col" class="bg-body-secondary">Department</th>
-                        <th scope="col" class="bg-body-secondary">Date</th>
-                        <th scope="col" class="bg-body-secondary">Check In</th>
-                        <th scope="col" class="bg-body-secondary">Check Out</th>
-                        <th scope="col" class="bg-body-secondary">Status</th>
-                        <th scope="col" class="bg-body-secondary">Minutes Late</th>
-                        <th scope="col" class="bg-body-secondary">Work From Home</th>
-                        <th scope="col" class="bg-body-secondary">Leave</th>
-                        <th scope="col" class="bg-body-secondary">Notes</th>
+                        <th scope="col" class="table-header">Employee</th>
+                        <th scope="col" class="table-header">Department</th>
+                        <th scope="col" class="table-header">Date</th>
+                        <th scope="col" class="table-header">Check In</th>
+                        <th scope="col" class="table-header">Check Out</th>
+                        <th scope="col" class="table-header">Status</th>
+                        <th scope="col" class="table-header">Minutes Late</th>
+                        <th scope="col" class="table-header">Work From Home</th>
+                        <th scope="col" class="table-header">Leave</th>
+                        <th scope="col" class="table-header">Notes</th>
                     </tr>
                 </thead>
                 <tbody id="attendance-table"></tbody>
@@ -86,17 +88,17 @@
 
         <!-- Task Center -->
         <div style="overflow-x:auto;display: none;" class="py-3 center-section">
-            <h4 class="mb-0">Task Center</h4>
+            <h4 class="mb-0 table-title">Task Center</h4>
             <table class="table my-5">
                 <thead>
                     <tr>
-                        <th scope="col" class="bg-body-secondary">Task ID</th>
-                        <th scope="col" class="bg-body-secondary">Task Title</th>
-                        <th scope="col" class="bg-body-secondary">Task Description</th>
-                        <th scope="col" class="bg-body-secondary">Employee</th>
-                        <th scope="col" class="bg-body-secondary">Department</th>
-                        <th scope="col" class="bg-body-secondary">Status</th>
-                        <th scope="col" class="bg-body-secondary">Due Date</th>
+                        <th scope="col" class="table-header">Task ID</th>
+                        <th scope="col" class="table-header">Task Title</th>
+                        <th scope="col" class="table-header">Task Description</th>
+                        <th scope="col" class="table-header">Employee</th>
+                        <th scope="col" class="table-header">Department</th>
+                        <th scope="col" class="table-header">Status</th>
+                        <th scope="col" class="table-header">Due Date</th>
                     </tr>
                 </thead>
                 <tbody id="task-table"></tbody>
@@ -106,7 +108,7 @@
         <!-- Assign New Task Center -->
         <div id="manager-assign" class="manager-task py-3 center-section" style="display: none;">
             <div class="manager-task-assign">
-                <h4 class="mb-4">Assign New Task Center</h4>
+                <h4 class="mb-4 table-title">Assign New Task Center</h4>
                 <label for="employee-assign-task-selector" class="form-label">Choose Employee</label>
                 <select class="form-select manager-task-assign-employee my-3" id="employee-assign-task-selector"
                     aria-label="Default select example">
