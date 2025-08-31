@@ -167,7 +167,7 @@ function renderEmployeeTable() {
     filteredData.forEach(emp => {
         const row = document.createElement("tr");
         row.innerHTML = `
-            <th scope="row"><input type="checkbox"></th>
+            
             <td>${emp.id}</td>
             <td>${emp.name}</td>
             <td>${emp.department}</td>
@@ -178,6 +178,9 @@ function renderEmployeeTable() {
             </td>
             <td>
                 <button class="btn btn-sm btn-danger deduction-btn" data-employee-id="${emp.id}">-Deduction</button>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-info deduction-btn text-white" data-employee-id="${emp.id}">Get Awards</button>
             </td>
         `;
         employeeTableBody.appendChild(row);
