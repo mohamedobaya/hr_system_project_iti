@@ -42,16 +42,20 @@ const getRequestByID = (reqID) => {
     return Data.requests.filter(req => req.id == reqID)[0];
 }
 
-const acceptRequest = (reqID) => {
+const approveRequest = (reqID) => {
     let req = getRequestByID(reqID);
     // TODO: accept logic
-    console.log(req.id, req.employeeId);
+    req.status = "Approved";
+    console.log(req);
+    loadApprovalTable();
 }
 
 const rejectRequest = (reqID) => {
     let req = getRequestByID(reqID);
-    // TODO: accept logic
-    console.log(req.id, req.employeeId);
+    // TODO: reject logic
+    req.status = "Rejected";
+    console.log(req);
+    loadApprovalTable();
 }
 
 const createRow = (reqID) => {
@@ -60,15 +64,12 @@ const createRow = (reqID) => {
     const department = emp.department;
     return `
     <tr>
-        <th scope="row">${emp.name}</th>
-        <td>${req.type}</td>
-        <td>${req.date}</td>
-        <td>${req.notes}</td>
-        <td>${req.status}</td>
-        <td>
-            <textarea name="" id=""></textarea>
-        </td>
-        <td>
+        <th scope="row" id="employee-${req.id}">${emp.name}</th>
+        <td id="type-${req.id}">${req.type}</td>
+        <td id="date-${req.id}">${req.date}</td>
+        <td id="notes-${req.id}">${req.notes}</td>
+        <td id="status-${req.id}">${req.status}</td>
+        <td id="btns-${req.id}">
             <div class="manager-btns d-flex">
                 <a class="btn btn-success accept-req me-1" data-id='${reqID}'>accept</a>
                 <a class="btn btn-danger reject-req ms-1" data-id='${reqID}'>reject</a>
@@ -80,17 +81,21 @@ const createRow = (reqID) => {
 
 const loadApprovalTable = () => {
     const approvalTable = document.getElementById("approval-table");
+    approvalTable.innerHTML = "";
     for (let req of Data.requests) {
         const row = createRow(req.id);
         approvalTable.innerHTML += row;
     }
+
+    console.log(Data.requests);
+    localStorage.setItem("requests", JSON.stringify(Data.requests));   
 }
 
 // event-listenrs
 // event-listners, for a request accept or reject
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("accept-req")) {
-    acceptRequest(e.target.dataset.id);
+    approveRequest(e.target.dataset.id);
     
   }
   if (e.target.classList.contains("reject-req")) {
