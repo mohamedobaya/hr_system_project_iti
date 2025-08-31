@@ -15,30 +15,42 @@
 <body>
     <div id="navbar-elm"></div>
 
-     <div class="container-fluid">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <div class="container-fluid">
+        <ul class="nav nav-tabs py-4" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="dashboard-tab" data-bs-toggle="tab" data-bs-target="#dashboard-section" type="button" role="tab" aria-controls="dashboard-section" aria-selected="true">Dashboard</button>
+                <button class="nav-link active text-black fw-bold fs-5" 
+                id="dashboard-tab" data-bs-toggle="tab" 
+                data-bs-target="#dashboard-section"
+                 type="button" role="tab" aria-controls="dashboard-section"
+                  aria-selected="true">Dashboard</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports-section" type="button" role="tab" aria-controls="reports-section" aria-selected="false">Reports</button>
+                <button class="nav-link text-black fw-bold fs-5" id="reports-tab"
+                 data-bs-toggle="tab" data-bs-target="#reports-section"
+                  type="button" role="tab" aria-controls="reports-section" 
+                  aria-selected="false">Reports</button>
             </li>
         </ul>
         
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="dashboard-section" role="tabpanel" aria-labelledby="dashboard-tab">
+            <div class="tab-pane fade show active"
+              id="dashboard-section" role="tabpanel" aria-labelledby="dashboard-tab">
                 <div class="row">
                     <div id="employee-management-section" class="col-12 mb-3">
                         <div class="p-3 border rounded w-100">
-                            <h4 class="mb-3">Employee Management</h4>
-                            <div class="d-flex justify-content-between mb-5">
-                                <input id="searchInput" type="text" class="form-control w-50 p-2" placeholder="Search employee...">
-                                <div>
-                                    <select id="searchCriteria" class="form-select me-2">
+                            <h4 class="mb-3 fw-bold fs-2 text-center py-4">Employee Management</h4>
+                            <div class="d-flex justify-content-around gap-4 align-items-center mb-5">
+                                 <input id="searchInput" type="text" class="form-control  p-2" placeholder="Search employee...">
+                                
+                                   
+                                 <select id="searchCriteria" class="form-select w-50  me-2">
                                         <option value="name">Name</option>
                                         <option value="department">Department</option>
                                     </select>
-                                </div>
+                               
+                                    
+                                
+                                
                             </div>
 
                             <div class="table-responsive rounded-2">
@@ -51,9 +63,9 @@
                                             <th scope="col">Department</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Leave Balance</th>
-                                            <th scope="col">Increase</th>
-                                            <th scope="col">DeCrease</th>
-                                            <th scope="col">Awards</th>
+                                            <th scope="col" id="increase">Increase</th>
+                                            <th scope="col" id="descrese">DeCrease</th>
+                                            <th scope="col" id="awards">Awards</th>
                                         </tr>
                                     </thead>
                                     <tbody id="employee-table-body"></tbody>
@@ -68,9 +80,9 @@
             </div>
 
             <div class="tab-pane fade" id="reports-section" role="tabpanel" aria-labelledby="reports-tab">
-                <h2 class="text-center mb-4">Company Reports</h2>
+                <h2 class="text-center py-5 fw-bold fs-2 mb-4">Company Reports</h2>
 
-                <div class="text-start border mt-3">
+                <div class="text-start  mt-3">
                     <h4>Total Employees: <span id="totalEmployees">0</span></h4>
                 </div>
 

@@ -14,10 +14,7 @@ let loggedEmployee = {};
 
 const employeeTableBody = document.getElementById("employee-table-body");
 const searchInput = document.getElementById("searchInput");
-const showReportsLink = document.getElementById('show-reports-link');
-const showEmployeesLink = document.getElementById('show-employees-link');
-const addBonusBtn = document.getElementById("add-bonus-btn");
-const deductBonusBtn = document.getElementById("deduct-bonus-btn");
+
 const reportTableBody = document.getElementById('reportTableBody');
 const filterDepartment = document.getElementById('filterDepartment');
 const filterMonth = document.getElementById('filterMonth');
@@ -45,22 +42,14 @@ window.addEventListener("load", async () => {
     }
     navbar.innerHTML = getNavbar(loggedEmployee.role, loggedEmployee.name, loggedEmployee.preferences.theme);
     
-    // Initial rendering of all sections based on loaded data
+   
     updateEmployeeStatusAndLeaveBalance();
     renderEmployeeTable();
     setupReportsSection();
 
-    // Event listeners for Employee Management
-    if (showReportsLink) {
-        showReportsLink.addEventListener('click', showReports);
-    }
-    if (showEmployeesLink) {
-        showEmployeesLink.addEventListener('click', showEmployeeManagement);
-    }
+    // Event listeners
     searchInput.addEventListener("keyup", renderEmployeeTable);
     employeeTableBody.addEventListener("click", handleTableButtonClick);
-    addBonusBtn.addEventListener("click", () => handleBulkAction(1));
-    deductBonusBtn.addEventListener("click", () => handleBulkAction(-1));
 });
 
 // Main Data Initialization Function
@@ -68,9 +57,11 @@ const initializeData = async () => {
     const storedEmployees = JSON.parse(localStorage.getItem("employees"));
     
     if (storedEmployees && storedEmployees.length > 0) {
+        
         loadDataFromStorage();
         console.log("Data loaded from localStorage.");
     } else {
+        
         try {
             const response = await fetch(url);
             const data = await response.json();
@@ -106,22 +97,9 @@ const saveDataToStorage = () => {
 };
 
 const getEmployeeByID = (empID) => {
-    return Data.employees.find(emp => emp.id == empID);
+    // Ensure empID is a number for strict comparison
+    return Data.employees.find(emp => emp.id === Number(empID));
 };
-
-// Section visibility
-const showReports = () => {
-    document.getElementById('employee-management-section').style.display = 'none';
-    document.getElementById('reports-section').style.display = 'block';
-    document.getElementById('rewards-penalties-section').style.display = 'none';
-};
-
-const showEmployeeManagement = () => {
-    document.getElementById('employee-management-section').style.display = 'block';
-    document.getElementById('reports-section').style.display = 'none';
-    document.getElementById('rewards-penalties-section').style.display = 'block';
-};
-
 
 const updateEmployeeStatusAndLeaveBalance = () => {
     Data.employees.forEach(emp => {
@@ -144,12 +122,14 @@ function getLatestStatus(attendanceRecords, employeeId) {
 }
 
 function updateLeaveBalance(employeeId, daysToAdd) {
-    const employee = Data.employees.find(emp => emp.id === employeeId);
+    // Find the employee by ID and ensure ID is a number
+    const employee = Data.employees.find(emp => emp.id === Number(employeeId));
     if (employee) {
         employee.leaveBalance += daysToAdd;
         if (employee.leaveBalance < 0) {
             employee.leaveBalance = 0;
         }
+        // Save the changes to localStorage immediately
         saveDataToStorage();
         renderEmployeeTable();
         showMessage(`Updated leave balance for employee ${employee.name}.`, 'success');
@@ -167,20 +147,20 @@ function renderEmployeeTable() {
     filteredData.forEach(emp => {
         const row = document.createElement("tr");
         row.innerHTML = `
-            
+
             <td>${emp.id}</td>
             <td>${emp.name}</td>
             <td>${emp.department}</td>
             <td><button class="btn border">${emp.status}</button></td>
             <td>${emp.leaveBalance} days</td>
             <td>
-                <button class="btn btn-sm btn-success bonus-btn" data-employee-id="${emp.id}">+Bonus</button>
+                <button class="btn btn-sm btn-success bonus-btn" id="bonus-btn-${emp.id}" data-employee-id="${emp.id}">+Bouns</button>
             </td>
             <td>
-                <button class="btn btn-sm btn-danger deduction-btn" data-employee-id="${emp.id}">-Deduction</button>
+                <button class="btn btn-sm btn-danger deduction-btn" id="deduction-btn-${emp.id}" data-employee-id="${emp.id}">-Deduction</button>
             </td>
             <td>
-                <button class="btn btn-sm btn-info deduction-btn text-white" data-employee-id="${emp.id}">Get Awards</button>
+                <button class="btn btn-sm btn-info text-white" data-employee-id="${emp.id}">Get Awards</button>
             </td>
         `;
         employeeTableBody.appendChild(row);
@@ -188,20 +168,17 @@ function renderEmployeeTable() {
 }
 
 const handleTableButtonClick = (event) => {
-    if (event.target.classList.contains("bonus-btn")) {
-        const employeeId = parseInt(event.target.dataset.employeeId);
-        updateLeaveBalance(employeeId, 1);
-    }
-    if (event.target.classList.contains("deduction-btn")) {
-        const employeeId = parseInt(event.target.dataset.employeeId);
-        updateLeaveBalance(employeeId, -1);
+    const targetId = event.target.id;
+    if (targetId.startsWith("bonus-btn-") || targetId.startsWith("deduction-btn-")) {
+        const employeeId = event.target.dataset.employeeId;
+        const daysToAdd = targetId.startsWith("bonus-btn-") ? 1 : -1;
+        updateLeaveBalance(employeeId, daysToAdd);
     }
 };
 
 const handleBulkAction = (daysToAdd) => {
     const selectedEmployees = Array.from(employeeTableBody.querySelectorAll("tr input[type='checkbox']:checked")).map(checkbox => {
-        const row = checkbox.closest("tr");
-        return parseInt(row.querySelector("td").textContent);
+        return checkbox.dataset.employeeId;
     });
 
     if (selectedEmployees.length === 0) {
@@ -363,9 +340,10 @@ function renderCharts(employees, tasks, attendanceRecords) {
 }
 
 function exportToExcel() {
-    const table = document.getElementById('reportTable');
+    // Note: The HTML table for reports needs an ID, e.g., id="reportTable"
+    const table = document.getElementById('reportTable'); 
     if (!table) {
-        showMessage('Reports table not found.', 'danger');
+        showMessage('Reports table not found. Make sure the HTML table has id="reportTable".', 'danger');
         return;
     }
     const csv = [];
@@ -391,11 +369,12 @@ function exportToExcel() {
 
 function exportToPDF() {
     window.jsPDF = window.jspdf.jsPDF;
+    // Note: The HTML table for reports needs an ID, e.g., id="reportTable"
     const doc = new window.jsPDF('p', 'pt', 'a4');
     const element = document.querySelector('#reportTable');
     
     if (!element) {
-        showMessage('Reports table not found.', 'danger');
+        showMessage('Reports table not found. Make sure the HTML table has id="reportTable".', 'danger');
         return;
     }
 
