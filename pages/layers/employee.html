@@ -1,3 +1,4 @@
+//html code 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +19,7 @@
   <div id="navbar-elm"></div>
   <!-- Main Content -->
   <main class="container my-4 p-4 bg-white rounded shadow-sm text-center text-md-start">
-    <h1>Welcome back</h1> <br><br>
+    <h1>Welcome Back</h1> <br><br>  
 
 <!-- Tasks -->
 <section class="mb-4">
@@ -53,20 +54,57 @@
     </div>
   </div>
 </section>
-    <!-- Request Permission -->
-    <section class="mb-4">
-      <h4>Request Permission</h4>
-      <form class="w-100 w-md-25 d-flex flex-column gap-3 mx-auto mx-md-0">
-        <select class="form-select">
-          <option>Overtime</option>
-          <option>Leave</option>
-          <option>Remote</option>
-        </select>
-        <input type="date" class="form-control">
-        <textarea class="form-control" placeholder="Enter details"></textarea>
-        <button type="submit" class="btn btn-primary mt-2">Submit Request</button>
-      </form>
-    </section>
+  <!-- Request Center -->
+<section class="mb-4">
+  <h3>Request Center</h3>
+
+  <!-- Form -->
+  <form id="request-form" class="row g-3 mb-4">
+    <div class="col-md-4">
+      <label class="form-label">Request Type</label>
+      <select id="request-type" class="form-select" required>
+        <option value="Late">Late</option>
+        <option value="Absence">Absence</option>
+        <option value="WFH">Work From Home</option>
+        <option value="Overtime">Overtime</option>
+        <option value="Deadline Extension">Deadline Extension</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Date</label>
+      <input type="date" id="request-date" class="form-control" required>
+    </div>
+    <div class="col-md-12">
+      <label class="form-label">Details</label>
+      <textarea id="request-details" class="form-control" placeholder="Enter details"></textarea>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Submit Request</button>
+    </div>
+  </form>
+
+  <!-- Real-time Quota Counter -->
+  <div class="mb-4">
+    <h5>Quota Usage</h5>
+    <ul id="quota-list" class="list-group"></ul>
+  </div>
+
+  <!-- Requests Table -->
+  <h5>My Requests</h5>
+  <table id="requests-table" class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Type</th>
+        <th>Date</th>
+        <th>Details</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</section>
+
 
    <!-- Attendance -->
 <section class="mb-4">
@@ -85,14 +123,6 @@
     </tbody>
   </table>
 </section>
-
-
-    <!-- Vacation -->
-    <section>
-      <h3>Vacation Balance</h3>
-      <p><span class="fw-bold">Remaining Days:</span> 12</p>
-    </section>
-
   </main>
 
   <!-- JS Tags -->
