@@ -15,121 +15,125 @@
 <body>
     <div id="navbar-elm"></div>
 
-    <div class="container-fluid">
-        <div class="row">
+     <div class="container-fluid">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="dashboard-tab" data-bs-toggle="tab" data-bs-target="#dashboard-section" type="button" role="tab" aria-controls="dashboard-section" aria-selected="true">Dashboard</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports-section" type="button" role="tab" aria-controls="reports-section" aria-selected="false">Reports</button>
+            </li>
+        </ul>
+        
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="dashboard-section" role="tabpanel" aria-labelledby="dashboard-tab">
+                <div class="row">
+                    <div id="employee-management-section" class="col-12 mb-3">
+                        <div class="p-3 border rounded w-100">
+                            <h4 class="mb-3">Employee Management</h4>
+                            <div class="d-flex justify-content-between mb-5">
+                                <input id="searchInput" type="text" class="form-control w-50 p-2" placeholder="Search employee...">
+                                <div>
+                                    <select id="searchCriteria" class="form-select me-2">
+                                        <option value="name">Name</option>
+                                        <option value="department">Department</option>
+                                    </select>
+                                </div>
+                            </div>
 
-            <div id="employee-management-section" class="col-12 mb-3">
-                <div class="p-3 border rounded w-100">
-
-                    <div class="d-flex justify-content-between align-items-center py-2 mb-5">
-                        <h4 class="mb-3">Employee Management</h4>
-                        <a href="#" class="text-decoration-none text-black fs-3 fw-bold" id="show-reports-link"><h5> Reports</h5></a>
-                    </div>
-                    <div class="d-flex justify-content-between mb-5">
-                        <input id="searchInput" type="text" class="form-control w-50 p-2" placeholder="Search employee...">
-                        <div>
-                            <select id="searchCriteria" class="form-select me-2">
-                                <option value="name">Name</option>
-                                <option value="department">Department</option>
-                            </select>
+                            <div class="table-responsive rounded-2">
+                                <table class="table table-striped ">
+                                    <thead class="sticky-top">
+                                        <tr>
+                                            <th scope="col"><input type="checkbox"></th>
+                                            <th scope="col">Emp ID</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Department</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Leave Balance</th>
+                                            <th scope="col">Increase</th>
+                                            <th scope="col">DeCrease</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="employee-table-body"></tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="table-responsive rounded-2">
-                        <table class="table table-striped ">
-                            <thead class="sticky-top">
-                                <tr>
-                                    <th scope="col"><input type="checkbox"></th>
-                                    <th scope="col">Emp ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Department</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Leave Balance</th>
-                                    <th scope="col">Increase</th>
-                                    <th scope="col">DeCrease</th>
-                                </tr>
-                            </thead>
-                            <tbody id="employee-table-body"></tbody>
-                        </table>
+                <div id="rewards-penalties-section" class="container-fluid mt-5">
+                    <h2 class="text-center mb-5">Rewards and Penalties</h2>
+                    <div class="d-flex justify-content-around align-items-center">
+                        <button class="btn btn-primary" id="add-bonus-btn">+Bonus</button>
+                        <button class="btn btn-warning" id="deduct-bonus-btn">-Deduction</button>
+                        <button class="btn btn-info">Give Award</button>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div id="rewards-penalties-section" class="container-fluid mt-5">
-        <h2 class="text-center mb-5">Rewards and Penalties</h2>
-        <div class="d-flex justify-content-around align-items-center">
-            <button class="btn btn-primary" id="add-bonus-btn">+Bonus</button>
-            <button class="btn btn-warning" id="deduct-bonus-btn">-Deduction</button>
-            <button class="btn btn-info">Give Award</button>
-        </div>
-    </div>
+            <div class="tab-pane fade" id="reports-section" role="tabpanel" aria-labelledby="reports-tab">
+                <h2 class="text-center mb-4">Company Reports</h2>
 
-    <div id="reports-section" class="container-fluid my-4" style="display:none;">
-        <h2 class="text-center mb-4">Company Reports</h2>
+                <div class="text-start border mt-3">
+                    <h4>Total Employees: <span id="totalEmployees">0</span></h4>
+                </div>
 
-        <div class="text-start border mt-3">
-            <h4>Total Employees: <span id="totalEmployees">0</span></h4>
-        </div>
+                <div class="row mb-3 py-5">
+                    <div class="col-md-4">
+                        <label class="form-label">Department</label>
+                        <select id="filterDepartment" class="form-select">
+                            <option value="">All</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Month</label>
+                        <select id="filterMonth" class="form-select">
+                            <option value="">All</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Status</label>
+                        <select id="filterStatus" class="form-select">
+                            <option value="">All</option>
+                            <option value="Present">Present</option>
+                            <option value="Late">Late</option>
+                            <option value="Absent">Absent</option>
+                        </select>
+                    </div>
+                </div>
 
-        <div class="row mb-3 py-5">
-            <div class="col-md-4">
-                <label class="form-label">Department</label>
-                <select id="filterDepartment" class="form-select">
-                    <option value="">All</option>
-                </select>
+                <div class="row text-center mb-5 py-5 ">
+                    <div class="col-md-4">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                    <div class="col-md-4">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                    <div class="col-md-4">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="text-end mb-3">
+                    <button id="exportExcel" class="btn btn-success me-2">Export to Excel</button>
+                    <button id="exportPDF" class="btn btn-danger">Export to PDF</button>
+                </div>
+
+                <table class="table table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reportTableBody"></tbody>
+                </table>
             </div>
-            <div class="col-md-4">
-                <label class="form-label">Month</label>
-                <select id="filterMonth" class="form-select">
-                    <option value="">All</option>
-                </select>
-            </div>
-            <div class="col-md-4">
-                <label class="form-label">Status</label>
-                <select id="filterStatus" class="form-select">
-                    <option value="">All</option>
-                    <option value="Present">Present</option>
-                    <option value="Late">Late</option>
-                    <option value="Absent">Absent</option>
-                </select>
-            </div>
         </div>
-
-        <div class="row text-center mb-5 py-5 ">
-            <div class="col-md-4">
-                <canvas id="barChart"></canvas>
-            </div>
-            <div class="col-md-4">
-                <canvas id="pieChart"></canvas>
-            </div>
-            <div class="col-md-4">
-                <canvas id="lineChart"></canvas>
-            </div>
-        </div>
-
-        <div class="text-end mb-3">
-            <button id="exportExcel" class="btn btn-success me-2">Export to Excel</button>
-            <button id="exportPDF" class="btn btn-danger">Export to PDF</button>
-        </div>
-
-        <table class="table table-bordered">
-            <thead class="table-dark">
-                <tr>
-                    <th>Name</th>
-                    <th>Department</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody id="reportTableBody"></tbody>
-        </table>
-
-        <a href="#"
-        class="text-decoration-none text-black fs-3 fw-bold mb-4"
-        id="show-employees-link"><h5 class="mt-5">Back to Employee Management</h5></a>
     </div>
 
     <div class="container-fluid px-0 my-4 ">
