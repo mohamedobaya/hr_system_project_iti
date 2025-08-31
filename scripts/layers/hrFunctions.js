@@ -2,6 +2,7 @@ import { getNavbar } from "../components/navbar.js";
 
 const url = "./server/server.json";
 const navbar = document.getElementById("navbar-elm");
+
 const Data = {
     employees: [],
     attendanceRecords: [],
@@ -21,17 +22,7 @@ const filterMonth = document.getElementById('filterMonth');
 const filterStatus = document.getElementById('filterStatus');
 const exportExcelBtn = document.getElementById('exportExcel');
 const exportPDFBtn = document.getElementById('exportPDF');
-const messageBox = document.getElementById('message-box');
 
-
-const showMessage = (message, type = 'info') => {
-    messageBox.textContent = message;
-    messageBox.className = `alert alert-${type}`;
-    messageBox.style.display = 'block';
-    setTimeout(() => {
-        messageBox.style.display = 'none';
-    }, 3000);
-};
 
 window.addEventListener("load", async () => {
     await initializeData();
@@ -102,14 +93,27 @@ const getEmployeeByID = (empID) => {
 };
 
 const updateEmployeeStatusAndLeaveBalance = () => {
-    Data.employees.forEach(emp => {
-        const absenceDays = Data.attendanceRecords.filter(a => a.employeeId === emp.id && a.status === "Absent").length;
-        emp.leaveBalance = emp.annualVacationDays - absenceDays;
-        if (emp.leaveBalance < 0) {
-            emp.leaveBalance = 0;
+ Data.employees.forEach(emp => {
+ 
+    if (emp.leaveBalanceAdjustment === undefined) {
+         emp.leaveBalanceAdjustment = 0;
+        
         }
-        emp.status = getLatestStatus(Data.attendanceRecords, emp.id);
-    });
+
+        const absenceDays = Data.attendanceRecords.
+        filter(a => a.employeeId === emp.id && a.status === "Absent").length;
+        emp.leaveBalance = emp.annualVacationDays - absenceDays + emp.leaveBalanceAdjustment;
+
+        if (emp.leaveBalance < 0) {
+             emp.leaveBalance = 0;
+
+            }
+
+            emp.status = getLatestStatus(Data.attendanceRecords, emp.id);
+
+        });
+    
+    saveDataToStorage(); 
 };
 
 function getLatestStatus(attendanceRecords, employeeId) {
@@ -122,18 +126,31 @@ function getLatestStatus(attendanceRecords, employeeId) {
 }
 
 function updateLeaveBalance(employeeId, daysToAdd) {
+ const employee = Data.employees.find(emp => emp.id === Number(employeeId));
+ if (employee) {
     
-    const employee = Data.employees.find(emp => emp.id === Number(employeeId));
-    if (employee) {
-        employee.leaveBalance += daysToAdd;
-        if (employee.leaveBalance < 0) {
-            employee.leaveBalance = 0;
-        }
-        
-        saveDataToStorage();
-        renderEmployeeTable();
-        showMessage(`Updated leave balance for employee ${employee.name}.`, 'success');
-    }
+ if (employee.leaveBalanceAdjustment === undefined) {
+ employee.leaveBalanceAdjustment = 0;
+ }
+ employee.leaveBalanceAdjustment += daysToAdd;
+
+        // Now, recalculate the final leaveBalance based on the new adjustment
+        const absenceDays = Data.attendanceRecords.filter(a => a.employeeId
+             === employee.id && a.status === "Absent").length;
+        employee.leaveBalance = employee.annualVacationDays
+         - absenceDays + employee.leaveBalanceAdjustment;
+
+ if (employee.leaveBalance < 0) {
+ employee.leaveBalance = 0;
+
+}
+
+
+saveDataToStorage(); 
+
+renderEmployeeTable(); 
+      showMessage(`Updated leave balance for employee ${employee.name}.`, 'success');
+ }
 }
 
 function renderEmployeeTable() {
