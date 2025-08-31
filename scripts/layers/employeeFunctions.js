@@ -6,7 +6,13 @@ const Data = {
   tasks: [],
   requests: [],
   payrolls: [],
+  employees: [],
+  attendanceRecords: [],
+  tasks: [],
+  requests: [],
+  payrolls: [],
 };
+let loggedEmployee = {};
 let loggedEmployee = {};
 
 // automatically load when window is ready
@@ -26,10 +32,36 @@ window.addEventListener("load", async () => {
   renderAttendance();
   renderRequests();
   renderQuota();
+  loadDataFromStorage();
+  loggedEmployee = getEmployeeByID(localStorage.getItem("loggedEmployeeID"));
+  if (loggedEmployee == undefined) {
+    window.location.href = "/pages/index.html";
+  }
+  document.getElementById("navbar-elm").innerHTML = getNavbar(
+    loggedEmployee.role,
+    loggedEmployee.name,
+    loggedEmployee.preferences?.theme || "light"
+  );
+
+  renderTasks();
+  renderAttendance();
+  renderRequests();
+  renderQuota();
 });
 
 // ---------------- Load & Get Data ----------------
+// ---------------- Load & Get Data ----------------
 const loadDataFromStorage = () => {
+  Data.employees = JSON.parse(localStorage.getItem("employees") || "[]");
+  Data.attendanceRecords = JSON.parse(localStorage.getItem("attendanceRecords") || "[]");
+  Data.tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+  Data.requests = JSON.parse(localStorage.getItem("requests") || "[]");
+  Data.payrolls = JSON.parse(localStorage.getItem("payrolls") || "[]");
+};
+
+const saveDataToStorage = () => {
+  localStorage.setItem("requests", JSON.stringify(Data.requests));
+};
   Data.employees = JSON.parse(localStorage.getItem("employees") || "[]");
   Data.attendanceRecords = JSON.parse(localStorage.getItem("attendanceRecords") || "[]");
   Data.tasks = JSON.parse(localStorage.getItem("tasks") || "[]");

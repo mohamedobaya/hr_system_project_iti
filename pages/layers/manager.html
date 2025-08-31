@@ -17,75 +17,91 @@
 </head>
 
 <body>
-
-    <div id="navbar-elm"></div>
+    <div class="mx-auto">
+        <div id="navbar-elm" class="mx-auto"></div>
+    </div>
+    
     <!-- html here -->
-    <div class="manager container bg-body-secondary mt-5">
+    <div class="manager container bg-body-secondary mt-5 mx-auto">
         <div class="manager-welcome py-3">
             <h3>Manager Portal</h3>
             <p>Welcome, Manager Mohamed Obaya</p>
         </div>
+        <!-- Approval Center -->
         <div style="overflow-x:auto;">
+            <h4 class="mb-0">Approval Center</h4>
             <table class="table my-5">
                 <thead>
                     <tr>
                         <th scope="col" class="bg-body-secondary">Employee</th>
-                        <th scope="col" class="bg-body-secondary">Type</th>
+                        <th scope="col" class="bg-body-secondary">Department</th>
+                        <th scope="col" class="bg-body-secondary">Request</th>
                         <th scope="col" class="bg-body-secondary">Date</th>
-                        <th scope="col" class="bg-body-secondary">Reason</th>
+                        <th scope="col" class="bg-body-secondary">Notes</th>
                         <th scope="col" class="bg-body-secondary">Status</th>
-                        <th scope="col" class="bg-body-secondary">Comment</th>
                         <th scope="col" class="bg-body-secondary">Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">Ahmed Ali</th>
-                        <td>Leave</td>
-                        <td>2025-08-25</td>
-                        <td>Family emergency</td>
-                        <td>Pending</td>
-                        <td>
-                            <textarea name="" id=""></textarea>
-                        </td>
-                        <td>
-                            <div class="manager-btns d-flex">
-                                <a class="btn btn-success me-1">accept</a>
-                                <a class="btn btn-danger ms-1">reject</a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Sara Hassan</th>
-                        <td>Late</td>
-                        <td>2025-08-25</td>
-                        <td>Traffic jam</td>
-                        <td>Pending</td>
-                        <td>
-                            <textarea name="" id=""></textarea>
-                        </td>
-                        <td>
-                            <div class="manager-btns d-flex">
-                                <a class="btn btn-success me-1">accept</a>
-                                <a class="btn btn-danger ms-1">reject</a>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
+                <tbody id="approval-table"></tbody>
             </table>
         </div>
 
-        <div class="manager-task py-3">
+        <!-- Attendance Center -->
+        <div style="overflow-x:auto;">
+            <h4 class="mb-0">Attendance Center</h4>
+            <table class="table my-5">
+                <thead>
+                    <tr>
+                        <th scope="col" class="bg-body-secondary">Employee</th>
+                        <th scope="col" class="bg-body-secondary">Department</th>
+                        <th scope="col" class="bg-body-secondary">Date</th>
+                        <th scope="col" class="bg-body-secondary">Check In</th>
+                        <th scope="col" class="bg-body-secondary">Check Out</th>
+                        <th scope="col" class="bg-body-secondary">Status</th>
+                        <th scope="col" class="bg-body-secondary">Minutes Late</th>
+                        <th scope="col" class="bg-body-secondary">Work From Home</th>
+                        <th scope="col" class="bg-body-secondary">Leave</th>
+                        <th scope="col" class="bg-body-secondary">Notes</th>
+                    </tr>
+                </thead>
+                <tbody id="attendance-table"></tbody>
+            </table>
+        </div>
+
+        <!-- Task Center -->
+        <div style="overflow-x:auto;">
+            <h4 class="mb-0">Task Center</h4>
+            <table class="table my-5">
+                <thead>
+                    <tr>
+                        <th scope="col" class="bg-body-secondary">Task ID</th>
+                        <th scope="col" class="bg-body-secondary">Task Title</th>
+                        <th scope="col" class="bg-body-secondary">Task Description</th>
+                        <th scope="col" class="bg-body-secondary">Employee</th>
+                        <th scope="col" class="bg-body-secondary">Department</th>
+                        <th scope="col" class="bg-body-secondary">Status</th>
+                        <th scope="col" class="bg-body-secondary">Due Date</th>
+                    </tr>
+                </thead>
+                <tbody id="task-table"></tbody>
+            </table>
+        </div>
+
+        <!-- Assign New Task Center -->
+        <div id="manager-assign" class="manager-task py-3">
             <div class="manager-task-assign">
-                <h3>Assign Task</h3>
-                <select class="form-select manager-task-assign-employee" aria-label="Default select example">
-                    <option selected>Choose Employee</option>
-                    <option value="emp-id">${emp name}</option>
-                    <option value="emp-id">${emp name}</option>
-                    <option value="emp-id">${emp name}</option>
+                <h3 class="mb-4">Assign New Task Center</h3>
+                <label for="employee-assign-task-selector" class="form-label">Choose Employee</label>
+                <select class="form-select manager-task-assign-employee my-3" id="employee-assign-task-selector" aria-label="Default select example">
+                    <option selected value="">Choose Employee</option>
                 </select>
-                <input type="text" class="form-control manager-task-assign-employee" id="task-id" placeholder="Task title">
-                <a class="btn btn-success">assign</a>
+                <label for="new-task-title" class="form-label">Task Title</label>
+                <input type="text" class="form-control manager-task-assign-employee my-3" id="new-task-title" placeholder="Task title">
+                <label for="new-task-description" class="form-label">Task Description</label>
+                <input type="text" class="form-control manager-task-assign-employee my-3" id="new-task-description" placeholder="Task Description">
+                <label for="new-task-date" class="form-label">Task Due Date</label>
+                <input type="date" class="form-control manager-task-assign-employee my-3" id="new-task-date">
+                <a id="assign-task-btn" class="btn btn-success">Assign Task</a>
             </div>
         </div>
 
