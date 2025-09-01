@@ -9,10 +9,7 @@
 .security .cursor {
   cursor: pointer;
 }
-.security #footer-security {
-  background-color: #fff;
-  height: 8vh;
-}
+
 .security #main-security {
   height: 90vh;
   position: relative;
@@ -87,4 +84,9 @@
   border-radius: 8px;
   padding: 10px 20px;
   font-size: 14px;
-}/*# sourceMappingURL=security.css.map */
+}
+
+.security .form-select {
+  padding-right: 2rem !important;
+}
+/*# sourceMappingURL=security.css.map */

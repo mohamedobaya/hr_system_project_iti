@@ -14,11 +14,6 @@
         cursor: pointer;
     }
 
-    #footer-security {
-        background-color: #fff;
-        height: 8vh;
-    }
-
     #main-security {
         height: 90vh;
         position: relative;
@@ -77,7 +72,6 @@
     }
 
 
-
     .dropdown .btn {
         padding: 8px 12px;
         border-radius: 8px;
@@ -108,14 +102,16 @@
         resize: none;
     }
 
-
-
     #myAlert,
     #alertsubmit {
         font-weight: 500;
         border-radius: 8px;
         padding: 10px 20px;
         font-size: 14px;
+    }
+
+    .form-select {
+        padding-right: 2rem !important;
     }
 
 }

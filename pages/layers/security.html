@@ -1,166 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Security</title>
 
-    <!-- html here -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security</title>
 
-    <!-- CSS -->
-    <link
-      rel="stylesheet"
-      href="../../frameworks/bootstrap/css/bootstrap.min.css"
-    />
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="../../frameworks/fontawesome/css/fontawesome.min.css"
-    />
-    <!-- FontAwesome CSS -->
-    <link
-      rel="stylesheet"
-      href="../../frameworks/fontawesome/css/all.min.css"
-    />
-    <link rel="stylesheet" href="../../styles/layers/security.css" />
-    <!-- Base CSS style -->
-  </head>
+  <!-- html here -->
 
-  <body>
-    <!--   alert for submit  -->
-    <div class="security">
-      <div
-        id="myAlert"
-        class="alert d-none position-fixed top-0 start-50 translate-middle-x mt-3 w-50 text-center"
-        role="alert"
-        style="z-index: 9999"
-      ></div>
-      <div
-        id="alertsubmit"
-        class="alert alert-success d-none position-fixed top-0 start-50 translate-middle-x mt-3 w-50 text-center"
-        role="alert"
-        style="z-index: 9999"
-      ></div>
+  <!-- CSS -->
+  <link rel="stylesheet" href="../../frameworks/bootstrap/css/bootstrap.min.css" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../../frameworks/fontawesome/css/fontawesome.min.css" />
+  <!-- FontAwesome CSS -->
+  <link rel="stylesheet" href="../../frameworks/fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="../../styles/layers/security.css" />
+  <!-- Base CSS style -->
+</head>
 
-      <div id="content">
-        <div id="navbar-elm"></div>
-        <!-- html here -->
-        <!-- body -->
-        <section id="main-security">
-          <div
-            class="card-security m-auto bg-light p-4 gap-4 d-flex flex-column rounded-2"
-          >
-            <!-- title -->
-            <h5 class="text-capitalize text-start">daily attendance</h5>
-            <div
-              class="search w-100 mx-auto align-items-center d-flex justify-content-between"
-            >
-              <input
-                type="search"
-                placeholder="Search By Name/ID"
-                class="w-25 d-flex p-2 search-input rounded-2"
-              />
-              <div
-                class="d-flex align-items-center justify-content-center gap-3"
-              >
-                <div
-                  class="calendar d-flex justify-content-center align-items-center"
-                >
-                  <label for="attendance-date" class="me-2 fw-bold"
-                    >Attendance for:</label
-                  >
-                  <input type="date" id="attendance-date" />
-                </div>
+<body>
+  <!--   alert for submit  -->
+  <div class="security">
+    <div id="myAlert" class="alert d-none position-fixed top-0 start-50 translate-middle-x mt-3 w-50 text-center"
+      role="alert" style="z-index: 9999"></div>
+    <div id="alertsubmit"
+      class="alert alert-success d-none position-fixed top-0 start-50 translate-middle-x mt-3 w-50 text-center"
+      role="alert" style="z-index: 9999"></div>
 
-                <div class="dropdown">
-                  <button
-                    class="btn btn-light"
-                    type="button"
-                    id="filterMenu"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <i class="fa-solid fa-filter text-primary"></i>
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="filterMenu">
-                    <li>
-                      <a
-                        class="dropdown-item filter-option"
-                        data-status="All"
-                        href="#"
-                        >All</a
-                      >
-                    </li>
-                    <li>
-                      <a
-                        class="dropdown-item filter-option"
-                        data-status="Present"
-                        href="#"
-                        >Present</a
-                      >
-                    </li>
-                    <li>
-                      <a
-                        class="dropdown-item filter-option"
-                        data-status="Late"
-                        href="#"
-                        >Late</a
-                      >
-                    </li>
-                    <li>
-                      <a
-                        class="dropdown-item filter-option"
-                        data-status="Absent"
-                        href="#"
-                        >Absent</a
-                      >
-                    </li>
-                  </ul>
-                </div>
+    <div id="content">
+      <div id="navbar-elm"></div>
+      <!-- html here -->
+      <!-- body -->
+      <section id="main-security">
+        <div class="card-security m-auto bg-light p-4 gap-4 d-flex flex-column rounded-2">
+          <!-- title -->
+          <h5 class="text-capitalize text-start">daily attendance</h5>
+          <div class="search w-100 mx-auto align-items-center d-flex justify-content-between">
+            <input type="search" placeholder="Search By Name/ID" class="w-25 d-flex p-2 search-input rounded-2" />
+            <div class="d-flex align-items-center justify-content-center gap-3">
+              <div class="calendar d-flex justify-content-center align-items-center">
+                <label for="attendance-date" class="me-2 fw-bold">Attendance for:</label>
+                <input type="date" id="attendance-date" />
+              </div>
+
+              <div class="dropdown">
+                <button class="btn btn-light" type="button" id="filterMenu" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <i class="fa-solid fa-filter text-primary"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="filterMenu">
+                  <li>
+                    <a class="dropdown-item filter-option" data-status="All" href="#">All</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item filter-option" data-status="Present" href="#">Present</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item filter-option" data-status="Late" href="#">Late</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item filter-option" data-status="Absent" href="#">Absent</a>
+                  </li>
+                </ul>
               </div>
             </div>
-
-            <!-- table -->
-            <div class="table-responsive rounded-2">
-              <table class="table table-striped table-hover">
-                <thead class="sticky-top">
-                  <tr class="text-center">
-                    <th scope="col">
-                      <input type="checkbox" class="cursor" id="checkall" />
-                    </th>
-                    <th scope="col" class="text-capitalize">emp ID</th>
-                    <th scope="col" class="text-capitalize">name</th>
-                    <th scope="col" class="text-capitalize">dept</th>
-                    <th scope="col" class="text-capitalize">status</th>
-                    <th scope="col" class="text-capitalize">check-in</th>
-                    <th scope="col" class="text-capitalize">check-out</th>
-                    <th scope="col" class="text-capitalize">minutesLate</th>
-                    <th scope="col" class="text-capitalize">notes</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
-            <!-- button submit -->
-            <div class="submit w-25">
-              <button class="btn btn-primary" id="Updata">Submit Change</button>
-            </div>
           </div>
-        </section>
-        <!-- footer -->
-        <footer id="footer-security" class="align-items-center d-flex px-3">
-          <p class="text-capitalize fw-bold cursor">home</p>
-        </footer>
-      </div>
-    </div>
 
-    <!-- JS Tags -->
-    <script src="../../frameworks/bootstrap/js/bootstrap.bundle.js"></script>
-    <!-- Bootstrap JS -->
-    <script
-      type="module"
-      src="../../scripts/layers/securityFunctions.js"
-    ></script>
-    <!-- Security JS -->
-  </body>
+          <!-- table -->
+          <div class="table-responsive rounded-2">
+            <table class="table table-striped table-hover">
+              <thead class="sticky-top">
+                <tr class="text-center">
+                  <th scope="col">
+                    <input type="checkbox" class="cursor" id="checkall" />
+                  </th>
+                  <th scope="col" class="text-capitalize">emp ID</th>
+                  <th scope="col" class="text-capitalize">name</th>
+                  <th scope="col" class="text-capitalize">dept</th>
+                  <th scope="col" class="text-capitalize">status</th>
+                  <th scope="col" class="text-capitalize">check-in</th>
+                  <th scope="col" class="text-capitalize">check-out</th>
+                  <th scope="col" class="text-capitalize">minutesLate</th>
+                  <th scope="col" class="text-capitalize">notes</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <!-- button submit -->
+          <div class="submit w-25">
+            <button class="btn btn-primary" id="Updata">Submit Change</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- JS Tags -->
+  <script src="../../frameworks/bootstrap/js/bootstrap.bundle.js"></script>
+  <!-- Bootstrap JS -->
+  <script type="module" src="../../scripts/layers/securityFunctions.js"></script>
+  <!-- Security JS -->
+</body>
+
 </html>
