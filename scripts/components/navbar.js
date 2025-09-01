@@ -1,7 +1,6 @@
-import { lightColorTheme, darkColorTheme, themeStyle, dangerStyle, primaryStyle } from "./themes.js";
-
-export const getNavbar = (empRole, empName) => {
-    
+export const getNavbar = (empRole, empName, empTheme = 'light') => {
+    const lightIcon = `<i class="fa-regular fa-sun"></i>`;
+    const darkIcon = `<i class="fa-regular fa-moon"></i>`;
     return `
     <nav class="navbar navbar-expand-lg" ">
         <div class="container d-flex">
@@ -17,7 +16,7 @@ export const getNavbar = (empRole, empName) => {
                 <ul class="navbar-nav ms-auto me-md-0 me-auto mb-2 mb-lg-0">
                     <li class="nav-item me-md-1 me-auto mx-auto my-1">
                         <a class="btn btn-theme" id="btn-theme">
-                            <i class="fa-solid fa-circle-half-stroke"></i>
+                            ${empTheme == 'light' ? darkIcon: lightIcon}
                         </a>
                     </li>
                     <li class="nav-item mx-md-2 mx-auto my-1">

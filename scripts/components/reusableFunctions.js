@@ -16,6 +16,9 @@ export const onPageLoad = (loggedEmployee) => {
 
 
     // theme-logic (light/dark)
+
+    
+
     const themeBtn = document.getElementById("btn-theme");
 
     // theme button logic
@@ -26,13 +29,23 @@ export const onPageLoad = (loggedEmployee) => {
     const disableDarkmode = () => {
         document.body.classList.remove('darkmode');
     }
+
+    if (loggedEmployee.preferences.theme == 'dark')
+        enableDarkmode();
+    else
+        disableDarkmode();
+    
     themeBtn.addEventListener('click', () => {
         if (loggedEmployee.preferences.theme == 'light') {
             loggedEmployee.preferences.theme = 'dark';
+            localStorage.setItem("employees", JSON.stringify(updateEmployeeByTheme(loggedEmployee.id, 'dark')));
             enableDarkmode();
+            onPageLoad(loggedEmployee);
         } else {
             loggedEmployee.preferences.theme = 'light';
+            localStorage.setItem("employees", JSON.stringify(updateEmployeeByTheme(loggedEmployee.id, 'light')));
             disableDarkmode();
+            onPageLoad(loggedEmployee);
         }
     });
 }
@@ -88,6 +101,18 @@ export const updateRequestByStatus = (reqID, newStatus) => {
 
     // localStorage.setItem("requests", JSON.stringify(requests));
     return updatedRequests;
+}
+
+export const updateEmployeeByTheme = (empID, newTheme) => {
+    const employees = JSON.parse(localStorage.getItem("employees") || "[]");
+    let updatedEmployees = [];
+    for (let emp of employees) {
+        if (emp.id == empID)
+            emp.preferences.theme = newTheme;
+        updatedEmployees.push(emp);
+    }
+
+    return updatedEmployees;
 }
 
 export const searchEmployeesByName = () => {
