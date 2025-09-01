@@ -1,5 +1,103 @@
+:root {
+    --base-color: #F9FAFB;
+    --base-variant: #E5E7EB;
+    --base-variant2: #EBEEF3;
+    --text-color: #1F2937;
+    --secondary-text: #6B7280;
+    --primary-color: #2563EB;
+    --accent-color: #10B981;
+}
+
+.darkmode {
+    --base-color: #111827;
+    --base-variant: #374151;
+    --base-variant2: #1E2639;
+    --text-color: #F3F4F6;
+    --secondary-text: #9CA3AF;
+    --primary-color: #3B82F6;
+    --accent-color: #34D399;
+}
+
+.btn {
+    border-radius: 1em;
+
+    &-theme {
+        border: none;
+        color: var(--text-color);
+    }
+}
+
+body {
+    font-family: monospace !important;
+    background-color: var(--base-color) !important;
+    color: var(--text-color);
+}
+
+hr {
+    color: var(--primary-color);
+    border: 0.07em solid var(--primary-color);
+    border-radius: 1em;
+}
+
+.emp {
+    &-title {
+        color: var(--primary-color);
+    }
+
+    &-name {
+        color: var(--accent-color);
+    }
+}
+
+.navbar {
+    background-color: var(--base-variant) !important;
+}
+
+.nav {
+    @media (max-width: 768px) {
+        font-size: 0.7em;
+        margin: 0em;
+
+    }
+    &-item {
+        background-color: var(--base-variant) !important;
+        border-radius: 1em;
+        margin: 0.5em;
+
+        &:first-child {
+            margin-inline-start: 0;
+        }
+
+        &:hover {
+            border: none;
+        }
+    }
+
+    &-link {
+        color: var(--text-color);
+        border-radius: 1em !important;
+
+        &:hover {
+            color: var(--text-color);
+            background-color: var(--accent-color);
+            border-color: var(--accent-color) !important;
+            border-radius: 1em;
+        }
+    }
+
+    .active {
+        background-color: var(--primary-color) !important;
+        color: var(--base-color) !important;
+        border: none;
+    }
+    border: none;
+}
+
 .manager {
-    background-color: black;
+    background-color: var(--base-variant) !important;
+    border-radius: 1em;
+    padding: 2em !important;
+
     &-task {
         &-assign {
             &-employee {
@@ -10,23 +108,86 @@
         }
     }
 
+    &-btns {
+        .btns {
+            margin-inline: auto;
+        }
+
+        text-align: center;
+    }
+
     table {
-        background-color: aqua;
+        background-color: var(--base-variant);
         margin-inline: auto;
         width: 100%;
-        border: 1px solid #ddd;
+        // border: 1px solid var(--base-color) !important;
         border-collapse: collapse;
+        border-radius: 10em !important;
         /* ensures proper border rendering */
     }
 
-    th,
-    td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: center;
-        /* horizontal centering */
-        vertical-align: middle;
-        /* vertical centering */
+    .table-title {
+        color: var(--accent-color);
     }
-    
+
+
+    .table-header {
+        background-color: var(--accent-color) !important;
+        color: var(--base-color) !important;
+    }
+
+
+
+    tr {
+        th {
+            background-color: var(--primary-color);
+            color: var(--base-color) !important;
+
+        }
+
+        th,
+        td {
+            border: 0.01em solid var(--base-variant) !important;
+            padding: 8px;
+            text-align: center;
+            /* horizontal centering */
+            vertical-align: middle;
+            /* vertical centering */
+        }
+
+        td {
+            background-color: var(--base-color);
+            color: var(--text-color) !important;
+        }
+
+        &:nth-child(even) {
+            td {
+                background-color: var(--base-variant2);
+            }
+        }
+
+        &:first-child th:first-child {
+            border-top-left-radius: 1em !important;
+        }
+
+        &:first-child th:last-child {
+            border-top-right-radius: 1em !important;
+        }
+
+        &:last-child td:first-child {
+            border-bottom-left-radius: 1em !important;
+        }
+
+        &:last-child td:last-child {
+            border-bottom-right-radius: 1em !important;
+        }
+    }
+
+
+
+
+
+
+
+
 }

@@ -2,102 +2,75 @@
   width: 3px;
   height: 3px;
 }
-
 .security ::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 10px;
 }
-
 .security .cursor {
   cursor: pointer;
 }
-
 .security #footer-security {
   background-color: #fff;
   height: 8vh;
 }
-
 .security #main-security {
   height: 90vh;
   position: relative;
 }
-
 .security #main-security .table-responsive {
   max-height: 50vh;
-  -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
-
 .security #main-security .card-security {
-  -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   width: 90%;
 }
-
 .security #main-security .card-security .search-input {
   border: none;
   outline: none;
 }
-
 .security #main-security .card-security .table thead,
 .security #main-security .card-security .table .submit .btn {
   white-space: nowrap;
 }
-
 .security #main-security .card-security .table tbody th {
   font-weight: unset !important;
 }
-
-.security input[type="time"] {
+.security input[type=time] {
   border: 1px solid #ccc;
 }
-
 .security .submit .btn,
 .security th {
   white-space: nowrap;
 }
-
 .security #content {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-between;
   min-height: 100vh;
 }
-
 .security .dropdown-menu.show {
   z-index: 100000000 !important;
 }
-
 .security .dropdown .btn {
   padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid #ccc;
   background-color: #fff;
 }
-
 .security .calendar label {
   font-weight: 600;
 }
-
-.security .calendar input[type="date"] {
+.security .calendar input[type=date] {
   padding: 7px 12px;
   border-radius: 8px;
   border: 1px solid #ccc;
 }
-
-.security input[type="time"],
+.security input[type=time],
 .security select,
 .security textarea {
   border: 1px solid #ccc;
@@ -105,16 +78,13 @@
   padding: 5px 8px;
   font-size: 14px;
 }
-
 .security textarea {
   resize: none;
 }
-
 .security #myAlert,
 .security #alertsubmit {
   font-weight: 500;
   border-radius: 8px;
   padding: 10px 20px;
   font-size: 14px;
-}
-/*# sourceMappingURL=security.css.map */
+}/*# sourceMappingURL=security.css.map */
