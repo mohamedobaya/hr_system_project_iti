@@ -87,7 +87,7 @@ function updateLeaveBalance(employeeId, daysToAdd) {
         }
         employee.leaveBalanceAdjustment += daysToAdd;
 
-        // Now, recalculate the final leaveBalance based on the new adjustment
+        
         const absenceDays = Data.attendanceRecords.filter(a => a.employeeId
             === employee.id && a.status === "Absent").length;
         employee.leaveBalance = employee.annualVacationDays
@@ -114,24 +114,39 @@ function renderEmployeeTable() {
         emp.department.toLowerCase().includes(value)
     );
     console.log(filterDepartment);
-    
-    filteredData.forEach(emp => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
 
+    filteredData.forEach(emp => {
+       
+        let statusClass = '';
+        switch (emp.status) {
+            case 'Present':
+                statusClass = 'status-present';
+                break;
+            case 'Late':
+                statusClass = 'status-late';
+                break;
+            case 'Absent':
+                statusClass = 'status-absent';
+                break;
+            default:
+                statusClass = 'status-default'; }
+        
+
+        const row = document.createElement("tr"); 
+        row.innerHTML = `
             <td scope="row">${emp.id}</td>
             <td>${emp.name}</td>
             <td>${emp.department}</td>
-            <td><button class="btn border">${emp.status}</button></td>
+            <td><button class="btn ${statusClass}">${emp.status}</button></td>
             <td>${emp.leaveBalance} days</td>
             <td>
-                <button class="btn btn-sm btn-success bonus-btn" id="bonus-btn-${emp.id}" data-employee-id="${emp.id}">+Bouns</button>
+                <button class="btn btn-sm btn-success bonus-btn" id="bonus-btn-${emp.id}" data-employee-id="${emp.id}">+Bonus</button>
             </td>
             <td>
                 <button class="btn btn-sm btn-danger deduction-btn" id="deduction-btn-${emp.id}" data-employee-id="${emp.id}">-Deduction</button>
             </td>
             <td>
-                <button class="btn btn-sm btn-info text-white" data-employee-id="${emp.id}">Get Awards</button>
+                <button class="btn btn-sm btn-info text-white" data-employee-id="onclick="showAward(${emp.id})"">Get Awards</button>
             </td>
         `;
         employeeTableBody.appendChild(row);
@@ -161,6 +176,12 @@ const handleBulkAction = (daysToAdd) => {
         updateLeaveBalance(employeeId, daysToAdd);
     });
 };
+
+
+
+
+
+
 
 //**********************  Reports  ****************************** */
 const setupReportsSection = () => {
