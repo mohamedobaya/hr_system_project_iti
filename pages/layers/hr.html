@@ -35,9 +35,9 @@
                 <div class="row">
                     <div id="employee-management-section" class="col-12 mb-3">
                         <div class="p-3 border rounded w-100">
-                            <h4 class="mb-3 fw-bold fs-2 text-center py-4">Employee Management</h4>
+                            <h4 class="mb-3 fw-bold fs-1 text-center py-4">Employee Management</h4>
                             <div class="d-flex justify-content-around gap-4 align-items-center mb-5">
-                                <input id="searchInput" type="text" class="form-control  p-2"
+                                <input id="searchInput" type="text" class="form-control   p-2"
                                     placeholder="Search employee...">
 
 
@@ -63,7 +63,7 @@
                                             <th scope="col" class="table-header">Leave Balance</th>
                                             <th scope="col" id="increase" class="table-header">Increase</th>
                                             <th scope="col" id="descrese" class="table-header">DeCrease</th>
-                                            <th scope="col" id="awards" class="table-header">Awards</th>
+                                            <th  scope="col" id="awards" class="table-header">Awards</th>
                                         </tr>
                                     </thead>
                                     <tbody id="employee-table-body"></tbody>
@@ -78,10 +78,10 @@
             </div>
 
             <div class="tab-pane fade" id="reports-section" role="tabpanel" aria-labelledby="reports-tab">
-                <h2 class="text-center py-5 fw-bold fs-2 mb-4">Company Reports</h2>
+                <h2 class="text-center py-5 fw-bold fs-1 mb-4">Company Reports</h2>
 
                 <div class="text-start  mt-3">
-                    <h4 class="fw-bold fs-2">Total Employees: <span id="totalEmployees">0</span></h4>
+                    <h4 class="fw-bold fs-1">Total Employees: <span id="totalEmployees">0</span></h4>
                 </div>
 
                 <div class="row mb-3 py-5">
@@ -125,8 +125,10 @@
                     <button id="exportPDF" class="btn btn-danger">Export to PDF</button>
                 </div>
 
-                <table class="table table-bordered">
-                    <thead class="table-dark">
+               
+                <div class="table-responsive rounded-2">
+                     <table class="table table-striped">
+                    <thead class="sticky-top">
                         <tr>
                             <th scope="col" class="table-header">Name</th>
                             <th scope="col" class="table-header">Department</th>
@@ -137,6 +139,7 @@
                     </thead>
                     <tbody id="reportTableBody"></tbody>
                 </table>
+                </div>
             </div>
         </div>
     </div>
