@@ -9,7 +9,6 @@
 .security .cursor {
   cursor: pointer;
 }
-
 .security #main-security {
   height: 90vh;
   position: relative;
@@ -85,8 +84,6 @@
   padding: 10px 20px;
   font-size: 14px;
 }
-
 .security .form-select {
   padding-right: 2rem !important;
-}
-/*# sourceMappingURL=security.css.map */
+}/*# sourceMappingURL=security.css.map */

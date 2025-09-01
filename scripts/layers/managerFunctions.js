@@ -1,3 +1,4 @@
+import { paginationEnable } from "../components/pagination.js";
 import { loadDataFromStorage, onPageLoad } from "../components/reusableFunctions.js";
 import { getEmployeeByID, getRequestByID, updateRequestByStatus, getAttendanceRecordsByID, getTaskByID } from "../components/reusableFunctions.js";
 
@@ -16,7 +17,7 @@ window.addEventListener("load", async () => {
     Data = await loadDataFromStorage();
     loggedEmployee = getEmployeeByID(localStorage.getItem("loggedEmployeeID"));
     onPageLoad(loggedEmployee);
-    
+
     // role-based call functions
     loadApprovalTable();
     loadAttendanceTable();
@@ -66,9 +67,9 @@ const loadApprovalTable = () => {
         const row = createApprovalRow(req.id);
         approvalTable.innerHTML += row;
     }
-
     // console.log(Data.requests);
     localStorage.setItem("requests", JSON.stringify(Data.requests));
+    paginationEnable("pagination-approval", "approval-table", 5);
 }
 
 document.addEventListener("click", (e) => {
@@ -98,7 +99,7 @@ const createAttendancelRow = (attendanceRecordID) => {
         <td id="checkOut-${attendanceRecord.id}">${attendanceRecord.checkOut}</td>
         <td id="status-${attendanceRecord.id}">${attendanceRecord.status}</td>
         <td id="minutesLate-${attendanceRecord.id}">${attendanceRecord.minutesLate}</td>
-        <td id="isWFH-${attendanceRecord.id}">${attendanceRecord.isWFH ? "Work from Home": "Office"}</td>
+        <td id="isWFH-${attendanceRecord.id}">${attendanceRecord.isWFH ? "Work from Home" : "Office"}</td>
         <td id="isLeave-${attendanceRecord.id}">${attendanceRecord.isLeave}</td>
         <td id="notes-${attendanceRecord.id}">${attendanceRecord.notes}</td>
     </tr>
@@ -112,6 +113,7 @@ const loadAttendanceTable = () => {
         const row = createAttendancelRow(ar.id);
         attendanceTable.innerHTML += row;
     }
+    paginationEnable("pagination-attendance", "attendance-table", 10);
 }
 
 // Task Center logic
@@ -140,6 +142,7 @@ const loadTaskTable = () => {
         const row = creatTaskRow(task.id);
         taskTable.innerHTML += row;
     }
+    paginationEnable("pagination-task", "task-table", 10);
 }
 
 // Assign New Tasks
