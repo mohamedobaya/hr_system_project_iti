@@ -1,1 +1,152 @@
 
+/* =================================================================
+   1. Define Color Variables for Light & Dark Themes
+   ================================================================= */
+:root {
+    --base-color: #F9FAFB;
+    --base-variant: #FFFFFF; // White background for sections
+    --base-variant2: #E5E7EB; // For striped tables
+    --border-color: #DEE2E6;
+    --text-color: #1F2937;
+    --secondary-text: #6B7280;
+    --primary-color: #2563EB;
+    --accent-color: #10B981;
+    --thead-bg-color: #212529; // Corresponds to .table-dark
+    --thead-text-color: #FFFFFF;
+}
+
+.darkmode {
+    --base-color: #111827;
+    --base-variant: #1F2937; // Darker background for sections
+    --base-variant2: #374151; // For striped tables
+    --border-color: #4B5563;
+    --text-color: #F3F4F6;
+    --secondary-text: #9CA3AF;
+    --primary-color: #3B82F6;
+    --accent-color: #34D399;
+    --thead-bg-color: #374151;
+    --thead-text-color: #F3F4F6;
+}
+
+/* =================================================================
+   2. General Body & Container Styles
+   ================================================================= */
+body {
+    background-color: var(--base-color) !important;
+    color: var(--text-color);
+}
+
+.container-fluid {
+    // Style the main container if needed
+}
+
+// Styling for the main content boxes like "Employee Management"
+.p-3.border.rounded {
+    background-color: var(--base-variant);
+    border-color: var(--border-color) !important;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* =================================================================
+   3. Navigation Tabs
+   ================================================================= */
+.nav-tabs {
+    border-bottom: 2px solid var(--border-color);
+
+    .nav-link {
+        color: var(--secondary-text);
+        border: none;
+        border-bottom: 2px solid transparent; // To avoid layout shift
+
+        &:hover {
+            color: var(--primary-color);
+            border-color: var(--border-color);
+        }
+
+        // Active tab style
+        &.active {
+            color: var(--primary-color) !important;
+            background-color: transparent !important;
+            border-color: var(--primary-color) !important;
+            border-bottom: 2px solid var(--primary-color);
+        }
+    }
+}
+
+/* =================================================================
+   4. Typography (Headings)
+   ================================================================= */
+h2, h4 {
+    color: var(--primary-color);
+}
+
+/* =================================================================
+   5. Form Inputs & Selects
+   ================================================================= */
+.form-control,
+.form-select {
+    background-color: var(--base-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+
+    &:focus {
+        background-color: var(--base-color);
+        color: var(--text-color);
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.25rem rgba(var(--primary-color), 0.25);
+    }
+}
+
+/* =================================================================
+   6. Table Styles
+   ================================================================= */
+.table {
+    // General styles for all cells
+    th,
+    td {
+        color: var(--text-color);
+        border-color: var(--border-color);
+        vertical-align: middle;
+    }
+
+    // Table header for the first table
+    thead:not(.table-dark) {
+        th {
+            background-color: var(--accent-color);
+            color: var(--base-color);
+        }
+    }
+
+    // Specific override for Bootstrap's .table-striped
+    &.table-striped > tbody > tr:nth-of-type(odd) > * {
+        background-color: var(--base-variant2);
+        color: var(--text-color);
+    }
+
+    &.table-striped > tbody > tr:nth-of-type(even) > * {
+        background-color: var(--base-variant);
+        color: var(--text-color);
+    }
+
+    // Override for the second table's dark header
+    thead.table-dark {
+        th {
+            background-color: var(--thead-bg-color) !important;
+            color: var(--thead-text-color) !important;
+        }
+    }
+}
+
+/* =================================================================
+   7. Buttons
+   ================================================================= */
+.btn {
+    // You can add general button styles here if you want
+    border-radius: 0.5em;
+}
+
+// Keep button colors as they are, or theme them like this:
+// .btn-success {
+//     background-color: var(--accent-color);
+//     border-color: var(--accent-color);
+// }
