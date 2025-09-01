@@ -20,6 +20,7 @@ window.addEventListener("load", async () => {
     showAttendanceByDate();
 
     Data.attendanceRecords.forEach((emp) => calculateAttendance(emp));
+    paginationEnable("pagination-security", "table-security", 8);
 });
 
 

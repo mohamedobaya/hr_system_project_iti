@@ -35,7 +35,7 @@
         <div class="card-security m-auto bg-light p-4 gap-4 d-flex flex-column rounded-2">
           <!-- title -->
           <h5 class="text-capitalize text-start emp-title">daily attendance</h5>
-          <div class="search w-100 mx-auto align-items-center d-flex justify-content-between">
+          <div class="search w-100 mx-auto align-items-center d-flex flex-md-row flex-column justify-content-between">
             <input type="search" placeholder="Search By Name/ID" class="w-25 d-flex p-2 search-input rounded-2" />
             <div class="d-flex align-items-center justify-content-center gap-3">
               <div class="calendar d-flex justify-content-center align-items-center">
@@ -84,8 +84,11 @@
                   <th scope="col" class="table-header text-capitalize">notes</th>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody id="table-security"></tbody>
             </table>
+            <div class="my-2 d-flex justify-content-center">
+                <div class="pagination" id="pagination-security"></div>
+            </div>
           </div>
           <!-- button submit -->
           <div class="submit w-25">

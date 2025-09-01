@@ -214,22 +214,23 @@ textarea {
     }
 
     #main-security {
-        height: 90vh;
+        // height: 90vh;
         position: relative;
         background-color: var(--base-color);
 
         .table-responsive {
-            max-height: 50vh;
+            // max-height: 50vh;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .card-security {
             background-color: var(--base-variant) !important;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            margin-top: 5em !important;
+            // position: absolute;
+            // top: 50%;
+            // left: 50%;
+            // transform: translate(-50%, -50%);
             width: 90%;
 
             .search-input {
@@ -270,7 +271,7 @@ textarea {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        min-height: 100vh;
+        // min-height: 100vh;
     }
 
     .dropdown-menu.show {
