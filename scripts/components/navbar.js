@@ -20,10 +20,14 @@ export const getNavbar = (empRole, empName, empTheme = 'light') => {
                         </a>
                     </li>
                     <li class="nav-item mx-md-2 mx-auto my-1">
-                        <a class="btn btn-warning" onclick="{localStorage.clear()}">Reset Local Storage</a>
+                        <a class="btn btn-reset" onclick="{localStorage.clear()}">
+                            <i class="fa-solid fa-server"></i>
+                        </a>
                     </li>
                     <li class="nav-item mx-auto my-1">
-                        <a class="btn btn-danger" href="../index.html">Logout</a>
+                        <a class="btn logout" href="../index.html">
+                            <i class="fa-solid fa-power-off"></i>
+                        </a>
                     </li>
                 </ul>
             </div>

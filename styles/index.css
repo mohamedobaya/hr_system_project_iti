@@ -48,6 +48,27 @@ hr {
 .navbar {
   background-color: var(--base-variant) !important;
 }
+.navbar .nav-item a {
+  font-size: 1.2em;
+}
+.navbar .logout {
+  color: red;
+}
+.navbar .logout:hover {
+  opacity: 0.4;
+}
+.navbar .btn-theme {
+  color: var(--text-color) !important;
+}
+.navbar .btn-theme:hover {
+  opacity: 0.4;
+}
+.navbar .btn-reset {
+  color: var(--accent-color);
+}
+.navbar .btn-reset:hover {
+  opacity: 0.4;
+}
 
 .nav {
   border: none;
