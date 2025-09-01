@@ -40,10 +40,12 @@ export const onPageLoad = (loggedEmployee) => {
             loggedEmployee.preferences.theme = 'dark';
             localStorage.setItem("employees", JSON.stringify(updateEmployeeByTheme(loggedEmployee.id, 'dark')));
             enableDarkmode();
+            onPageLoad(loggedEmployee);
         } else {
             loggedEmployee.preferences.theme = 'light';
             localStorage.setItem("employees", JSON.stringify(updateEmployeeByTheme(loggedEmployee.id, 'light')));
             disableDarkmode();
+            onPageLoad(loggedEmployee);
         }
     });
 }

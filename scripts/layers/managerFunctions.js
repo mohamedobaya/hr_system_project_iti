@@ -17,7 +17,7 @@ window.addEventListener("load", async () => {
     Data = await loadDataFromStorage();
     loggedEmployee = getEmployeeByID(localStorage.getItem("loggedEmployeeID"));
     onPageLoad(loggedEmployee);
-
+    
     // role-based call functions
     loadApprovalTable();
     loadAttendanceTable();
