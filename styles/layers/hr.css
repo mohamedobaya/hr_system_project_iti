@@ -1,11 +1,3 @@
-#searchInput::-moz-placeholder:not.root {
-  color: white;
-}
-
-#searchInput::placeholder:not.root {
-  color: white;
-}
-
 :root {
   --base-color: #F9FAFB;
   --base-variant: #FFFFFF;
@@ -31,7 +23,12 @@
   --accent-color: #34D399;
   --thead-bg-color: #374151;
   --thead-text-color: #F3F4F6;
-  --input-search:#F3F4F6;
+}
+.darkmode input::-moz-placeholder {
+  color: var(--border-color); /* Set your desired color */
+}
+.darkmode input::placeholder {
+  color: var(--border-color); /* Set your desired color */
 }
 
 .btn {
