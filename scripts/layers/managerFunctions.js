@@ -1,8 +1,8 @@
-import { getNavbar } from "../components/navbar.js";
+import { loadDataFromStorage, onPageLoad } from "../components/reusableFunctions.js";
+import { getEmployeeByID, getRequestByID, updateRequestByStatus, getAttendanceRecordsByID, getTaskByID } from "../components/reusableFunctions.js";
 
-const url = "./server/server.json";
-const navbar = document.getElementById("navbar-elm");
-const Data = {
+
+let Data = {
     employees: [],
     attendanceRecords: [],
     tasks: [],
@@ -13,90 +13,34 @@ let loggedEmployee = {}
 
 // automatically load when window is ready
 window.addEventListener("load", async () => {
-    loadDataFromStorage();
+    Data = await loadDataFromStorage();
     loggedEmployee = getEmployeeByID(localStorage.getItem("loggedEmployeeID"));
-    if (loggedEmployee == undefined) {
-        window.location.href = "/pages/index.html";
-    }
-    navbar.innerHTML = getNavbar(loggedEmployee.role, loggedEmployee.name, loggedEmployee.preferences.theme);
-
-    const themeBtn = document.getElementById("btn-theme");
-
-    // theme button logic
-    const enableDarkmode = () => {
-        document.body.classList.add('darkmode');
-    }
-
-    const disableDarkmode = () => {
-        document.body.classList.remove('darkmode');
-    }
-    themeBtn.addEventListener('click', () => {
-        if (loggedEmployee.preferences.theme == 'light') {
-            loggedEmployee.preferences.theme = 'dark';
-            enableDarkmode();
-        } else {
-            loggedEmployee.preferences.theme = 'light';
-            disableDarkmode();
-        }
-    });
-
+    onPageLoad(loggedEmployee);
+    
+    // role-based call functions
     loadApprovalTable();
     loadAttendanceTable();
     loadTaskTable();
     loadAssignTaskForm();
 });
 
-
-
-
-
-// Function to load data from localStorage
-const loadDataFromStorage = () => {
-    Data.employees = JSON.parse(localStorage.getItem("employees") || '[]');
-    Data.attendanceRecords = JSON.parse(localStorage.getItem("attendanceRecords") || '[]');
-    Data.tasks = JSON.parse(localStorage.getItem("tasks") || '[]');
-    Data.requests = JSON.parse(localStorage.getItem("requests") || '[]');
-    Data.payrolls = JSON.parse(localStorage.getItem("payrolls") || '[]');
-    console.log("Loaded Data in managerFunctions.js:", Data);
-}
-
-const getEmployeeByID = (empID) => {
-    return Data.employees.filter(emp => emp.id == empID)[0];
-}
-
-const getRequestByID = (reqID) => {
-    return Data.requests.filter(req => req.id == reqID)[0];
-}
-
-const getAttendanceRecordsByID = (arID) => {
-    return Data.attendanceRecords.filter(ar => ar.id == arID)[0];
-}
-
-const getTaskByID = (taskID) => {
-    return Data.tasks.filter(task => task.id == taskID)[0];
-}
-
 // Approval Center logic
 const approveRequest = (reqID) => {
-    let req = getRequestByID(reqID);
-    // TODO: accept logic
-    req.status = "Approved";
-    console.log(req);
+    Data.requests = updateRequestByStatus(reqID, "Approved");
+    localStorage.setItem("requests", JSON.stringify(Data.requests));
     loadApprovalTable();
 }
 
 const rejectRequest = (reqID) => {
-    let req = getRequestByID(reqID);
-    // TODO: reject logic
-    req.status = "Rejected";
-    console.log(req);
+    Data.requests = updateRequestByStatus(reqID, "Rejected");
+    localStorage.setItem("requests", JSON.stringify(Data.requests));
     loadApprovalTable();
 }
 
 const createApprovalRow = (reqID) => {
     let req = getRequestByID(reqID);
     const emp = getEmployeeByID(req.employeeId);
-    const department = emp.department;
+
     return `
     <tr>
         <td scope="row" id="employee-${req.id}">${emp.name}</td>
@@ -123,7 +67,7 @@ const loadApprovalTable = () => {
         approvalTable.innerHTML += row;
     }
 
-    console.log(Data.requests);
+    // console.log(Data.requests);
     localStorage.setItem("requests", JSON.stringify(Data.requests));
 }
 
@@ -168,18 +112,13 @@ const loadAttendanceTable = () => {
         const row = createAttendancelRow(ar.id);
         attendanceTable.innerHTML += row;
     }
-
-    console.log(Data.attendanceRecords);
-    // localStorage.setItem("attendanceRecords", JSON.stringify(Data.attendanceRecords));   
 }
 
 // Task Center logic
 const creatTaskRow = (taskID) => {
     let task = getTaskByID(taskID);
-    console.log(task);
 
     const emp = getEmployeeByID(task.employeeId);
-    console.log(emp);
 
     return `
     <tr>
@@ -201,8 +140,6 @@ const loadTaskTable = () => {
         const row = creatTaskRow(task.id);
         taskTable.innerHTML += row;
     }
-
-    console.log(Data.tasks);
 }
 
 // Assign New Tasks
@@ -258,7 +195,6 @@ const loadAssignTaskForm = () => {
         };
 
         // save to local storage
-        console.log("Task assigned:", newTask);
         Data.tasks.push(newTask);
         localStorage.setItem("tasks", JSON.stringify(Data.tasks));
         // reload Task Center
