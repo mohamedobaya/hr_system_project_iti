@@ -12,7 +12,7 @@
   --accent-color: #10B981;
   --thead-bg-color: #212529;
   --thead-text-color: #FFFFFF;
-  --colored:red;
+  --colored: red;
 }
 
 .darkmode {
@@ -31,9 +31,119 @@
 /* =================================================================
    2. General Body & Container Styles
    ================================================================= */
+.btn {
+  border-radius: 1em;
+}
+.btn-theme {
+  border: none;
+  color: var(--text-color);
+}
+
 body {
+  font-family: monospace !important;
   background-color: var(--base-color) !important;
   color: var(--text-color);
+}
+
+hr {
+  color: var(--primary-color);
+  border: 0.07em solid var(--primary-color);
+  border-radius: 1em;
+}
+
+.emp-title {
+  color: var(--primary-color);
+}
+.emp-name {
+  color: var(--accent-color);
+}
+
+.navbar {
+  background-color: var(--base-variant) !important;
+}
+
+.nav {
+  border: none;
+}
+@media (max-width: 768px) {
+  .nav {
+    font-size: 0.7em;
+    margin: 0em;
+  }
+}
+.nav-item {
+  background-color: var(--base-variant) !important;
+  border-radius: 1em;
+  margin: 0.5em;
+}
+.nav-item:first-child {
+  margin-inline-start: 0;
+}
+.nav-item:hover {
+  border: none;
+}
+.nav-link {
+  color: var(--text-color);
+  border-radius: 1em !important;
+}
+.nav-link:hover {
+  color: var(--text-color);
+  background-color: var(--accent-color);
+  border-color: var(--accent-color) !important;
+  border-radius: 1em;
+}
+.nav .active {
+  background-color: var(--primary-color) !important;
+  color: var(--base-color) !important;
+  border: none;
+}
+
+.hr table {
+  background-color: var(--base-variant);
+  margin-inline: auto;
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10em !important;
+  /* ensures proper border rendering */
+}
+.hr .table-title {
+  color: var(--accent-color);
+}
+.hr .table-header {
+  background-color: var(--accent-color) !important;
+  color: var(--base-color) !important;
+}
+.hr tr th {
+  background-color: var(--primary-color);
+  color: var(--base-color) !important;
+}
+.hr tr th,
+.hr tr td {
+  border: 0.01em solid var(--base-variant) !important;
+  padding: 8px;
+  text-align: center;
+  /* horizontal centering */
+  vertical-align: middle;
+  /* vertical centering */
+}
+.hr tr td {
+  background-color: var(--base-color);
+  color: var(--text-color) !important;
+}
+.hr tr:nth-child(even) td {
+  background-color: var(--base-variant2);
+}
+.hr tr:first-child th:first-child {
+  border-top-left-radius: 1em !important;
+}
+.hr tr:first-child th:last-child {
+  border-top-right-radius: 1em !important;
+}
+.hr tr:last-child td:first-child {
+  border-bottom-left-radius: 1em !important;
+}
+.hr tr:last-child td:last-child {
+  border-bottom-right-radius: 1em !important;
 }
 
 .p-3.border.rounded {
@@ -67,7 +177,8 @@ body {
 /* =================================================================
    4. Typography (Headings)
    ================================================================= */
-h2, h4 {
+h2,
+h4 {
   color: var(--primary-color);
 }
 

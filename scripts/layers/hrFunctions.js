@@ -1,9 +1,7 @@
-import { getNavbar } from "../components/navbar.js";
+import { loadDataFromStorage, onPageLoad } from "../components/reusableFunctions.js";
+import { getEmployeeByID, getRequestByID, updateRequestByStatus, getAttendanceRecordsByID, getTaskByID } from "../components/reusableFunctions.js";
 
-const url = "./server/server.json";
-const navbar = document.getElementById("navbar-elm");
-
-const Data = {
+let Data = {
     employees: [],
     attendanceRecords: [],
     tasks: [],
@@ -25,59 +23,19 @@ const exportPDFBtn = document.getElementById('exportPDF');
 
 
 window.addEventListener("load", async () => {
-    await initializeData();
+    Data = await loadDataFromStorage();
     loggedEmployee = getEmployeeByID(localStorage.getItem("loggedEmployeeID"));
-    if (loggedEmployee == undefined) {
-        window.location.href = "/pages/index.html";
-        return;
-    }
-    navbar.innerHTML = getNavbar(loggedEmployee.role, loggedEmployee.name, loggedEmployee.preferences.theme);
-    
-   
+    onPageLoad(loggedEmployee);
+
     updateEmployeeStatusAndLeaveBalance();
     renderEmployeeTable();
     setupReportsSection();
 
-    
+
     searchInput.addEventListener("keyup", renderEmployeeTable);
     employeeTableBody.addEventListener("click", handleTableButtonClick);
 });
 
-
-const initializeData = async () => {
-    const storedEmployees = JSON.parse(localStorage.getItem("employees"));
-    
-    if (storedEmployees && storedEmployees.length > 0) {
-        
-        loadDataFromStorage();
-        console.log("Data loaded from localStorage.");
-    } else {
-        
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            Data.employees = data.employees;
-            Data.attendanceRecords = data.attendanceRecords;
-            Data.tasks = data.tasks;
-            Data.requests = data.requests;
-            Data.payrolls = data.payrolls;
-            saveDataToStorage();
-            console.log("Data fetched from server and saved to localStorage.");
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            showMessage('Error fetching data from server.', 'danger');
-        }
-    }
-};
-
-
-const loadDataFromStorage = () => {
-    Data.employees = JSON.parse(localStorage.getItem("employees") || '[]');
-    Data.attendanceRecords = JSON.parse(localStorage.getItem("attendanceRecords") || '[]');
-    Data.tasks = JSON.parse(localStorage.getItem("tasks") || '[]');
-    Data.requests = JSON.parse(localStorage.getItem("requests") || '[]');
-    Data.payrolls = JSON.parse(localStorage.getItem("payrolls") || '[]');
-};
 
 const saveDataToStorage = () => {
     localStorage.setItem("employees", JSON.stringify(Data.employees));
@@ -87,33 +45,28 @@ const saveDataToStorage = () => {
     localStorage.setItem("payrolls", JSON.stringify(Data.payrolls));
 };
 
-const getEmployeeByID = (empID) => {
-    
-    return Data.employees.find(emp => emp.id === Number(empID));
-};
-
 const updateEmployeeStatusAndLeaveBalance = () => {
- Data.employees.forEach(emp => {
- 
-    if (emp.leaveBalanceAdjustment === undefined) {
-         emp.leaveBalanceAdjustment = 0;
-        
+    Data.employees.forEach(emp => {
+
+        if (emp.leaveBalanceAdjustment === undefined) {
+            emp.leaveBalanceAdjustment = 0;
+
         }
 
         const absenceDays = Data.attendanceRecords.
-        filter(a => a.employeeId === emp.id && a.status === "Absent").length;
+            filter(a => a.employeeId === emp.id && a.status === "Absent").length;
         emp.leaveBalance = emp.annualVacationDays - absenceDays + emp.leaveBalanceAdjustment;
 
         if (emp.leaveBalance < 0) {
-             emp.leaveBalance = 0;
+            emp.leaveBalance = 0;
 
-            }
+        }
 
-            emp.status = getLatestStatus(Data.attendanceRecords, emp.id);
+        emp.status = getLatestStatus(Data.attendanceRecords, emp.id);
 
-        });
-    
-    saveDataToStorage(); 
+    });
+
+    saveDataToStorage();
 };
 
 function getLatestStatus(attendanceRecords, employeeId) {
@@ -126,31 +79,31 @@ function getLatestStatus(attendanceRecords, employeeId) {
 }
 
 function updateLeaveBalance(employeeId, daysToAdd) {
- const employee = Data.employees.find(emp => emp.id === Number(employeeId));
- if (employee) {
-    
- if (employee.leaveBalanceAdjustment === undefined) {
- employee.leaveBalanceAdjustment = 0;
- }
- employee.leaveBalanceAdjustment += daysToAdd;
+    const employee = Data.employees.find(emp => emp.id === Number(employeeId));
+    if (employee) {
+
+        if (employee.leaveBalanceAdjustment === undefined) {
+            employee.leaveBalanceAdjustment = 0;
+        }
+        employee.leaveBalanceAdjustment += daysToAdd;
 
         // Now, recalculate the final leaveBalance based on the new adjustment
         const absenceDays = Data.attendanceRecords.filter(a => a.employeeId
-             === employee.id && a.status === "Absent").length;
+            === employee.id && a.status === "Absent").length;
         employee.leaveBalance = employee.annualVacationDays
-         - absenceDays + employee.leaveBalanceAdjustment;
+            - absenceDays + employee.leaveBalanceAdjustment;
 
- if (employee.leaveBalance < 0) {
- employee.leaveBalance = 0;
+        if (employee.leaveBalance < 0) {
+            employee.leaveBalance = 0;
 
-}
+        }
 
 
-saveDataToStorage(); 
+        saveDataToStorage();
 
-renderEmployeeTable(); 
-      showMessage(`Updated leave balance for employee ${employee.name}.`, 'success');
- }
+        renderEmployeeTable();
+        showMessage(`Updated leave balance for employee ${employee.name}.`, 'success');
+    }
 }
 
 function renderEmployeeTable() {
@@ -160,12 +113,13 @@ function renderEmployeeTable() {
         emp.name.toLowerCase().includes(value) ||
         emp.department.toLowerCase().includes(value)
     );
-
+    console.log(filterDepartment);
+    
     filteredData.forEach(emp => {
         const row = document.createElement("tr");
         row.innerHTML = `
 
-            <td>${emp.id}</td>
+            <td scope="row">${emp.id}</td>
             <td>${emp.name}</td>
             <td>${emp.department}</td>
             <td><button class="btn border">${emp.status}</button></td>
@@ -211,7 +165,7 @@ const handleBulkAction = (daysToAdd) => {
 //**********************  Reports  ****************************** */
 const setupReportsSection = () => {
     document.getElementById('totalEmployees').textContent = Data.employees.length;
-    
+
     const allReports = Data.attendanceRecords.map(rec => {
         const employee = Data.employees.find(e => e.id === rec.employeeId);
         return {
@@ -226,7 +180,7 @@ const setupReportsSection = () => {
     populateFilters(Data.employees, allReports);
     applyFilters(allReports);
     renderCharts(Data.employees, Data.tasks, Data.attendanceRecords);
-    
+
     filterDepartment.addEventListener('change', () => applyFilters(allReports));
     filterMonth.addEventListener('change', () => applyFilters(allReports));
     filterStatus.addEventListener('change', () => applyFilters(allReports));
@@ -235,7 +189,7 @@ const setupReportsSection = () => {
 };
 
 function populateFilters(employees, reports) {
-    
+
     filterDepartment.innerHTML = '<option value="">All Departments</option>';
     filterMonth.innerHTML = '<option value="">All Months</option>';
 
@@ -299,7 +253,7 @@ function renderCharts(employees, tasks, attendanceRecords) {
         acc[emp.department] = (acc[emp.department] || 0) + 1;
         return acc;
     }, {});
-    
+
     new Chart(document.getElementById('barChart'), {
         type: 'bar',
         data: {
@@ -357,8 +311,8 @@ function renderCharts(employees, tasks, attendanceRecords) {
 }
 
 function exportToExcel() {
-   
-    const table = document.getElementById('reportTable'); 
+
+    const table = document.getElementById('reportTable');
     if (!table) {
         showMessage('Reports table not found. Make sure the HTML table has id="reportTable".', 'danger');
         return;
@@ -386,17 +340,17 @@ function exportToExcel() {
 
 function exportToPDF() {
     window.jsPDF = window.jspdf.jsPDF;
-    
+
     const doc = new window.jsPDF('p', 'pt', 'a4');
     const element = document.querySelector('#reportTable');
-    
+
     if (!element) {
         showMessage('Reports table not found. Make sure the HTML table has id="reportTable".', 'danger');
         return;
     }
 
     doc.html(element, {
-        callback: function(pdf) {
+        callback: function (pdf) {
             pdf.save('company_reports.pdf');
         },
         x: 10,
