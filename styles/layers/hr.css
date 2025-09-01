@@ -1,6 +1,11 @@
-/* =================================================================
-   1. Define Color Variables for Light & Dark Themes
-   ================================================================= */
+#searchInput::-moz-placeholder:not.root {
+  color: white;
+}
+
+#searchInput::placeholder:not.root {
+  color: white;
+}
+
 :root {
   --base-color: #F9FAFB;
   --base-variant: #FFFFFF;
@@ -29,9 +34,6 @@
   --input-search:#F3F4F6;
 }
 
-/* =================================================================
-   2. General Body & Container Styles
-   ================================================================= */
 .btn {
   border-radius: 1em;
 }
@@ -153,9 +155,6 @@ hr {
   transition: background-color 0.3s, border-color 0.3s;
 }
 
-/* =================================================================
-   3. Navigation Tabs
-   ================================================================= */
 .nav-tabs {
   border-bottom: 2px solid var(--border-color);
 }
@@ -175,17 +174,11 @@ hr {
   border-bottom: 2px solid var(--primary-color);
 }
 
-/* =================================================================
-   4. Typography (Headings)
-   ================================================================= */
 h2,
 h4 {
   color: var(--primary-color);
 }
 
-/* =================================================================
-   5. Form Inputs & Selects
-   ================================================================= */
 .form-control,
 .form-select {
   background-color: var(--base-color);
@@ -200,9 +193,6 @@ h4 {
   box-shadow: 0 0 0 0.25rem rgba(var(--primary-color), 0.25);
 }
 
-/* =================================================================
-   6. Table Styles
-   ================================================================= */
 .table th,
 .table td {
   color: var(--text-color);

@@ -1,24 +1,26 @@
-/* =================================================================
-   1. Define Color Variables for Light & Dark Themes
-   ================================================================= */
+#searchInput::placeholder:not.root {
+  color: white;
+
+}
 :root {
     --base-color: #F9FAFB;
-    --base-variant: #FFFFFF; // White background for sections
-    --base-variant2: #E5E7EB; // For striped tables
+    --base-variant: #FFFFFF; 
+    --base-variant2: #E5E7EB; 
     --border-color: #DEE2E6;
     --text-color: #1F2937;
     --secondary-text: #6B7280;
     --primary-color: #2563EB;
     --accent-color: #10B981;
-    --thead-bg-color: #212529; // Corresponds to .table-dark
+    --thead-bg-color: #212529; 
     --thead-text-color: #FFFFFF;
     --colored: red;
+
 }
 
 .darkmode {
     --base-color: #111827;
-    --base-variant: #1F2937; // Darker background for sections
-    --base-variant2: #374151; // For striped tables
+    --base-variant: #1F2937; 
+    --base-variant2: #374151; 
     --border-color: #4B5563;
     --text-color: #F3F4F6;
     --secondary-text: #9CA3AF;
@@ -29,9 +31,7 @@
     --input-search:#F3F4F6;
 }
 
-/* =================================================================
-   2. General Body & Container Styles
-   ================================================================= */
+
 
 .btn {
     border-radius: 1em;
@@ -183,9 +183,7 @@ hr {
     transition: background-color 0.3s, border-color 0.3s;
 }
 
-/* =================================================================
-   3. Navigation Tabs
-   ================================================================= */
+
 .nav-tabs {
     border-bottom: 2px solid var(--border-color);
 
@@ -209,17 +207,13 @@ hr {
     }
 }
 
-/* =================================================================
-   4. Typography (Headings)
-   ================================================================= */
+
 h2,
 h4 {
     color: var(--primary-color);
 }
 
-/* =================================================================
-   5. Form Inputs & Selects
-   ================================================================= */
+
 .form-control,
 .form-select {
     background-color: var(--base-color);
@@ -234,9 +228,7 @@ h4 {
     }
 }
 
-/* =================================================================
-   6. Table Styles
-   ================================================================= */
+
 .table {
 
     // General styles for all cells
@@ -247,7 +239,7 @@ h4 {
         vertical-align: middle;
     }
 
-    // Table header for the first table
+    
     thead:not(.table-dark) {
         th {
             background-color: var(--accent-color);
@@ -255,7 +247,7 @@ h4 {
         }
     }
 
-    // Specific override for Bootstrap's .table-striped
+    
     &.table-striped>tbody>tr:nth-of-type(odd)>* {
         background-color: var(--base-variant2);
         color: var(--text-color);
@@ -266,7 +258,7 @@ h4 {
         color: var(--text-color);
     }
 
-    // Override for the second table's dark header
+    
     thead.table-dark {
         th {
             background-color: var(--thead-bg-color) !important;
