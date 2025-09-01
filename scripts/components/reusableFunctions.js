@@ -66,6 +66,16 @@ export const getRequestByID = (reqID) => {
     return requests.filter(req => req.id == reqID)[0];
 }
 
+export const getAttendanceRecordsByID = (arID) => {
+    const attendanceRecords = JSON.parse(localStorage.getItem("attendanceRecords") || "[]");
+    return attendanceRecords.filter(ar => ar.id == arID)[0];
+}
+
+export const getTaskByID = (taskID) => {
+    const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+    return tasks.filter(task => task.id == taskID)[0];
+}
+
 export const updateRequestByStatus = (reqID, newStatus) => {
     const requests = JSON.parse(localStorage.getItem("requests") || "[]");
     let updatedRequests = [];
@@ -80,12 +90,6 @@ export const updateRequestByStatus = (reqID, newStatus) => {
     return updatedRequests;
 }
 
-export const getAttendanceRecordsByID = (arID) => {
-    const attendanceRecords = JSON.parse(localStorage.getItem("attendanceRecords") || "[]");
-    return attendanceRecords.filter(ar => ar.id == arID)[0];
-}
-
-export const getTaskByID = (taskID) => {
-    const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
-    return tasks.filter(task => task.id == taskID)[0];
+export const searchEmployeesByName = () => {
+    
 }
