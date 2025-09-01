@@ -14,9 +14,11 @@
     <link rel="stylesheet" href="../../frameworks/fontawesome/css/fontawesome.min.css"> <!-- FontAwesome CSS -->
     <link rel="stylesheet" href="../../frameworks/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="../../styles/layers/manager.css"> <!-- Base CSS style -->
+    <link rel="stylesheet" href="../../styles/index.css">
 </head>
 
 <!-- <body class="darkmode"> -->
+
 <body>
     <div class="mx-auto">
         <div id="navbar-elm" class="mx-auto"></div>
@@ -46,85 +48,103 @@
         </ul>
         <hr>
         <!-- Approval Center -->
-        <div style="overflow-x:auto;" class="py-3 center-section">
-            <h4 class="mb-0 table-title">Approval Center</h4>
-            <table class="table my-5">
-                <thead>
-                    <tr>
-                        <th scope="col" class="table-header">Employee</th>
-                        <th scope="col" class="table-header">Department</th>
-                        <th scope="col" class="table-header">Request</th>
-                        <th scope="col" class="table-header">Date</th>
-                        <th scope="col" class="table-header">Notes</th>
-                        <th scope="col" class="table-header">Status</th>
-                        <th scope="col" class="table-header">Action</th>
-                    </tr>
-                </thead>
-                <tbody id="approval-table"></tbody>
-            </table>
+        <div class="center-section">
+            <div style="overflow-x:auto;" class="py-3">
+                <h4 class="mb-0 table-title">Approval Center</h4>
+                <table class="table my-5">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="table-header">Employee</th>
+                            <th scope="col" class="table-header">Department</th>
+                            <th scope="col" class="table-header">Request</th>
+                            <th scope="col" class="table-header">Date</th>
+                            <th scope="col" class="table-header">Notes</th>
+                            <th scope="col" class="table-header">Status</th>
+                            <th scope="col" class="table-header">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="approval-table"></tbody>
+                </table>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="pagination" id="pagination-approval"></div>
+            </div>
         </div>
 
         <!-- Attendance Center -->
-        <div style="overflow-x:auto;display: none;" class="py-3 center-section">
-            <h4 class="mb-0 table-title">Attendance Center</h4>
-            <table class="table my-5">
-                <thead>
-                    <tr>
-                        <th scope="col" class="table-header">Employee</th>
-                        <th scope="col" class="table-header">Department</th>
-                        <th scope="col" class="table-header">Date</th>
-                        <th scope="col" class="table-header">Check In</th>
-                        <th scope="col" class="table-header">Check Out</th>
-                        <th scope="col" class="table-header">Status</th>
-                        <th scope="col" class="table-header">Minutes Late</th>
-                        <th scope="col" class="table-header">Work From Home</th>
-                        <th scope="col" class="table-header">Leave</th>
-                        <th scope="col" class="table-header">Notes</th>
-                    </tr>
-                </thead>
-                <tbody id="attendance-table"></tbody>
-            </table>
-        </div>
+        <div class="center-section" style="display: none;">
+            <div style="overflow-x:auto;" class="py-3">
+                <h4 class="mb-0 table-title">Attendance Center</h4>
+                <table class="table my-5">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="table-header">Employee</th>
+                            <th scope="col" class="table-header">Department</th>
+                            <th scope="col" class="table-header">Date</th>
+                            <th scope="col" class="table-header">Check In</th>
+                            <th scope="col" class="table-header">Check Out</th>
+                            <th scope="col" class="table-header">Status</th>
+                            <th scope="col" class="table-header">Minutes Late</th>
+                            <th scope="col" class="table-header">Work From Home</th>
+                            <th scope="col" class="table-header">Leave</th>
+                            <th scope="col" class="table-header">Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendance-table"></tbody>
+                </table>
 
-        <!-- Task Center -->
-        <div style="overflow-x:auto;display: none;" class="py-3 center-section">
-            <h4 class="mb-0 table-title">Task Center</h4>
-            <table class="table my-5">
-                <thead>
-                    <tr>
-                        <th scope="col" class="table-header">Task ID</th>
-                        <th scope="col" class="table-header">Task Title</th>
-                        <th scope="col" class="table-header">Task Description</th>
-                        <th scope="col" class="table-header">Employee</th>
-                        <th scope="col" class="table-header">Department</th>
-                        <th scope="col" class="table-header">Status</th>
-                        <th scope="col" class="table-header">Due Date</th>
-                    </tr>
-                </thead>
-                <tbody id="task-table"></tbody>
-            </table>
-        </div>
-
-        <!-- Assign New Task Center -->
-        <div id="manager-assign" class="manager-task py-3 center-section" style="display: none;">
-            <div class="manager-task-assign">
-                <h4 class="mb-4 table-title">Assign New Task Center</h4>
-                <label for="employee-assign-task-selector" class="form-label">Choose Employee</label>
-                <select class="form-select manager-task-assign-employee my-3" id="employee-assign-task-selector"
-                    aria-label="Default select example">
-                    <option selected value="">Choose Employee</option>
-                </select>
-                <label for="new-task-title" class="form-label">Task Title</label>
-                <input type="text" class="form-control manager-task-assign-employee my-3" id="new-task-title"
-                    placeholder="Task title">
-                <label for="new-task-description" class="form-label">Task Description</label>
-                <input type="text" class="form-control manager-task-assign-employee my-3" id="new-task-description"
-                    placeholder="Task Description">
-                <label for="new-task-date" class="form-label">Task Due Date</label>
-                <input type="date" class="form-control manager-task-assign-employee my-3" id="new-task-date">
-                <a id="assign-task-btn" class="btn btn-success">Assign Task</a>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="pagination" id="pagination-attendance"></div>
             </div>
         </div>
+        <!-- Task Center -->
+        <div class="center-section" style="display: none;">
+            <div style="overflow-x:auto;" class="py-3">
+                <h4 class="mb-0 table-title">Task Center</h4>
+                <table class="table my-5">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="table-header">Task ID</th>
+                            <th scope="col" class="table-header">Task Title</th>
+                            <th scope="col" class="table-header">Task Description</th>
+                            <th scope="col" class="table-header">Employee</th>
+                            <th scope="col" class="table-header">Department</th>
+                            <th scope="col" class="table-header">Status</th>
+                            <th scope="col" class="table-header">Due Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="task-table"></tbody>
+                </table>
+
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="pagination mx-auto" id="pagination-task"></div>
+            </div>
+        </div>
+        <!-- Assign New Task Center -->
+        <div class="center-section" style="display: none;">
+            <div id="manager-assign" class="manager-task py-3 d-flex justify-content-center">
+                <div class="manager-task-assign">
+                    <h4 class="mb-4 table-title">Assign New Task Center</h4>
+                    <label for="employee-assign-task-selector" class="form-label">Choose Employee</label>
+                    <select class="form-select manager-task-assign-employee my-1 mb-4" id="employee-assign-task-selector"
+                        aria-label="Default select example">
+                        <option selected value="">Choose Employee</option>
+                    </select>
+                    <label for="new-task-title" class="form-label">Task Title</label>
+                    <input type="text" class="form-control manager-task-assign-employee my-1 mb-4" id="new-task-title"
+                        placeholder="Task title">
+                    <label for="new-task-description" class="form-label">Task Description</label>
+                    <input type="text" class="form-control manager-task-assign-employee my-1 mb-4" id="new-task-description"
+                        placeholder="Task Description">
+                    <label for="new-task-date" class="form-label">Task Due Date</label>
+                    <input type="date" class="form-control manager-task-assign-employee my-1 mb-4 mx-auto" id="new-task-date">
+                    <a id="assign-task-btn" class="btn btn-success">Assign Task</a>
+                </div>
+            </div>
+        </div>
+
 
     </div>
     <!-- JS Tags -->

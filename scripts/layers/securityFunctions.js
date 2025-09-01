@@ -1,9 +1,8 @@
-import { getNavbar } from "../components/navbar.js";
+import { paginationEnable } from "../components/pagination.js";
+import { loadDataFromStorage, onPageLoad } from "../components/reusableFunctions.js";
+import { getEmployeeByID, getRequestByID, updateRequestByStatus, getAttendanceRecordsByID, getTaskByID } from "../components/reusableFunctions.js";
 
-const url = "./server/server.json";
-const navbar = document.getElementById("navbar-elm");
-
-const Data = {
+let Data = {
     employees: [],
     attendanceRecords: [],
     tasks: [],
@@ -15,39 +14,15 @@ let loggedEmployee = {};
 
 // Load data and initialize
 window.addEventListener("load", async () => {
-    loadDataFromStorage();
+    Data = await loadDataFromStorage();
     loggedEmployee = getEmployeeByID(localStorage.getItem("loggedEmployeeID"));
-    console.log(loggedEmployee);
-
-    if (!loggedEmployee) {
-        window.location.href = "/pages/index.html";
-    }
-
-    navbar.innerHTML = getNavbar(
-        loggedEmployee.role,
-        loggedEmployee.name,
-        loggedEmployee.preferences.theme
-    );
-
+    onPageLoad(loggedEmployee);
     showAttendanceByDate();
 
     Data.attendanceRecords.forEach((emp) => calculateAttendance(emp));
+    paginationEnable("pagination-security", "table-security", 8);
 });
 
-// Load data from localStorage
-const loadDataFromStorage = () => {
-    Data.employees = JSON.parse(localStorage.getItem("employees") || "[]");
-    Data.attendanceRecords = JSON.parse(localStorage.getItem("attendanceRecords") || "[]");
-    Data.tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
-    Data.requests = JSON.parse(localStorage.getItem("requests") || "[]");
-    Data.payrolls = JSON.parse(localStorage.getItem("payrolls") || "[]");
-
-    console.log("Loaded Data in securityFunctions.js:", Data);
-};
-
-const getEmployeeByID = (empID) => {
-    return Data.employees.find((emp) => emp.id == empID);
-};
 
 // Styling status select
 function updateSelectColor(select) {
@@ -80,11 +55,11 @@ function createNewRow(emp) {
     NewRow.dataset.notes = emp.notes;
 
     NewRow.innerHTML = `
-        <th scope="row"><input type="checkbox" class="cursor"></th>
-        <th scope="row">${allemp.id}</th>
-        <th scope="row">${allemp.name}</th>
-        <th scope="row">${allemp.department}</th>
-        <th scope="row">
+        <td scope="row"><input type="checkbox" class="cursor"></td>
+        <td scope="row">${allemp.id}</td>
+        <td scope="row">${allemp.name}</td>
+        <td scope="row">${allemp.department}</td>
+        <td scope="row">
             <select class="cursor form-select" name="status" >
                 <option selected>${emp.status}</option>
                 <option value="Late">Late</option>
@@ -93,13 +68,13 @@ function createNewRow(emp) {
                 <option value="Leave">Leave</option>
                 <option value="WFH">WFH</option>
             </select>
-        </th>
-        <th scope="row"><input type="time" name="checkIn" value="${emp.checkIn}" class="rounded-2"></th>
-        <th scope="row"><input type="time" name="checkOut" value="${emp.checkOut}" class="rounded-2"></th>
-        <th scope="row" id='min'>${emp.minutesLate} min</th>
-        <th scope="row" class="text-capitalize">
+        </td>
+        <td scope="row"><input type="time" name="checkIn" value="${emp.checkIn}" class="rounded-2"></td>
+        <td scope="row"><input type="time" name="checkOut" value="${emp.checkOut}" class="rounded-2"></td>
+        <td scope="row" id='min'>${emp.minutesLate} min</td>
+        <td scope="row" class="text-capitalize">
             <textarea name="notes" class="form-control" rows="1" placeholder="Enter Your Notes">${emp.notes}</textarea>
-        </th>
+        </td>
     `;
 
     const select = NewRow.querySelector("select");
@@ -111,7 +86,7 @@ function createNewRow(emp) {
     select.addEventListener("change", function (e) {
         const oldStatus = emp.status;
         const newStatus = e.target.value;
-            //check wfh leave
+        //check wfh leave
         if ((newStatus === "WFH" && !emp.isWFH) || (newStatus === "Leave" && !emp.isLeave)) {
             alertBox.textContent = "Manager approval required!";
             alertBox.classList.add("alert-danger");
@@ -247,7 +222,7 @@ function updateChanges() {
 
     savebtn.addEventListener("click", function () {
         const tableRows = document.querySelectorAll("tbody tr");
-        let anyChange = false; 
+        let anyChange = false;
         for (let row of tableRows) {
             const newStatus = row.querySelector("select").value;
             const newCheckIn = row.querySelector('input[name="checkIn"]').value;
@@ -264,7 +239,7 @@ function updateChanges() {
                 emp.notes !== newNotes
             );
 
-            if (!changed) continue;  
+            if (!changed) continue;
 
             anyChange = true;
 
