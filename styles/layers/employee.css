@@ -1,1 +1,10 @@
 /*# sourceMappingURL=employee.css.map */
+
+ul.list-unstyled {
+  min-height: 120px;
+  padding: 10px;
+  border: 2px solid transparent;
+}
+ul.list-unstyled.drag-over {
+  border: 2px solid #00bcd4;
+}
