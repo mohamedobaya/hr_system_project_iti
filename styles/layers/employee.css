@@ -1,1 +1,108 @@
-/* No CSS *//*# sourceMappingURL=employee.css.map */
+:root {
+  --base-color: #F9FAFB;
+  --base-variant: #E5E7EB;
+  --base-variant2: #EBEEF3;
+  --text-color: #1F2937;
+  --secondary-text: #6B7280;
+  --primary-color: #2563EB;
+  --accent-color: #10B981;
+}
+
+.darkmode {
+  --base-color: #111827;
+  --base-variant: #374151;
+  --base-variant2: #1E2639;
+  --text-color: #F3F4F6;
+  --secondary-text: #9CA3AF;
+  --primary-color: #3B82F6;
+  --accent-color: #34D399;
+}
+
+.employee {
+  background-color: var(--base-variant) !important;
+}
+.employee .task-holder {
+  background-color: var(--base-color);
+  border-radius: 1em;
+}
+.employee .task-holder .task-title {
+  margin-bottom: 1em !important;
+}
+.employee table {
+  background-color: var(--base-variant);
+  margin-inline: auto;
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10em !important;
+  /* ensures proper border rendering */
+}
+.employee .table-title {
+  color: var(--accent-color);
+}
+.employee .table-header {
+  background-color: var(--accent-color) !important;
+  color: var(--base-color) !important;
+}
+.employee tr th {
+  background-color: var(--primary-color);
+  color: var(--base-color) !important;
+}
+.employee tr th,
+.employee tr td {
+  border: 0.01em solid var(--base-variant) !important;
+  padding: 8px;
+  text-align: center;
+  /* horizontal centering */
+  vertical-align: middle;
+  /* vertical centering */
+}
+.employee tr td {
+  background-color: var(--base-color);
+  color: var(--text-color) !important;
+}
+.employee tr:nth-child(even) td {
+  background-color: var(--base-variant2);
+}
+.employee tr:first-child th:first-child {
+  border-top-left-radius: 1em !important;
+}
+.employee tr:first-child th:last-child {
+  border-top-right-radius: 1em !important;
+}
+.employee tr:last-child td:first-child {
+  border-bottom-left-radius: 1em !important;
+}
+.employee tr:last-child td:last-child {
+  border-bottom-right-radius: 1em !important;
+}
+
+#requests-center .form-label {
+  color: var(--accent-color) !important;
+}
+#requests-center input, #requests-center select, #requests-center textArea {
+  background-color: var(--base-color);
+  color: var(--text-color);
+  border: var(--base-color);
+}
+#requests-center input::-moz-placeholder, #requests-center select::-moz-placeholder, #requests-center textArea::-moz-placeholder {
+  color: var(--secondary-text) !important;
+}
+#requests-center input::placeholder, #requests-center select::placeholder, #requests-center textArea::placeholder {
+  color: var(--secondary-text) !important;
+}
+#requests-center .request {
+  background-color: var(--base-color);
+  color: var(--text-color);
+  border-color: var(--base-variant);
+}
+
+
+/*# sourceMappingURL=employee.css.map */
+
+ul.list-unstyled {
+  min-height: 150px;
+  padding: 10px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+}
+

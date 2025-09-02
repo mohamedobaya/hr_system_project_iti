@@ -17,6 +17,9 @@
   --primary-color: #3B82F6;
   --accent-color: #34D399;
 }
+.darkmode ::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
 
 .btn {
   border-radius: 1em;
@@ -50,11 +53,6 @@ hr {
 .navbar {
   background-color: var(--base-variant) !important;
 }
-
-.navbar .nav-item a {
-  font-size: 1.2em;
-}
-
 .navbar .logout {
   color: red;
 }

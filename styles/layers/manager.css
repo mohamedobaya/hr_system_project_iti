@@ -119,8 +119,9 @@ hr {
   background-color: var(--base-variant);
   margin-inline: auto;
   width: 100%;
+  border: 1px solid var(--base-color) !important;
+  border: none;
   border-collapse: collapse;
-  border-radius: 10em !important;
   /* ensures proper border rendering */
 }
 
