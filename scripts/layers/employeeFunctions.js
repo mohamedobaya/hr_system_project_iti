@@ -161,7 +161,7 @@ function renderAttendance() {
       <td>${record.notes || ""}</td>
     `;
     tbody.appendChild(tr);
-  });
+  }); 
 }
 
 // Requests  (waled & omar)
