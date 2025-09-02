@@ -59,6 +59,7 @@ hr {
         margin: 0em;
 
     }
+
     &-item {
         background-color: var(--base-variant) !important;
         border-radius: 1em;
@@ -90,6 +91,7 @@ hr {
         color: var(--base-color) !important;
         border: none;
     }
+
     border: none;
 }
 
@@ -97,6 +99,7 @@ hr {
     background-color: var(--base-variant) !important;
     border-radius: 1em;
     padding: 2em !important;
+
     &-task {
         &-assign {
             &-employee {
@@ -106,6 +109,7 @@ hr {
             }
         }
     }
+
     &-btns {
         .btns {
             margin-inline: auto;
@@ -113,6 +117,7 @@ hr {
 
         text-align: center;
     }
+
     table {
         background-color: var(--base-variant);
         margin-inline: auto;
@@ -123,13 +128,16 @@ hr {
         // border-radius: 10em !important;
         /* ensures proper border rendering */
     }
+
     .table-title {
         color: var(--accent-color);
     }
+
     .table-header {
         background-color: var(--accent-color) !important;
         color: var(--base-color) !important;
     }
+
     tr {
         th {
             background-color: var(--primary-color);
@@ -174,4 +182,31 @@ hr {
             border-bottom-right-radius: 1em !important;
         }
     }
+
+    &-input-container {
+        .form {
+            &-control {
+                width: 10em;
+                background-color: var(--base-color);
+                color: var(--text-color);
+                border-color: var(--base-color);
+                &::placeholder {
+                    color: var(--secondary-text);
+                }
+            }
+
+            &-select {
+                margin-left: 1em;
+                width: 10em;
+                background-color: var(--base-color);
+                color: var(--text-color);
+                border-color: var(--base-color);
+                &::placeholder {
+                    color: var(--secondary-text);
+                }
+            }
+        }
+
+    }
 }
+

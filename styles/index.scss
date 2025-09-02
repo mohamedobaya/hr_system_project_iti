@@ -130,7 +130,15 @@ hr {
 }
 
 
-
+// profile
+.profile {
+    ul {
+        list-style: none;
+    }
+    &-avatar {
+        font-size: 10em;
+    }
+}
 
 // pagination
 .pagination {
