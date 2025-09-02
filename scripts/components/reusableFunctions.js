@@ -16,6 +16,9 @@ export const onPageLoad = (loggedEmployee) => {
 
 
     // theme-logic (light/dark)
+
+    
+
     const themeBtn = document.getElementById("btn-theme");
 
     // theme button logic
@@ -26,13 +29,23 @@ export const onPageLoad = (loggedEmployee) => {
     const disableDarkmode = () => {
         document.body.classList.remove('darkmode');
     }
+
+    if (loggedEmployee.preferences.theme == 'dark')
+        enableDarkmode();
+    else
+        disableDarkmode();
+    
     themeBtn.addEventListener('click', () => {
         if (loggedEmployee.preferences.theme == 'light') {
             loggedEmployee.preferences.theme = 'dark';
+            localStorage.setItem("employees", JSON.stringify(updateEmployeeByTheme(loggedEmployee.id, 'dark')));
             enableDarkmode();
+            onPageLoad(loggedEmployee);
         } else {
             loggedEmployee.preferences.theme = 'light';
+            localStorage.setItem("employees", JSON.stringify(updateEmployeeByTheme(loggedEmployee.id, 'light')));
             disableDarkmode();
+            onPageLoad(loggedEmployee);
         }
     });
 }
@@ -66,6 +79,16 @@ export const getRequestByID = (reqID) => {
     return requests.filter(req => req.id == reqID)[0];
 }
 
+export const getAttendanceRecordsByID = (arID) => {
+    const attendanceRecords = JSON.parse(localStorage.getItem("attendanceRecords") || "[]");
+    return attendanceRecords.filter(ar => ar.id == arID)[0];
+}
+
+export const getTaskByID = (taskID) => {
+    const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+    return tasks.filter(task => task.id == taskID)[0];
+}
+
 export const updateRequestByStatus = (reqID, newStatus) => {
     const requests = JSON.parse(localStorage.getItem("requests") || "[]");
     let updatedRequests = [];
@@ -80,12 +103,18 @@ export const updateRequestByStatus = (reqID, newStatus) => {
     return updatedRequests;
 }
 
-export const getAttendanceRecordsByID = (arID) => {
-    const attendanceRecords = JSON.parse(localStorage.getItem("attendanceRecords") || "[]");
-    return attendanceRecords.filter(ar => ar.id == arID)[0];
+export const updateEmployeeByTheme = (empID, newTheme) => {
+    const employees = JSON.parse(localStorage.getItem("employees") || "[]");
+    let updatedEmployees = [];
+    for (let emp of employees) {
+        if (emp.id == empID)
+            emp.preferences.theme = newTheme;
+        updatedEmployees.push(emp);
+    }
+
+    return updatedEmployees;
 }
 
-export const getTaskByID = (taskID) => {
-    const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
-    return tasks.filter(task => task.id == taskID)[0];
+export const searchEmployeesByName = () => {
+    
 }

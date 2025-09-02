@@ -82,12 +82,13 @@ function makeDraggable(li) {
 // get tasks condition and render them (waled)
 function renderTasks() {
   const loggedEmployeeID = parseInt(localStorage.getItem("loggedEmployeeID"));
-  const myTasks = Data.tasks.filter((t) => t.employeeId === loggedEmployeeID);
+  const myTasks = Data.tasks.filter((t) => Number(t.employeeId) === loggedEmployeeID);
 
   document.getElementById("Pending").innerHTML = "";
   document.getElementById("In Progress").innerHTML = "";
   document.getElementById("Completed").innerHTML = "";
 
+  
   myTasks.forEach((task) => {
     let li = document.createElement("li");
     li.className = "bg-primary-subtle rounded p-2 my-2";
@@ -240,4 +241,3 @@ if (requestForm) {
     requestForm.reset();
   });
 }
-

@@ -1,37 +1,203 @@
+:root {
+  --base-color: #F9FAFB;
+  --base-variant: #E5E7EB;
+  --base-variant2: #EBEEF3;
+  --text-color: #1F2937;
+  --secondary-text: #6B7280;
+  --primary-color: #2563EB;
+  --accent-color: #10B981;
+}
+
+.darkmode {
+  --base-color: #111827;
+  --base-variant: #374151;
+  --base-variant2: #1E2639;
+  --text-color: #F3F4F6;
+  --secondary-text: #9CA3AF;
+  --primary-color: #3B82F6;
+  --accent-color: #34D399;
+}
+
+.btn {
+  border-radius: 1em;
+}
+.btn-theme {
+  border: none;
+  color: var(--text-color);
+}
+
+body {
+  font-family: monospace !important;
+  background-color: var(--base-color) !important;
+  color: var(--text-color);
+}
+
+hr {
+  color: var(--primary-color);
+  border: 0.07em solid var(--primary-color);
+  border-radius: 1em;
+}
+
+.emp-title {
+  color: var(--primary-color);
+}
+.emp-name {
+  color: var(--accent-color);
+}
+
+.navbar {
+  background-color: var(--base-variant) !important;
+}
+
+.nav {
+  border: none;
+}
+@media (max-width: 768px) {
+  .nav {
+    font-size: 0.7em;
+    margin: 0em;
+  }
+}
+.nav-item {
+  background-color: var(--base-variant) !important;
+  border-radius: 1em;
+  margin: 0.5em;
+}
+.nav-item:first-child {
+  margin-inline-start: 0;
+}
+.nav-item:hover {
+  border: none;
+}
+.nav-link {
+  color: var(--text-color);
+  border-radius: 1em !important;
+}
+.nav-link:hover {
+  color: var(--text-color);
+  background-color: var(--accent-color);
+  border-color: var(--accent-color) !important;
+  border-radius: 1em;
+}
+.nav .active {
+  background-color: var(--primary-color) !important;
+  color: var(--base-color) !important;
+  border: none;
+}
+
+table {
+  background-color: var(--base-variant) !important;
+  margin-inline: auto;
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10em !important;
+  /* ensures proper border rendering */
+}
+table .table-header {
+  background-color: var(--accent-color) !important;
+  color: var(--base-color) !important;
+}
+table tr th {
+  background-color: var(--primary-color);
+  color: var(--base-color) !important;
+}
+table tr th,
+table tr td {
+  border: 0.01em solid var(--base-variant) !important;
+  padding: 8px;
+  text-align: center;
+  /* horizontal centering */
+  vertical-align: middle;
+  /* vertical centering */
+}
+table tr td {
+  background-color: var(--base-color) !important;
+  color: var(--text-color) !important;
+}
+table tr:nth-child(even) td {
+  background-color: var(--base-variant2) !important;
+}
+table tr:first-child th:first-child {
+  border-top-left-radius: 1em !important;
+}
+table tr:first-child th:last-child {
+  border-top-right-radius: 1em !important;
+}
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 1em !important;
+}
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 1em !important;
+}
+
+textarea {
+  background-color: var(--base-color) !important;
+  color: var(--text-color) !important;
+}
+textarea::-moz-placeholder {
+  color: var(--secondary-text) !important;
+}
+textarea::placeholder {
+  color: var(--secondary-text) !important;
+}
+
+.search input {
+  background-color: var(--base-color) !important;
+  color: var(--text-color);
+  border: var(--base-color) !important;
+}
+.search .dropdown .btn {
+  background-color: var(--base-color) !important;
+  border-color: var(--base-color) !important;
+  color: var(--accent-color) !important;
+}
+.search .dropdown ul {
+  background-color: var(--base-color) !important;
+  color: var(--text-color) !important;
+}
+.search .dropdown ul li a {
+  color: var(--text-color) !important;
+}
+.search .dropdown ul li a:hover {
+  background-color: var(--base-color) !important;
+  color: var(--accent-color) !important;
+}
+
+.security {
+  background-color: var(--base-color);
+}
 .security ::-webkit-scrollbar {
   width: 3px;
   height: 3px;
 }
 .security ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: var(--secondary-text);
   border-radius: 10px;
 }
 .security .cursor {
   cursor: pointer;
 }
-.security #footer-security {
-  background-color: #fff;
-  height: 8vh;
-}
 .security #main-security {
-  height: 90vh;
   position: relative;
+  background-color: var(--base-color);
 }
 .security #main-security .table-responsive {
-  max-height: 50vh;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 .security #main-security .card-security {
+  background-color: var(--base-variant) !important;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin-top: 5em !important;
   width: 90%;
 }
 .security #main-security .card-security .search-input {
   border: none;
   outline: none;
+  background-color: var(--base-color);
+  color: var(--text-color);
+}
+.security #main-security .card-security .table {
+  background-color: var(--base-variant) !important;
 }
 .security #main-security .card-security .table thead,
 .security #main-security .card-security .table .submit .btn {
@@ -42,6 +208,8 @@
 }
 .security input[type=time] {
   border: 1px solid #ccc;
+  background-color: var(--base-variant);
+  color: var(--text-color);
 }
 .security .submit .btn,
 .security th {
@@ -51,7 +219,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 100vh;
 }
 .security .dropdown-menu.show {
   z-index: 100000000 !important;
@@ -87,4 +254,7 @@
   border-radius: 8px;
   padding: 10px 20px;
   font-size: 14px;
+}
+.security .form-select {
+  padding-right: 2rem !important;
 }/*# sourceMappingURL=security.css.map */

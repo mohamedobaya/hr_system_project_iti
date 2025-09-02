@@ -1,1 +1,325 @@
 
+:root {
+    --base-color: #F9FAFB;
+    --base-variant: #FFFFFF; 
+    --base-variant2: #E5E7EB; 
+    --border-color: #DEE2E6;
+    --text-color: #1F2937;
+    --secondary-text: #6B7280;
+    --primary-color: #2563EB;
+    --accent-color: #10B981;
+    --thead-bg-color: #212529; 
+    --thead-text-color: #FFFFFF;
+    --colored: red;
+
+}
+
+.darkmode {
+    --base-color: #111827;
+    --base-variant: #1F2937; 
+    --base-variant2: #374151; 
+    --border-color: #4B5563;
+    --text-color: #F3F4F6;
+    --secondary-text: #9CA3AF;
+    --primary-color: #3B82F6;
+    --accent-color: #34D399;
+    --thead-bg-color: #374151;
+    --thead-text-color: #F3F4F6;
+   
+
+    input::placeholder {
+  color: var(--border-color); /* Set your desired color */
+}
+}
+
+
+
+.btn {
+    border-radius: 1em;
+
+    &-theme {
+        border: none;
+        color: var(--text-color);
+    }
+}
+
+body {
+    font-family: monospace !important;
+    background-color: var(--base-color) !important;
+    color: var(--text-color);
+}
+
+hr {
+    color: var(--primary-color);
+    border: 0.07em solid var(--primary-color);
+    border-radius: 1em;
+}
+
+.emp {
+    &-title {
+        color: var(--primary-color);
+    }
+
+    &-name {
+        color: var(--accent-color);
+    }
+}
+
+.navbar {
+    background-color: var(--base-variant) !important;
+}
+
+.nav {
+    @media (max-width: 768px) {
+        font-size: 0.7em;
+        margin: 0em;
+
+    }
+
+    &-item {
+        background-color: var(--base-variant) !important;
+        border-radius: 1em;
+        margin: 0.5em;
+
+        &:first-child {
+            margin-inline-start: 0;
+        }
+
+        &:hover {
+            border: none;
+        }
+    }
+
+    &-link {
+        color: var(--text-color);
+        border-radius: 1em !important;
+
+        &:hover {
+            color: var(--text-color);
+            background-color: var(--accent-color);
+            border-color: var(--accent-color) !important;
+            border-radius: 1em;
+        }
+    }
+
+    .active {
+        background-color: var(--primary-color) !important;
+        color: var(--base-color) !important;
+        border: none;
+    }
+
+    border: none;
+}
+
+.hr {
+    table {
+        background-color: var(--base-variant);
+        margin-inline: auto;
+        width: 100%;
+        // border: 1px solid var(--base-color) !important;
+        border-collapse: collapse;
+        border-radius: 10em !important;
+        /* ensures proper border rendering */
+    }
+
+    .table-title {
+        color: var(--accent-color);
+    }
+
+    .table-header {
+        background-color: var(--accent-color) !important;
+        color: var(--base-color) !important;
+    }
+
+    tr {
+        th {
+            background-color: var(--primary-color);
+            color: var(--base-color) !important;
+
+        }
+
+        th,
+        td {
+            border: 0.01em solid var(--base-variant) !important;
+            padding: 8px;
+            text-align: center;
+            /* horizontal centering */
+            vertical-align: middle;
+            /* vertical centering */
+        }
+
+        td {
+            background-color: var(--base-color);
+            color: var(--text-color) !important;
+        }
+
+        &:nth-child(even) {
+            td {
+                background-color: var(--base-variant2);
+            }
+        }
+
+        &:first-child th:first-child {
+            border-top-left-radius: 1em !important;
+        }
+
+        &:first-child th:last-child {
+            border-top-right-radius: 1em !important;
+        }
+
+        &:last-child td:first-child {
+            border-bottom-left-radius: 1em !important;
+        }
+
+        &:last-child td:last-child {
+            border-bottom-right-radius: 1em !important;
+        }
+    }
+}
+
+// Styling for the main content boxes like "Employee Management"
+.p-3.border.rounded {
+    background-color: var(--base-variant);
+    border-color: var(--border-color) !important;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+
+.nav-tabs {
+    border-bottom: 2px solid var(--border-color);
+
+    .nav-link {
+        color: var(--secondary-text);
+        border: none;
+        border-bottom: 2px solid transparent; // To avoid layout shift
+
+        &:hover {
+            color: var(--primary-color);
+            border-color: var(--border-color);
+        }
+
+        // Active tab style
+        &.active {
+            color: var(--primary-color) !important;
+            background-color: transparent !important;
+            border-color: var(--primary-color) !important;
+            border-bottom: 2px solid var(--primary-color);
+        }
+    }
+}
+
+
+h2,
+h4 {
+    color: var(--primary-color);
+}
+
+
+.form-control,
+.form-select {
+    background-color: var(--base-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+
+    &:focus {
+        background-color: var(--base-color);
+        color: var(--text-color);
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.25rem rgba(var(--primary-color), 0.25);
+    }
+}
+
+
+.table {
+
+    // General styles for all cells
+    th,
+    td {
+        color: var(--text-color);
+        border-color: var(--border-color);
+        vertical-align: middle;
+    }
+
+    
+    thead:not(.table-dark) {
+        th {
+            background-color: var(--accent-color);
+            color: var(--base-color);
+        }
+    }
+
+    
+    &.table-striped>tbody>tr:nth-of-type(odd)>* {
+        background-color: var(--base-variant2);
+        color: var(--text-color);
+    }
+
+    &.table-striped>tbody>tr:nth-of-type(even)>* {
+        background-color: var(--base-variant);
+        color: var(--text-color);
+    }
+
+    
+    thead.table-dark {
+        th {
+            background-color: var(--thead-bg-color) !important;
+            color: var(--thead-text-color) !important;
+        }
+    }
+}
+
+
+.btn {
+    
+    border-radius: 0.5em;
+}
+
+
+
+
+.status-present {
+  background-color: #0d6efd; 
+  color: white;
+  border-color: #0d6efd;
+
+  &:hover {
+    background-color: #0b5ed7; 
+    border-color: #0a58ca;
+  }
+}
+
+.status-late {
+  background-color: #ffc107; 
+  color: #000; 
+  border-color: #ffc107;
+
+  &:hover {
+    background-color: #ffca2c;
+    border-color: #ffc720;
+  }
+}
+
+
+.status-absent {
+  background-color: #dc3545; 
+  color: white;
+  border-color: #dc3545;
+  
+  &:hover {
+    background-color: #bb2d3b;
+    border-color: #b02a37;
+  }
+}
+
+.status-default {
+    background-color: #6c757d; 
+    color: white;
+    border-color: #6c757d;
+}
+
+#totalEmployees
+{
+    color: #10B981;
+
+}
+

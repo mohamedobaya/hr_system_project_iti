@@ -1,7 +1,9 @@
-import { lightColorTheme, darkColorTheme, themeStyle, dangerStyle, primaryStyle } from "./themes.js";
+export const getNavbar = (empRole, empName, empTheme = 'light') => {
+    const lightIcon = `<i class="fa-regular fa-sun"></i>`;
+    const darkIcon = `<i class="fa-regular fa-moon"></i>`;
+    const serverIcon = `<i class="fa-solid fa-server"></i>`;
+    const logoutIcon = `<i class="fa-solid fa-power-off"></i>`;
 
-export const getNavbar = (empRole, empName) => {
-    
     return `
     <nav class="navbar navbar-expand-lg" ">
         <div class="container d-flex">
@@ -17,14 +19,18 @@ export const getNavbar = (empRole, empName) => {
                 <ul class="navbar-nav ms-auto me-md-0 me-auto mb-2 mb-lg-0">
                     <li class="nav-item me-md-1 me-auto mx-auto my-1">
                         <a class="btn btn-theme" id="btn-theme">
-                            <i class="fa-solid fa-circle-half-stroke"></i>
+                            ${empTheme == 'light' ? `dark ${darkIcon}`: `light ${lightIcon}`}
                         </a>
                     </li>
                     <li class="nav-item mx-md-2 mx-auto my-1">
-                        <a class="btn btn-warning" onclick="{localStorage.clear()}">Reset Local Storage</a>
+                        <a class="btn btn-reset" onclick="{localStorage.clear()}">
+                            reset server ${serverIcon}
+                        </a>
                     </li>
                     <li class="nav-item mx-auto my-1">
-                        <a class="btn btn-danger" href="../index.html">Logout</a>
+                        <a class="btn logout" href="../index.html">
+                            logout ${logoutIcon}
+                        </a>
                     </li>
                 </ul>
             </div>

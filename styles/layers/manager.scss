@@ -97,7 +97,6 @@ hr {
     background-color: var(--base-variant) !important;
     border-radius: 1em;
     padding: 2em !important;
-
     &-task {
         &-assign {
             &-employee {
@@ -107,7 +106,6 @@ hr {
             }
         }
     }
-
     &-btns {
         .btns {
             margin-inline: auto;
@@ -115,7 +113,6 @@ hr {
 
         text-align: center;
     }
-
     table {
         background-color: var(--base-variant);
         margin-inline: auto;
@@ -125,19 +122,13 @@ hr {
         border-radius: 10em !important;
         /* ensures proper border rendering */
     }
-
     .table-title {
         color: var(--accent-color);
     }
-
-
     .table-header {
         background-color: var(--accent-color) !important;
         color: var(--base-color) !important;
     }
-
-
-
     tr {
         th {
             background-color: var(--primary-color);
@@ -182,12 +173,4 @@ hr {
             border-bottom-right-radius: 1em !important;
         }
     }
-
-
-
-
-
-
-
-
 }
