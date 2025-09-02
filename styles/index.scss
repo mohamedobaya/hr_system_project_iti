@@ -56,23 +56,30 @@ hr {
 
 .navbar {
     background-color: var(--base-variant) !important;
+
     .nav-item a {
-        font-size: 1.2em;
+        // font-size: 1.2em;
     }
+
     .logout {
         color: red;
+
         &:hover {
             opacity: 0.4;
         }
     }
+
     .btn-theme {
         color: var(--text-color) !important;
+
         &:hover {
             opacity: 0.4;
         }
     }
+
     .btn-reset {
         color: var(--accent-color);
+
         &:hover {
             opacity: 0.4;
         }
@@ -120,6 +127,9 @@ hr {
 
     border: none;
 }
+
+
+
 
 // pagination
 .pagination {
