@@ -48,9 +48,6 @@ hr {
 .navbar {
   background-color: var(--base-variant) !important;
 }
-.navbar .nav-item a {
-  font-size: 1.2em;
-}
 .navbar .logout {
   color: red;
 }
