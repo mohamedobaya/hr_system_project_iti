@@ -21,6 +21,10 @@
     --secondary-text: #9CA3AF;
     --primary-color: #3B82F6;
     --accent-color: #34D399;
+
+    ::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+    }
 }
 
 .btn {
