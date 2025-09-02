@@ -338,15 +338,10 @@ function updateChanges() {
 
         saveAttendanceToStorage();
 
-        if (anyChange) {
             alertBox.innerText = " Changes have been saved successfully";
             alertBox.classList.remove("alert-danger");
             alertBox.classList.add("alert-success");
-        } else {
-            alertBox.innerText = " No changes detected!";
-            alertBox.classList.remove("alert-success");
-            alertBox.classList.add("alert-danger");
-        }
+       
 
         alertBox.classList.remove("d-none");
         setTimeout(() => alertBox.classList.add("d-none"), 2000);
@@ -437,15 +432,23 @@ function renderAttendance(date) {
     const isToday = date === today;
 
     records.forEach(record => {
+        calculateAttendance(record);
+
         const employee = Data.employees.find(e => e.id == record.employeeId);
         if (!employee) return;
 
         const row = createNewRow(record);
+
         row.querySelectorAll("select, input, textarea, input[type='checkbox']").forEach(el => el.disabled = !isToday);
+
+        const statusSelect = row.querySelector("select");
+        statusSelect.value = record.status;
+        updateSelectColor(statusSelect);
+
         tableBody.appendChild(row);
     });
-        paginationEnable("pagination-security", "table-security", 8);
 
+    paginationEnable("pagination-security", "table-security", 8);
 }
 
 function showAttendanceForDate(date) {
