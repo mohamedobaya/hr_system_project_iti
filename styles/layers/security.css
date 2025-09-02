@@ -21,6 +21,7 @@
 .btn {
   border-radius: 1em;
 }
+
 .btn-theme {
   border: none;
   color: var(--text-color);
@@ -41,6 +42,7 @@ hr {
 .emp-title {
   color: var(--primary-color);
 }
+
 .emp-name {
   color: var(--accent-color);
 }
@@ -52,33 +54,41 @@ hr {
 .nav {
   border: none;
 }
+
 @media (max-width: 768px) {
   .nav {
     font-size: 0.7em;
     margin: 0em;
   }
 }
+
 .nav-item {
   background-color: var(--base-variant) !important;
   border-radius: 1em;
   margin: 0.5em;
 }
+
 .nav-item:first-child {
-  margin-inline-start: 0;
+  -webkit-margin-start: 0;
+          margin-inline-start: 0;
 }
+
 .nav-item:hover {
   border: none;
 }
+
 .nav-link {
   color: var(--text-color);
   border-radius: 1em !important;
 }
+
 .nav-link:hover {
   color: var(--text-color);
   background-color: var(--accent-color);
   border-color: var(--accent-color) !important;
   border-radius: 1em;
 }
+
 .nav .active {
   background-color: var(--primary-color) !important;
   color: var(--base-color) !important;
@@ -93,14 +103,17 @@ table {
   border-radius: 10em !important;
   /* ensures proper border rendering */
 }
+
 table .table-header {
   background-color: var(--accent-color) !important;
   color: var(--base-color) !important;
 }
+
 table tr th {
   background-color: var(--primary-color);
   color: var(--base-color) !important;
 }
+
 table tr th,
 table tr td {
   border: 0.01em solid var(--base-variant) !important;
@@ -110,22 +123,28 @@ table tr td {
   vertical-align: middle;
   /* vertical centering */
 }
+
 table tr td {
   background-color: var(--base-color) !important;
   color: var(--text-color) !important;
 }
+
 table tr:nth-child(even) td {
   background-color: var(--base-variant2) !important;
 }
+
 table tr:first-child th:first-child {
   border-top-left-radius: 1em !important;
 }
+
 table tr:first-child th:last-child {
   border-top-right-radius: 1em !important;
 }
+
 table tr:last-child td:first-child {
   border-bottom-left-radius: 1em !important;
 }
+
 table tr:last-child td:last-child {
   border-bottom-right-radius: 1em !important;
 }
@@ -134,9 +153,19 @@ textarea {
   background-color: var(--base-color) !important;
   color: var(--text-color) !important;
 }
-textarea::-moz-placeholder {
+
+textarea::-webkit-input-placeholder {
   color: var(--secondary-text) !important;
 }
+
+textarea:-ms-input-placeholder {
+  color: var(--secondary-text) !important;
+}
+
+textarea::-ms-input-placeholder {
+  color: var(--secondary-text) !important;
+}
+
 textarea::placeholder {
   color: var(--secondary-text) !important;
 }
@@ -146,18 +175,22 @@ textarea::placeholder {
   color: var(--text-color);
   border: var(--base-color) !important;
 }
+
 .search .dropdown .btn {
   background-color: var(--base-color) !important;
   border-color: var(--base-color) !important;
   color: var(--accent-color) !important;
 }
+
 .search .dropdown ul {
   background-color: var(--base-color) !important;
   color: var(--text-color) !important;
 }
+
 .search .dropdown ul li a {
   color: var(--text-color) !important;
 }
+
 .search .dropdown ul li a:hover {
   background-color: var(--base-color) !important;
   color: var(--accent-color) !important;
@@ -166,6 +199,7 @@ textarea::placeholder {
 .security {
   background-color: var(--base-color);
 }
+
 .security ::-webkit-scrollbar {
   width: 3px;
   height: 3px;
@@ -179,18 +213,21 @@ textarea::placeholder {
 .security .cursor {
   cursor: pointer;
 }
+
 .security #main-security {
   position: relative;
   background-color: var(--base-color);
 }
 
 .security #main-security .table-responsive {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .security #main-security .card-security {
   background-color: var(--base-variant) !important;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   margin-top: 5em !important;
   width: 90%;
 }
@@ -201,6 +238,7 @@ textarea::placeholder {
   background-color: var(--base-color);
   color: var(--text-color);
 }
+
 .security #main-security .card-security .table {
   background-color: var(--base-variant) !important;
 }
@@ -229,8 +267,13 @@ textarea::placeholder {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .security .dropdown-menu.show {
@@ -274,6 +317,17 @@ textarea::placeholder {
   padding: 10px 20px;
   font-size: 14px;
 }
+
 .security .form-select {
   padding-right: 2rem !important;
-}/*# sourceMappingURL=security.css.map */
+}
+
+@media screen and (max-width: 767px) {
+  .security .search-input {
+    width: 100% !important;
+  }
+  .security .emp-name {
+    display: none;
+  }
+}
+/*# sourceMappingURL=security.css.map */

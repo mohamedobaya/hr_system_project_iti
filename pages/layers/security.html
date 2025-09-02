@@ -14,8 +14,9 @@
   <link rel="stylesheet" href="../../frameworks/fontawesome/css/fontawesome.min.css" />
   <!-- FontAwesome CSS -->
   <link rel="stylesheet" href="../../frameworks/fontawesome/css/all.min.css" />
-  <link rel="stylesheet" href="../../styles/layers/security.css" /><!-- Base CSS style -->
-  <link rel="stylesheet" href="../../styles/index.css">
+  <link rel="stylesheet" href="../../styles/layers/security.css" />
+  <!-- Base CSS style -->
+  <link rel="stylesheet" href="../../styles/index.css" />
 </head>
 
 <body>
@@ -34,18 +35,19 @@
       <section id="main-security">
         <div class="card-security m-auto bg-light p-4 gap-4 d-flex flex-column rounded-2">
           <!-- title -->
-          <h5 class="text-capitalize text-start emp-title">daily attendance</h5>
+          <h5 class="text-capitalize text-start emp-title">
+            daily attendance
+          </h5>
           <div class="search w-100 mx-auto align-items-center d-flex flex-md-row flex-column justify-content-between">
-            <input type="search" placeholder="Search By Name/ID" class="w-25 d-flex p-2 search-input rounded-2" />
-            <div class="d-flex align-items-center justify-content-center gap-3">
+            <input type="search" placeholder="Search By Name/ID" class=" d-flex p-2 search-input rounded-2" />
+            <div class="d-flex align-items-center justify-content-center gap-lg-3  gap-md-3 gap-5  mt-3 mt-md-0  small-filterd">
               <div class="calendar d-flex justify-content-center align-items-center">
                 <label for="attendance-date" class="me-2 fw-bold emp-name">Attendance for:</label>
                 <input type="date" id="attendance-date" />
               </div>
 
               <div class="dropdown">
-                <button class="btn" type="button" id="filterMenu" data-bs-toggle="dropdown"
-                  aria-expanded="false">
+                <button class="btn" type="button" id="filterMenu" data-bs-toggle="dropdown" aria-expanded="false">
                   <i class="fa-solid fa-filter"></i>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="filterMenu">
@@ -61,6 +63,12 @@
                   <li>
                     <a class="dropdown-item filter-option" data-status="Absent" href="#">Absent</a>
                   </li>
+                  <!-- <li>
+                    <a class="dropdown-item filter-option" data-status="WFH" href="#">WFH</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item filter-option" data-status="Leave" href="#">Leave</a>
+                  </li> -->
                 </ul>
               </div>
             </div>
@@ -74,20 +82,36 @@
                   <th scope="col" class="table-header">
                     <input type="checkbox" class="cursor" id="checkall" />
                   </th>
-                  <th scope="col" class="table-header text-capitalize">emp ID</th>
-                  <th scope="col" class="table-header text-capitalize">name</th>
-                  <th scope="col" class="table-header text-capitalize">dept</th>
-                  <th scope="col" class="table-header text-capitalize">status</th>
-                  <th scope="col" class="table-header text-capitalize">check-in</th>
-                  <th scope="col" class="table-header text-capitalize">check-out</th>
-                  <th scope="col" class="table-header text-capitalize">minutesLate</th>
-                  <th scope="col" class="table-header text-capitalize">notes</th>
+                  <th scope="col" class="table-header text-capitalize">
+                    emp ID
+                  </th>
+                  <th scope="col" class="table-header text-capitalize">
+                    name
+                  </th>
+                  <th scope="col" class="table-header text-capitalize">
+                    dept
+                  </th>
+                  <th scope="col" class="table-header text-capitalize">
+                    status
+                  </th>
+                  <th scope="col" class="table-header text-capitalize">
+                    check-in
+                  </th>
+                  <th scope="col" class="table-header text-capitalize">
+                    check-out
+                  </th>
+                  <th scope="col" class="table-header text-capitalize">
+                    minutesLate
+                  </th>
+                  <th scope="col" class="table-header text-capitalize">
+                    notes
+                  </th>
                 </tr>
               </thead>
               <tbody id="table-security"></tbody>
             </table>
             <div class="my-2 d-flex justify-content-center">
-                <div class="pagination" id="pagination-security"></div>
+              <div class="pagination" id="pagination-security"></div>
             </div>
           </div>
           <!-- button submit -->
