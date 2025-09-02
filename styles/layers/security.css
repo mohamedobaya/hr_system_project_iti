@@ -21,7 +21,6 @@
 .btn {
   border-radius: 1em;
 }
-
 .btn-theme {
   border: none;
   color: var(--text-color);
@@ -42,7 +41,6 @@ hr {
 .emp-title {
   color: var(--primary-color);
 }
-
 .emp-name {
   color: var(--accent-color);
 }
@@ -54,41 +52,33 @@ hr {
 .nav {
   border: none;
 }
-
 @media (max-width: 768px) {
   .nav {
     font-size: 0.7em;
     margin: 0em;
   }
 }
-
 .nav-item {
   background-color: var(--base-variant) !important;
   border-radius: 1em;
   margin: 0.5em;
 }
-
 .nav-item:first-child {
-  -webkit-margin-start: 0;
-          margin-inline-start: 0;
+  margin-inline-start: 0;
 }
-
 .nav-item:hover {
   border: none;
 }
-
 .nav-link {
   color: var(--text-color);
   border-radius: 1em !important;
 }
-
 .nav-link:hover {
   color: var(--text-color);
   background-color: var(--accent-color);
   border-color: var(--accent-color) !important;
   border-radius: 1em;
 }
-
 .nav .active {
   background-color: var(--primary-color) !important;
   color: var(--base-color) !important;
@@ -103,17 +93,14 @@ table {
   border-radius: 10em !important;
   /* ensures proper border rendering */
 }
-
 table .table-header {
   background-color: var(--accent-color) !important;
   color: var(--base-color) !important;
 }
-
 table tr th {
   background-color: var(--primary-color);
   color: var(--base-color) !important;
 }
-
 table tr th,
 table tr td {
   border: 0.01em solid var(--base-variant) !important;
@@ -123,28 +110,22 @@ table tr td {
   vertical-align: middle;
   /* vertical centering */
 }
-
 table tr td {
   background-color: var(--base-color) !important;
   color: var(--text-color) !important;
 }
-
 table tr:nth-child(even) td {
   background-color: var(--base-variant2) !important;
 }
-
 table tr:first-child th:first-child {
   border-top-left-radius: 1em !important;
 }
-
 table tr:first-child th:last-child {
   border-top-right-radius: 1em !important;
 }
-
 table tr:last-child td:first-child {
   border-bottom-left-radius: 1em !important;
 }
-
 table tr:last-child td:last-child {
   border-bottom-right-radius: 1em !important;
 }
@@ -153,19 +134,9 @@ textarea {
   background-color: var(--base-color) !important;
   color: var(--text-color) !important;
 }
-
-textarea::-webkit-input-placeholder {
+textarea::-moz-placeholder {
   color: var(--secondary-text) !important;
 }
-
-textarea:-ms-input-placeholder {
-  color: var(--secondary-text) !important;
-}
-
-textarea::-ms-input-placeholder {
-  color: var(--secondary-text) !important;
-}
-
 textarea::placeholder {
   color: var(--secondary-text) !important;
 }
@@ -175,22 +146,18 @@ textarea::placeholder {
   color: var(--text-color);
   border: var(--base-color) !important;
 }
-
 .search .dropdown .btn {
   background-color: var(--base-color) !important;
   border-color: var(--base-color) !important;
   color: var(--accent-color) !important;
 }
-
 .search .dropdown ul {
   background-color: var(--base-color) !important;
   color: var(--text-color) !important;
 }
-
 .search .dropdown ul li a {
   color: var(--text-color) !important;
 }
-
 .search .dropdown ul li a:hover {
   background-color: var(--base-color) !important;
   color: var(--accent-color) !important;
@@ -199,105 +166,78 @@ textarea::placeholder {
 .security {
   background-color: var(--base-color);
 }
-
 .security ::-webkit-scrollbar {
   width: 3px;
   height: 3px;
 }
-
 .security ::-webkit-scrollbar-thumb {
   background: var(--secondary-text);
   border-radius: 10px;
 }
-
 .security .cursor {
   cursor: pointer;
 }
-
 .security #main-security {
   position: relative;
   background-color: var(--base-color);
 }
-
 .security #main-security .table-responsive {
-  -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
-
 .security #main-security .card-security {
   background-color: var(--base-variant) !important;
-  -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   margin-top: 5em !important;
   width: 90%;
 }
-
 .security #main-security .card-security .search-input {
   border: none;
   outline: none;
   background-color: var(--base-color);
   color: var(--text-color);
 }
-
 .security #main-security .card-security .table {
   background-color: var(--base-variant) !important;
 }
-
 .security #main-security .card-security .table thead,
 .security #main-security .card-security .table .submit .btn {
   white-space: nowrap;
 }
-
 .security #main-security .card-security .table tbody th {
   font-weight: unset !important;
 }
-
-.security input[type="time"] {
+.security input[type=time] {
   border: 1px solid #ccc;
   background-color: var(--base-variant);
   color: var(--text-color);
 }
-
 .security .submit .btn,
 .security th {
   white-space: nowrap;
 }
-
 .security #content {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-between;
 }
-
 .security .dropdown-menu.show {
   z-index: 100000000 !important;
 }
-
 .security .dropdown .btn {
   padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid #ccc;
   background-color: #fff;
 }
-
 .security .calendar label {
   font-weight: 600;
 }
-
-.security .calendar input[type="date"] {
+.security .calendar input[type=date] {
   padding: 7px 12px;
   border-radius: 8px;
   border: 1px solid #ccc;
 }
-
-.security input[type="time"],
+.security input[type=time],
 .security select,
 .security textarea {
   border: 1px solid #ccc;
@@ -305,11 +245,9 @@ textarea::placeholder {
   padding: 5px 8px;
   font-size: 14px;
 }
-
 .security textarea {
   resize: none;
 }
-
 .security #myAlert,
 .security #alertsubmit {
   font-weight: 500;
@@ -317,11 +255,9 @@ textarea::placeholder {
   padding: 10px 20px;
   font-size: 14px;
 }
-
 .security .form-select {
   padding-right: 2rem !important;
 }
-
 @media screen and (max-width: 767px) {
   .security .search-input {
     width: 100% !important;
@@ -329,5 +265,4 @@ textarea::placeholder {
   .security .emp-name {
     display: none;
   }
-}
-/*# sourceMappingURL=security.css.map */
+}/*# sourceMappingURL=security.css.map */

@@ -24,7 +24,6 @@
 .btn {
   border-radius: 1em;
 }
-
 .btn-theme {
   border: none;
   color: var(--text-color);
@@ -45,7 +44,6 @@ hr {
 .emp-title {
   color: var(--primary-color);
 }
-
 .emp-name {
   color: var(--accent-color);
 }
@@ -56,23 +54,18 @@ hr {
 .navbar .logout {
   color: red;
 }
-
 .navbar .logout:hover {
   opacity: 0.4;
 }
-
 .navbar .btn-theme {
   color: var(--text-color) !important;
 }
-
 .navbar .btn-theme:hover {
   opacity: 0.4;
 }
-
 .navbar .btn-reset {
   color: var(--accent-color);
 }
-
 .navbar .btn-reset:hover {
   opacity: 0.4;
 }
@@ -80,52 +73,50 @@ hr {
 .nav {
   border: none;
 }
-
 @media (max-width: 768px) {
   .nav {
     font-size: 0.7em;
     margin: 0em;
   }
 }
-
 .nav-item {
   background-color: var(--base-variant) !important;
   border-radius: 1em;
   margin: 0.5em;
 }
-
 .nav-item:first-child {
-  -webkit-margin-start: 0;
-          margin-inline-start: 0;
+  margin-inline-start: 0;
 }
-
 .nav-item:hover {
   border: none;
 }
-
 .nav-link {
   color: var(--text-color);
   border-radius: 1em !important;
 }
-
 .nav-link:hover {
   color: var(--text-color);
   background-color: var(--accent-color);
   border-color: var(--accent-color) !important;
   border-radius: 1em;
 }
-
 .nav .active {
   background-color: var(--primary-color) !important;
   color: var(--base-color) !important;
   border: none;
 }
 
+.profile ul {
+  list-style: none;
+}
+.profile-avatar {
+  font-size: 10em;
+}
+
 .pagination {
   text-align: center;
   margin-top: 20px;
 }
-
 .pagination button {
   margin-inline: 0.1em;
   padding: 0.1em 0.5em;
@@ -135,22 +126,18 @@ hr {
   color: var(--text-color);
   cursor: pointer;
 }
-
 .pagination button.active {
   background: var(--accent-color);
   border-color: var(--accent-color);
   color: var(--base-color);
 }
-
 .pagination button:hover {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
   color: var(--base-color);
 }
-
 .pagination button:disabled {
   background: var(--secondary-text);
   color: var(--base-color);
   cursor: not-allowed;
-}
-/*# sourceMappingURL=index.css.map */
+}/*# sourceMappingURL=index.css.map */

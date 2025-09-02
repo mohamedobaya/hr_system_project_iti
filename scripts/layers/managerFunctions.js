@@ -1,7 +1,7 @@
 import { paginationEnable } from "../components/pagination.js";
-import { loadDataFromStorage, onPageLoad } from "../components/reusableFunctions.js";
+import { loadDataFromStorage, onPageLoad, searchAttendanceByEmployeeDepartment, searchAttendanceByEmployeeName, searchRequestByEmployeeDepartment, searchRequestByEmployeeName, searchTaskByEmployeeName, searchTaskByEmployeeDepartment } from "../components/reusableFunctions.js";
 import { getEmployeeByID, getRequestByID, updateRequestByStatus, getAttendanceRecordsByID, getTaskByID } from "../components/reusableFunctions.js";
-
+import { searchEmployeeByName, searchEmployeeByDepartment } from "../components/reusableFunctions.js";
 
 let Data = {
     employees: [],
@@ -11,17 +11,26 @@ let Data = {
     payrolls: []
 };
 let loggedEmployee = {}
+let viewedApprovals = [];
+let viewedAttendances = [];
+let viewedTasks = [];
 
 // automatically load when window is ready
 window.addEventListener("load", async () => {
     Data = await loadDataFromStorage();
     loggedEmployee = getEmployeeByID(localStorage.getItem("loggedEmployeeID"));
     onPageLoad(loggedEmployee);
-    
+
     // role-based call functions
+    viewedApprovals = Data.requests;
     loadApprovalTable();
+
+    viewedAttendances = Data.attendanceRecords;
     loadAttendanceTable();
+
+    viewedTasks = Data.tasks;
     loadTaskTable();
+
     loadAssignTaskForm();
 });
 
@@ -63,7 +72,9 @@ const createApprovalRow = (reqID) => {
 const loadApprovalTable = () => {
     const approvalTable = document.getElementById("approval-table");
     approvalTable.innerHTML = "";
-    for (let req of Data.requests) {
+
+    // adding to html logic
+    for (let req of viewedApprovals) {
         const row = createApprovalRow(req.id);
         approvalTable.innerHTML += row;
     }
@@ -109,7 +120,7 @@ const createAttendancelRow = (attendanceRecordID) => {
 const loadAttendanceTable = () => {
     const attendanceTable = document.getElementById("attendance-table");
     attendanceTable.innerHTML = "";
-    for (let ar of Data.attendanceRecords) {
+    for (let ar of viewedAttendances) {
         const row = createAttendancelRow(ar.id);
         attendanceTable.innerHTML += row;
     }
@@ -138,7 +149,7 @@ const creatTaskRow = (taskID) => {
 const loadTaskTable = () => {
     const taskTable = document.getElementById("task-table");
     taskTable.innerHTML = "";
-    for (let task of Data.tasks) {
+    for (let task of viewedTasks) {
         const row = creatTaskRow(task.id);
         taskTable.innerHTML += row;
     }
@@ -208,5 +219,50 @@ const loadAssignTaskForm = () => {
     });
 }
 
+// search-apporval logic
+const searchApprovalInput = document.getElementById("approval-search");
+const searchApprovalSelect = document.getElementById("approval-search-by");
+
+searchApprovalInput.addEventListener('keyup', () => {
+    if (searchApprovalSelect.value == "search-name") {
+        viewedApprovals = searchRequestByEmployeeName(searchApprovalInput.value);
+        console.log(viewedApprovals);
+        loadApprovalTable(); 
+    }
+    if (searchApprovalSelect.value == "search-department") {
+        viewedApprovals = searchRequestByEmployeeDepartment(searchApprovalInput.value);
+        loadApprovalTable(); 
+    }
+});
+
+// search-attendance logic
+const searchAttendanceInput = document.getElementById("attendance-search");
+const searchAttendanceSelect = document.getElementById("attendance-search-by");
+
+searchAttendanceInput.addEventListener('keyup', () => {
+    if (searchAttendanceSelect.value == "search-name") {
+        viewedAttendances = searchAttendanceByEmployeeName(searchAttendanceInput.value);
+        loadAttendanceTable(); 
+    }
+    if (searchAttendanceSelect.value == "search-department") {
+        viewedAttendances = searchAttendanceByEmployeeDepartment(searchAttendanceInput.value);
+        loadAttendanceTable(); 
+    }
+});
+
+// search-task logic
+const searchTaskInput = document.getElementById("task-search");
+const searchTaskSelect = document.getElementById("task-search-by");
+
+searchTaskInput.addEventListener('keyup', () => {
+    if (searchTaskSelect.value == "search-name") {
+        viewedTasks = searchTaskByEmployeeName(searchTaskInput.value);
+        loadTaskTable(); 
+    }
+    if (searchTaskSelect.value == "search-department") {
+        viewedTasks = searchTaskByEmployeeDepartment(searchTaskInput.value);
+        loadTaskTable(); 
+    }
+});
 
 

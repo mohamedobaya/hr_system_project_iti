@@ -1930,7 +1930,26 @@
             "title": "Task for Omar Khalil",
             "description": "Complete assigned work package",
             "status": "Completed",
-            "dueDate": "2025-08-20"
+            "dueDate": "2025-08-20",
+            "priority": 2
+        },
+        {
+            "id": 17,
+            "employeeId": 1,
+            "title": "Client presentation - Omar Khalil",
+            "description": "Prepare slides and present",
+            "status": "Pending",
+            "dueDate": "2025-09-10",
+            "priority": 1
+        },
+        {
+            "id": 18,
+            "employeeId": 1,
+            "title": "Code review - Omar Khalil",
+            "description": "Review teammate’s pull request",
+            "status": "In Progress",
+            "dueDate": "2025-09-15",
+            "priority": 3
         },
         {
             "id": 2,
@@ -1938,7 +1957,26 @@
             "title": "Task for Mariam Fathy",
             "description": "Complete assigned work package",
             "status": "Pending",
-            "dueDate": "2025-08-20"
+            "dueDate": "2025-08-20",
+            "priority": 3
+        },
+        {
+            "id": 19,
+            "employeeId": 2,
+            "title": "Testing module - Mariam Fathy",
+            "description": "Perform QA tests",
+            "status": "Completed",
+            "dueDate": "2025-09-08",
+            "priority": 2
+        },
+        {
+            "id": 20,
+            "employeeId": 2,
+            "title": "Prepare documentation - Mariam Fathy",
+            "description": "Update system documentation",
+            "status": "In Progress",
+            "dueDate": "2025-09-18",
+            "priority": 1
         },
         {
             "id": 3,
@@ -1946,7 +1984,26 @@
             "title": "Task for Adel Mansour",
             "description": "Complete assigned work package",
             "status": "In Progress",
-            "dueDate": "2025-08-20"
+            "dueDate": "2025-08-20",
+            "priority": 1
+        },
+        {
+            "id": 21,
+            "employeeId": 3,
+            "title": "Bug fixing - Adel Mansour",
+            "description": "Fix reported system bugs",
+            "status": "Completed",
+            "dueDate": "2025-09-05",
+            "priority": 2
+        },
+        {
+            "id": 22,
+            "employeeId": 3,
+            "title": "Database update - Adel Mansour",
+            "description": "Update database schema",
+            "status": "Pending",
+            "dueDate": "2025-09-12",
+            "priority": 3
         },
         {
             "id": 4,
@@ -1954,7 +2011,26 @@
             "title": "Task for Dina Lotfy",
             "description": "Complete assigned work package",
             "status": "Completed",
-            "dueDate": "2025-08-20"
+            "dueDate": "2025-08-20",
+            "priority": 2
+        },
+        {
+            "id": 23,
+            "employeeId": 4,
+            "title": "UI design - Dina Lotfy",
+            "description": "Create new UI mockups",
+            "status": "Pending",
+            "dueDate": "2025-09-07",
+            "priority": 1
+        },
+        {
+            "id": 24,
+            "employeeId": 4,
+            "title": "Team training - Dina Lotfy",
+            "description": "Conduct training session",
+            "status": "In Progress",
+            "dueDate": "2025-09-19",
+            "priority": 3
         },
         {
             "id": 5,
@@ -1962,7 +2038,26 @@
             "title": "Task for Samir Naguib",
             "description": "Complete assigned work package",
             "status": "Pending",
-            "dueDate": "2025-08-20"
+            "dueDate": "2025-08-20",
+            "priority": 3
+        },
+        {
+            "id": 25,
+            "employeeId": 5,
+            "title": "Deployment - Samir Naguib",
+            "description": "Deploy latest version",
+            "status": "Completed",
+            "dueDate": "2025-09-09",
+            "priority": 2
+        },
+        {
+            "id": 26,
+            "employeeId": 5,
+            "title": "Server maintenance - Samir Naguib",
+            "description": "Perform scheduled maintenance",
+            "status": "In Progress",
+            "dueDate": "2025-09-14",
+            "priority": 1
         },
         {
             "id": 6,
@@ -1970,7 +2065,26 @@
             "title": "Task for Heba Zaki",
             "description": "Complete assigned work package",
             "status": "Pending",
-            "dueDate": "2025-08-20"
+            "dueDate": "2025-08-20",
+            "priority": 2
+        },
+        {
+            "id": 27,
+            "employeeId": 6,
+            "title": "Market research - Heba Zaki",
+            "description": "Collect competitor data",
+            "status": "Completed",
+            "dueDate": "2025-09-11",
+            "priority": 3
+        },
+        {
+            "id": 28,
+            "employeeId": 6,
+            "title": "Social media campaign - Heba Zaki",
+            "description": "Plan campaign posts",
+            "status": "In Progress",
+            "dueDate": "2025-09-16",
+            "priority": 1
         },
         {
             "id": 7,
@@ -1978,7 +2092,26 @@
             "title": "Task for Mostafa Ragab",
             "description": "Complete assigned work package",
             "status": "Pending",
-            "dueDate": "2025-08-20"
+            "dueDate": "2025-08-20",
+            "priority": 3
+        },
+        {
+            "id": 29,
+            "employeeId": 7,
+            "title": "API integration - Mostafa Ragab",
+            "description": "Integrate third-party APIs",
+            "status": "Completed",
+            "dueDate": "2025-09-13",
+            "priority": 1
+        },
+        {
+            "id": 30,
+            "employeeId": 7,
+            "title": "Performance tuning - Mostafa Ragab",
+            "description": "Optimize query performance",
+            "status": "In Progress",
+            "dueDate": "2025-09-17",
+            "priority": 2
         },
         {
             "id": 8,
@@ -1986,7 +2119,26 @@
             "title": "Task for Ibrahim Selim",
             "description": "Complete assigned work package",
             "status": "Completed",
-            "dueDate": "2025-08-20"
+            "dueDate": "2025-08-20",
+            "priority": 1
+        },
+        {
+            "id": 31,
+            "employeeId": 8,
+            "title": "Backend refactor - Ibrahim Selim",
+            "description": "Refactor backend modules",
+            "status": "Pending",
+            "dueDate": "2025-09-06",
+            "priority": 3
+        },
+        {
+            "id": 32,
+            "employeeId": 8,
+            "title": "Unit testing - Ibrahim Selim",
+            "description": "Write unit test cases",
+            "status": "In Progress",
+            "dueDate": "2025-09-20",
+            "priority": 2
         },
         {
             "id": 9,
@@ -1994,7 +2146,26 @@
             "title": "Task for Tarek Anwar",
             "description": "Complete assigned work package",
             "status": "Completed",
-            "dueDate": "2025-08-20"
+            "dueDate": "2025-08-20",
+            "priority": 3
+        },
+        {
+            "id": 33,
+            "employeeId": 9,
+            "title": "Security audit - Tarek Anwar",
+            "description": "Conduct application audit",
+            "status": "Pending",
+            "dueDate": "2025-09-08",
+            "priority": 2
+        },
+        {
+            "id": 34,
+            "employeeId": 9,
+            "title": "Patch updates - Tarek Anwar",
+            "description": "Apply security patches",
+            "status": "In Progress",
+            "dueDate": "2025-09-18",
+            "priority": 1
         },
         {
             "id": 10,
@@ -2002,7 +2173,26 @@
             "title": "Task for Nader Farouk",
             "description": "Complete assigned work package",
             "status": "Pending",
-            "dueDate": "2025-08-20"
+            "dueDate": "2025-08-20",
+            "priority": 2
+        },
+        {
+            "id": 35,
+            "employeeId": 10,
+            "title": "Frontend development - Nader Farouk",
+            "description": "Develop dashboard pages",
+            "status": "Completed",
+            "dueDate": "2025-09-11",
+            "priority": 1
+        },
+        {
+            "id": 36,
+            "employeeId": 10,
+            "title": "Bug triage - Nader Farouk",
+            "description": "Analyze and prioritize bugs",
+            "status": "In Progress",
+            "dueDate": "2025-09-16",
+            "priority": 3
         },
         {
             "id": 11,
@@ -2010,7 +2200,26 @@
             "title": "Task for Amal Karam",
             "description": "Complete assigned work package",
             "status": "In Progress",
-            "dueDate": "2025-08-20"
+            "dueDate": "2025-08-20",
+            "priority": 1
+        },
+        {
+            "id": 37,
+            "employeeId": 11,
+            "title": "Client meeting - Amal Karam",
+            "description": "Discuss project requirements",
+            "status": "Completed",
+            "dueDate": "2025-09-07",
+            "priority": 2
+        },
+        {
+            "id": 38,
+            "employeeId": 11,
+            "title": "System analysis - Amal Karam",
+            "description": "Analyze system workflows",
+            "status": "Pending",
+            "dueDate": "2025-09-19",
+            "priority": 3
         },
         {
             "id": 12,
@@ -2018,7 +2227,26 @@
             "title": "Task for Karima Hassan",
             "description": "Complete assigned work package",
             "status": "In Progress",
-            "dueDate": "2025-08-20"
+            "dueDate": "2025-08-20",
+            "priority": 2
+        },
+        {
+            "id": 39,
+            "employeeId": 12,
+            "title": "Feature design - Karima Hassan",
+            "description": "Design new feature workflow",
+            "status": "Completed",
+            "dueDate": "2025-09-09",
+            "priority": 1
+        },
+        {
+            "id": 40,
+            "employeeId": 12,
+            "title": "Documentation review - Karima Hassan",
+            "description": "Review technical documents",
+            "status": "Pending",
+            "dueDate": "2025-09-17",
+            "priority": 3
         },
         {
             "id": 13,
@@ -2026,7 +2254,26 @@
             "title": "Task for Ali Sherif",
             "description": "Complete assigned work package",
             "status": "Completed",
-            "dueDate": "2025-08-20"
+            "dueDate": "2025-08-20",
+            "priority": 3
+        },
+        {
+            "id": 41,
+            "employeeId": 13,
+            "title": "Integration testing - Ali Sherif",
+            "description": "Perform integration tests",
+            "status": "Pending",
+            "dueDate": "2025-09-06",
+            "priority": 1
+        },
+        {
+            "id": 42,
+            "employeeId": 13,
+            "title": "Code optimization - Ali Sherif",
+            "description": "Refactor code for efficiency",
+            "status": "In Progress",
+            "dueDate": "2025-09-18",
+            "priority": 2
         },
         {
             "id": 14,
@@ -2034,7 +2281,26 @@
             "title": "Task for Rasha Younis",
             "description": "Complete assigned work package",
             "status": "In Progress",
-            "dueDate": "2025-08-20"
+            "dueDate": "2025-08-20",
+            "priority": 1
+        },
+        {
+            "id": 43,
+            "employeeId": 14,
+            "title": "Testing scripts - Rasha Younis",
+            "description": "Automate test scripts",
+            "status": "Completed",
+            "dueDate": "2025-09-08",
+            "priority": 3
+        },
+        {
+            "id": 44,
+            "employeeId": 14,
+            "title": "Database backup - Rasha Younis",
+            "description": "Backup system databases",
+            "status": "Pending",
+            "dueDate": "2025-09-15",
+            "priority": 2
         },
         {
             "id": 15,
@@ -2042,7 +2308,26 @@
             "title": "Task for Hossam Magdy",
             "description": "Complete assigned work package",
             "status": "Completed",
-            "dueDate": "2025-08-20"
+            "dueDate": "2025-08-20",
+            "priority": 2
+        },
+        {
+            "id": 45,
+            "employeeId": 15,
+            "title": "New feature dev - Hossam Magdy",
+            "description": "Develop new feature module",
+            "status": "Pending",
+            "dueDate": "2025-09-12",
+            "priority": 1
+        },
+        {
+            "id": 46,
+            "employeeId": 15,
+            "title": "System monitoring - Hossam Magdy",
+            "description": "Monitor system performance",
+            "status": "In Progress",
+            "dueDate": "2025-09-20",
+            "priority": 3
         },
         {
             "id": 16,
@@ -2050,7 +2335,26 @@
             "title": "Task for Nourhan Adel",
             "description": "Complete assigned work package",
             "status": "Pending",
-            "dueDate": "2025-08-20"
+            "dueDate": "2025-08-20",
+            "priority": 1
+        },
+        {
+            "id": 47,
+            "employeeId": 16,
+            "title": "UX research - Nourhan Adel",
+            "description": "Conduct usability study",
+            "status": "Completed",
+            "dueDate": "2025-09-11",
+            "priority": 2
+        },
+        {
+            "id": 48,
+            "employeeId": 16,
+            "title": "Wireframe update - Nourhan Adel",
+            "description": "Update app wireframes",
+            "status": "In Progress",
+            "dueDate": "2025-09-16",
+            "priority": 3
         }
     ],
     "requests": [
