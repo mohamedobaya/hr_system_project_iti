@@ -1,7 +1,9 @@
-import { getNavbar } from "../components/navbar.js";
+// import { getNavbar } from "../components/navbar.js";
+import { paginationEnable } from "../components/pagination.js";
+import { loadDataFromStorage, onPageLoad } from "../components/reusableFunctions.js";
+import { getEmployeeByID, getRequestByID, updateRequestByStatus, getAttendanceRecordsByID, getTaskByID } from "../components/reusableFunctions.js";
 
-
-const Data = {
+let Data = {
   employees: [],
   attendanceRecords: [],
   tasks: [],
@@ -12,16 +14,9 @@ let loggedEmployee = {};
 
 // automatically load when window is ready
 window.addEventListener("load", async () => {
-  loadDataFromStorage();
+  Data = await loadDataFromStorage();
   loggedEmployee = getEmployeeByID(localStorage.getItem("loggedEmployeeID"));
-  if (loggedEmployee == undefined) {
-    window.location.href = "/pages/index.html";
-  }
-  document.getElementById("navbar-elm").innerHTML = getNavbar(
-    loggedEmployee.role,
-    loggedEmployee.name,
-    loggedEmployee.preferences?.theme || "light"
-  );
+  onPageLoad(loggedEmployee);
 
   renderTasks();
   renderAttendance();
@@ -46,20 +41,8 @@ tabs.forEach((tab, index) => {
 });
 
 // ---------------- Load & Get Data ----------------
-const loadDataFromStorage = () => {
-  Data.employees = JSON.parse(localStorage.getItem("employees") || "[]");
-  Data.attendanceRecords = JSON.parse(localStorage.getItem("attendanceRecords") || "[]");
-  Data.tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
-  Data.requests = JSON.parse(localStorage.getItem("requests") || "[]");
-  Data.payrolls = JSON.parse(localStorage.getItem("payrolls") || "[]");
-};
-
 const saveDataToStorage = () => {
   localStorage.setItem("requests", JSON.stringify(Data.requests));
-};
-
-const getEmployeeByID = (empID) => {
-  return Data.employees.filter((emp) => emp.id == empID)[0];
 };
 
 // Drag and Drop for Tasks (Waled)
@@ -89,11 +72,14 @@ function renderTasks() {
   document.getElementById("In Progress").innerHTML = "";
   document.getElementById("Completed").innerHTML = "";
 
-  
+
   myTasks.forEach((task) => {
     let li = document.createElement("li");
     li.className = "bg-primary-subtle rounded p-2 my-2";
-    li.textContent = task.description;
+    li.innerHTML = `
+      <h5 class="fw-bold emp-title">${task.title}</h5>
+      <h6 class="mb-2 fst-italic">${task.dueDate}</h6>
+      <p>${task.description}</p>`;
 
     li.setAttribute("data-id", task.id);
 
@@ -141,6 +127,8 @@ function renderTasks() {
       ul.style.backgroundColor = "";
     });
   });
+
+  paginationEnable("pagination-requests", "requests-table-body", 5);
 }
 
 
@@ -163,7 +151,9 @@ function renderAttendance() {
       <td>${record.notes || ""}</td>
     `;
     tbody.appendChild(tr);
-  }); 
+  });
+
+  paginationEnable("pagination-attendance", "attendance-table-body", 5);
 }
 
 // Requests  (waled & omar)
@@ -202,8 +192,8 @@ function renderQuota() {
   ul.innerHTML = "";
   Object.keys(counts).forEach(type => {
     let li = document.createElement("li");
-    li.className = "list-group-item";
-    li.textContent = `${type}: ${counts[type]} requests`;
+    li.className = "list-group-item request";
+    li.innerHTML = `<span class="emp-name">${type}:</span> ${counts[type]} requests`;
     ul.appendChild(li);
   });
 }
