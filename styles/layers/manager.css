@@ -21,6 +21,7 @@
 .btn {
   border-radius: 1em;
 }
+
 .btn-theme {
   border: none;
   color: var(--text-color);
@@ -41,6 +42,7 @@ hr {
 .emp-title {
   color: var(--primary-color);
 }
+
 .emp-name {
   color: var(--accent-color);
 }
@@ -52,33 +54,41 @@ hr {
 .nav {
   border: none;
 }
+
 @media (max-width: 768px) {
   .nav {
     font-size: 0.7em;
     margin: 0em;
   }
 }
+
 .nav-item {
   background-color: var(--base-variant) !important;
   border-radius: 1em;
   margin: 0.5em;
 }
+
 .nav-item:first-child {
-  margin-inline-start: 0;
+  -webkit-margin-start: 0;
+          margin-inline-start: 0;
 }
+
 .nav-item:hover {
   border: none;
 }
+
 .nav-link {
   color: var(--text-color);
   border-radius: 1em !important;
 }
+
 .nav-link:hover {
   color: var(--text-color);
   background-color: var(--accent-color);
   border-color: var(--accent-color) !important;
   border-radius: 1em;
 }
+
 .nav .active {
   background-color: var(--primary-color) !important;
   color: var(--base-color) !important;
@@ -90,17 +100,21 @@ hr {
   border-radius: 1em;
   padding: 2em !important;
 }
+
 .manager-task-assign-employee {
   margin-top: 1em;
   margin-bottom: 1em;
   width: 20em;
 }
+
 .manager-btns {
   text-align: center;
 }
+
 .manager-btns .btns {
   margin-inline: auto;
 }
+
 .manager table {
   background-color: var(--base-variant);
   margin-inline: auto;
@@ -110,17 +124,21 @@ hr {
   border-collapse: collapse;
   /* ensures proper border rendering */
 }
+
 .manager .table-title {
   color: var(--accent-color);
 }
+
 .manager .table-header {
   background-color: var(--accent-color) !important;
   color: var(--base-color) !important;
 }
+
 .manager tr th {
   background-color: var(--primary-color);
   color: var(--base-color) !important;
 }
+
 .manager tr th,
 .manager tr td {
   border: 0.01em solid var(--base-variant) !important;
@@ -130,22 +148,29 @@ hr {
   vertical-align: middle;
   /* vertical centering */
 }
+
 .manager tr td {
   background-color: var(--base-color);
   color: var(--text-color) !important;
 }
+
 .manager tr:nth-child(even) td {
   background-color: var(--base-variant2);
 }
+
 .manager tr:first-child th:first-child {
   border-top-left-radius: 1em !important;
 }
+
 .manager tr:first-child th:last-child {
   border-top-right-radius: 1em !important;
 }
+
 .manager tr:last-child td:first-child {
   border-bottom-left-radius: 1em !important;
 }
+
 .manager tr:last-child td:last-child {
   border-bottom-right-radius: 1em !important;
-}/*# sourceMappingURL=manager.css.map */
+}
+/*# sourceMappingURL=manager.css.map */

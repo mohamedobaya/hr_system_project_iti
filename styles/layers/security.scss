@@ -99,7 +99,6 @@ table {
     background-color: var(--base-variant) !important;
     margin-inline: auto;
     width: 100%;
-    // border: 1px solid var(--base-color) !important;
     border-collapse: collapse;
     border-radius: 10em !important;
 
@@ -214,12 +213,10 @@ textarea {
     }
 
     #main-security {
-        // height: 90vh;
         position: relative;
         background-color: var(--base-color);
 
         .table-responsive {
-            // max-height: 50vh;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
@@ -227,10 +224,7 @@ textarea {
             background-color: var(--base-variant) !important;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             margin-top: 5em !important;
-            // position: absolute;
-            // top: 50%;
-            // left: 50%;
-            // transform: translate(-50%, -50%);
+          
             width: 90%;
 
             .search-input {
@@ -271,7 +265,6 @@ textarea {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        // min-height: 100vh;
     }
 
     .dropdown-menu.show {
@@ -320,5 +313,15 @@ textarea {
     .form-select {
         padding-right: 2rem !important;
     }
+
+@media screen and (max-width:767px) {
+.search-input {
+    width: 100% !important ;
+}
+.emp-name{
+    display: none ;
+}
+    
+}
 
 }
