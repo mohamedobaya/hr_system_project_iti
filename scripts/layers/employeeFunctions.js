@@ -1,5 +1,6 @@
 import { getNavbar } from "../components/navbar.js";
 
+
 const Data = {
   employees: [],
   attendanceRecords: [],
