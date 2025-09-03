@@ -287,17 +287,17 @@ const filterTasksByPriortiesSelect = document.getElementById("task-priority");
 const updateTasTable = () => {
     let filtered = [...Data.tasks];
 
-    // 1. Apply search
+    // apply search
     const keyword = searchTaskInput.value.trim();
     if (keyword !== "") {
-        if (searchTaskSelect.value === "search-name") {
+        if (searchTaskSelect.value == "search-name") {
             filtered = searchTaskByEmployeeName(filtered, keyword);
-        } else if (searchTaskSelect.value === "search-department") {
-            filtered = searchEmployeeByDepartment(filtered, keyword);
+        } else if (searchTaskSelect.value == "search-department") {
+            filtered = searchTaskByEmployeeDepartment(filtered, keyword);
         }
     }
 
-    // 2. Apply priority filter
+    // apply priority filter
     switch (filterTasksByPriortiesSelect.value) {
         case "high-priorities":
             filtered = filterTasksByPriorities(filtered, 1);
@@ -315,7 +315,7 @@ const updateTasTable = () => {
             break;
     }
 
-    // 3. Save & render
+    // save & render
     viewedTasks = filtered;
     loadTaskTable();
 }
