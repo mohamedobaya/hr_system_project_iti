@@ -1,11 +1,13 @@
 // Function to load data from localStorage
 import { getNavbar } from "./navbar.js";
+import { getProfile } from "./profile.js";
 
 const url = "./server/server.json";
 const navbar = document.getElementById("navbar-elm");
+const profile = document.getElementById("profile");
 
 export const onPageLoad = (loggedEmployee) => {
-    
+
     // check if logged-in
     if (loggedEmployee == undefined) {
         window.location.href = "/pages/index.html";
@@ -14,11 +16,10 @@ export const onPageLoad = (loggedEmployee) => {
     // navbar-logic
     navbar.innerHTML = getNavbar(loggedEmployee.role, loggedEmployee.name, loggedEmployee.preferences.theme);
 
+    // profile-logic
+    profile.innerHTML = getProfile(loggedEmployee);
 
     // theme-logic (light/dark)
-
-    
-
     const themeBtn = document.getElementById("btn-theme");
 
     // theme button logic
@@ -34,7 +35,7 @@ export const onPageLoad = (loggedEmployee) => {
         enableDarkmode();
     else
         disableDarkmode();
-    
+
     themeBtn.addEventListener('click', () => {
         if (loggedEmployee.preferences.theme == 'light') {
             loggedEmployee.preferences.theme = 'dark';
@@ -93,7 +94,7 @@ export const updateRequestByStatus = (reqID, newStatus) => {
     const requests = JSON.parse(localStorage.getItem("requests") || "[]");
     let updatedRequests = [];
     for (let req of requests) {
-        if (req.id == reqID) 
+        if (req.id == reqID)
             req.status = newStatus;
 
         updatedRequests.push(req);
@@ -115,6 +116,99 @@ export const updateEmployeeByTheme = (empID, newTheme) => {
     return updatedEmployees;
 }
 
-export const searchEmployeesByName = () => {
-    
+export const searchArrays = (array, keyword) => {
+    keyword.toLowerCase();
+
+    return array.filter(item =>
+        item.toLowerCase().startsWith(keyword)
+    );
+}
+
+export const searchEmployeeByName = (keyword) => {
+    keyword = keyword.toLowerCase();
+    const employees = JSON.parse(localStorage.getItem("employees") || "[]");
+
+    return employees.filter(emp =>
+        emp.name.toLowerCase().startsWith(keyword)
+    );
+}
+
+export const searchEmployeeByDepartment = (keyword) => {
+    keyword = keyword.toLowerCase();
+    const employees = JSON.parse(localStorage.getItem("employees") || "[]");
+
+    return employees.filter(emp =>
+        emp.department.toLowerCase().startsWith(keyword.toLowerCase())
+    );
+}
+
+export const searchRequestByEmployeeName = (keyword) => {
+    keyword = keyword.toLowerCase();
+    const requests = JSON.parse(localStorage.getItem("requests") || "[]");
+
+    return requests.filter(req => {
+        const emp = getEmployeeByID(req.employeeId);
+        if (emp.name.toLowerCase().startsWith(keyword.toLowerCase()))
+            return req;
+    });
+}
+
+export const searchRequestByEmployeeDepartment = (keyword) => {
+    keyword = keyword.toLowerCase();
+    const requests = JSON.parse(localStorage.getItem("requests") || "[]");
+
+    return requests.filter(req => {
+        const emp = getEmployeeByID(req.employeeId);
+        if (emp.department.toLowerCase().startsWith(keyword.toLowerCase()))
+            return req;
+    });
+}
+
+export const searchAttendanceByEmployeeName = (keyword) => {
+    keyword = keyword.toLowerCase();
+    const attendanceRecords = JSON.parse(localStorage.getItem("attendanceRecords") || "[]");
+
+    return attendanceRecords.filter(ar => {
+        const emp = getEmployeeByID(ar.employeeId);
+        if (emp.name.toLowerCase().startsWith(keyword.toLowerCase()))
+            return ar;
+    });
+}
+
+export const searchAttendanceByEmployeeDepartment = (keyword) => {
+    keyword = keyword.toLowerCase();
+    const attendanceRecords = JSON.parse(localStorage.getItem("attendanceRecords") || "[]");
+
+    return attendanceRecords.filter(ar => {
+        const emp = getEmployeeByID(ar.employeeId);
+        if (emp.department.toLowerCase().startsWith(keyword.toLowerCase()))
+            return ar;
+    });
+}
+
+export const searchTaskByEmployeeName = (tasks, keyword) => {
+    keyword = keyword.toLowerCase();
+
+    return tasks.filter(task => {
+        const emp = getEmployeeByID(task.employeeId);
+        if (emp.name.toLowerCase().startsWith(keyword.toLowerCase()))
+            return task;
+    });
+}
+
+export const searchTaskByEmployeeDepartment = (tasks, keyword) => {
+    keyword = keyword.toLowerCase();
+    return tasks.filter(task => {
+        const emp = getEmployeeByID(task.employeeId);
+        if (emp.department.toLowerCase().startsWith(keyword.toLowerCase()))
+            return task;
+    });
+}
+
+export const filterTasksByPriorities = (tasks, priority) => {
+
+    if (priority == 4)
+        return tasks;
+
+    return tasks.filter(task => task.priority == Number(priority));
 }

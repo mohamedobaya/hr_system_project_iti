@@ -37,7 +37,8 @@
 }
 
 body {
-    font-family: monospace !important;
+    // font-family: monospace !important;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: var(--base-color) !important;
     color: var(--text-color);
 }
@@ -129,7 +130,15 @@ hr {
 }
 
 
-
+// profile
+.profile {
+    ul {
+        list-style: none;
+    }
+    &-avatar {
+        font-size: 10em;
+    }
+}
 
 // pagination
 .pagination {
@@ -161,6 +170,34 @@ hr {
             background: var(--secondary-text);
             color: var(--base-color);
             cursor: not-allowed;
+        }
+    }
+}
+
+.task {
+    &-level {
+        &-high {
+            display: inline-block;
+            background-color: #9e2b2b !important;
+            border-radius: 1em;
+            color: white;
+            padding: 0.5em;
+        }
+
+        &-medium {
+            display: inline-block;
+            background-color: #d8d02f !important;
+            border-radius: 1em;
+            color: white;
+            padding: 0.5em;
+        }
+
+        &-low {
+            display: inline-block;
+            background-color: #10B981 !important;
+            border-radius: 1em;
+            color: white;
+            padding: 0.5em;
         }
     }
 }

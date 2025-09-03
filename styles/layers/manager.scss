@@ -28,7 +28,7 @@
 }
 
 body {
-    font-family: monospace !important;
+    // font-family: monospace !important;
     background-color: var(--base-color) !important;
     color: var(--text-color);
 }
@@ -59,6 +59,7 @@ hr {
         margin: 0em;
 
     }
+
     &-item {
         background-color: var(--base-variant) !important;
         border-radius: 1em;
@@ -90,6 +91,7 @@ hr {
         color: var(--base-color) !important;
         border: none;
     }
+
     border: none;
 }
 
@@ -97,6 +99,7 @@ hr {
     background-color: var(--base-variant) !important;
     border-radius: 1em;
     padding: 2em !important;
+
     &-task {
         &-assign {
             &-employee {
@@ -106,6 +109,7 @@ hr {
             }
         }
     }
+
     &-btns {
         .btns {
             margin-inline: auto;
@@ -113,14 +117,14 @@ hr {
 
         text-align: center;
     }
+
     table {
         background-color: var(--base-variant);
         margin-inline: auto;
         width: 100%;
-        border: 1px solid var(--base-color) !important;
-        border: none;
+        // border: 1px solid var(--base-color) !important;
         border-collapse: collapse;
-        // border-radius: 10em !important;
+        border-radius: 10em !important;
         /* ensures proper border rendering */
     }
     .table-title {
@@ -174,4 +178,31 @@ hr {
             border-bottom-right-radius: 1em !important;
         }
     }
+
+    &-input-container {
+        .form {
+            &-control {
+                width: 10em;
+                background-color: var(--base-color);
+                color: var(--text-color);
+                border-color: var(--base-color);
+                &::placeholder {
+                    color: var(--secondary-text);
+                }
+            }
+
+            &-select {
+                // margin-left: 1em;
+                width: 10em;
+                background-color: var(--base-color);
+                color: var(--text-color);
+                border-color: var(--base-color);
+                &::placeholder {
+                    color: var(--secondary-text);
+                }
+            }
+        }
+
+    }
 }
+

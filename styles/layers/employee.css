@@ -79,7 +79,9 @@
 #requests-center .form-label {
   color: var(--accent-color) !important;
 }
-#requests-center input, #requests-center select, #requests-center textArea {
+#requests-center input,
+#requests-center select,
+#requests-center textArea {
   background-color: var(--base-color);
   color: var(--text-color);
   border: var(--base-color);
@@ -87,7 +89,9 @@
 #requests-center input::-moz-placeholder, #requests-center select::-moz-placeholder, #requests-center textArea::-moz-placeholder {
   color: var(--secondary-text) !important;
 }
-#requests-center input::placeholder, #requests-center select::placeholder, #requests-center textArea::placeholder {
+#requests-center input::placeholder,
+#requests-center select::placeholder,
+#requests-center textArea::placeholder {
   color: var(--secondary-text) !important;
 }
 #requests-center .request {
@@ -97,10 +101,10 @@
 }
 
 ul.list-unstyled {
-  min-height: 150px;
+  height: 100%;
   padding: 10px;
   border: 2px solid transparent;
   border-radius: 10px;
-}
+    width: 100%;
 
-
+}/*# sourceMappingURL=employee.css.map */

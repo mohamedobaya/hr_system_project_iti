@@ -32,26 +32,42 @@
             <p><span class="emp-name">Welcome, Manager!</span></p>
         </div>
         <!-- Navigation Tabs -->
-        <ul class="nav nav-tabs mb-2 d-flex justify-content-between" id="center-tabs">
+        <ul class="nav nav-tabs mb-2" id="center-tabs">
             <li class="nav-item">
-                <a class="nav-link active">Approvals</a>
+                <a class="nav-link active"><i class="fa-solid fa-user"></i> Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link">Attendance</a>
+                <a class="nav-link"><i class="fa-solid fa-check-to-slot"></i> Approvals</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link">Tasks</a>
+                <a class="nav-link"><i class="fa-solid fa-id-card-clip"></i> Attendance</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link">New Task</a>
+                <a class="nav-link"><i class="fa-solid fa-clipboard-list"></i> Tasks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"><i class="fa-solid fa-notes-medical"></i> New Task</a>
             </li>
         </ul>
         <hr>
+        <!-- User Profile -->
+        <div class="center-section my-5">
+            <h4 class="my-2 table-title"><i class="fa-solid fa-user"></i> Profile</h4>
+            <div id="profile"></div>
+        </div>
         <!-- Approval Center -->
-        <div class="center-section">
+        <div class="center-section" style="display: none;">
             <div style="overflow-x:auto;" class="py-3">
-                <h4 class="mb-0 table-title">Approval Center</h4>
-                <table class="table my-5">
+                <h4 class="mb-0 table-title"><i class="fa-solid fa-check-to-slot"></i> Approval Center</h4>
+                <div class="manager-input-container mt-5 mb-3 d-flex ">
+                    <input id="approval-search" class="form-control" type="search" placeholder="Search"
+                        aria-label="Search">
+                    <select class="form-select ms-2" id="approval-search-by">
+                        <option selected value="search-name">Search by name</option>
+                        <option value="search-department">Search by department</option>
+                    </select>
+                </div>
+                <table class="table mb-5">
                     <thead>
                         <tr>
                             <th scope="col" class="table-header">Employee</th>
@@ -74,7 +90,15 @@
         <!-- Attendance Center -->
         <div class="center-section" style="display: none;">
             <div style="overflow-x:auto;" class="py-3">
-                <h4 class="mb-0 table-title">Attendance Center</h4>
+                <h4 class="mb-0 table-title"><i class="fa-solid fa-id-card-clip"></i> Attendance Center</h4>
+                <div class="manager-input-container mt-5 mb-3 d-flex ">
+                    <input id="attendance-search" class="form-control" type="search" placeholder="Search"
+                        aria-label="Search">
+                    <select class="form-select ms-2" id="attendance-search-by">
+                        <option selected value="search-name">Search by name</option>
+                        <option value="search-department">Search by department</option>
+                    </select>
+                </div>
                 <table class="table my-5">
                     <thead>
                         <tr>
@@ -101,11 +125,26 @@
         <!-- Task Center -->
         <div class="center-section" style="display: none;">
             <div style="overflow-x:auto;" class="py-3">
-                <h4 class="mb-0 table-title">Task Center</h4>
+                <h4 class="mb-0 table-title"><i class="fa-solid fa-clipboard-list"></i> Task Center</h4>
+                <div class="manager-input-container mt-5 mb-3 d-flex ">
+                    <input id="task-search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    <select class="form-select ms-2" id="task-search-by">
+                        <option selected value="search-name">Search by name</option>
+                        <option value="search-department">Search by department</option>
+                    </select>
+                </div>
+                <div class="manager-input-container mt-5 mb-3">
+                    <select class="form-select ml-0" id="task-priority">
+                        <option selected value="all-priorities">All Priorities</option>
+                        <option value="high-priorities">High Priorities</option>
+                        <option value="meduim-priorities">Meduim Priorities</option>
+                        <option value="low-priorities">Low Priorities</option>
+                    </select>
+                </div>
                 <table class="table my-5">
                     <thead>
                         <tr>
-                            <th scope="col" class="table-header">Task ID</th>
+                            <th scope="col" class="table-header">Priority</th>
                             <th scope="col" class="table-header">Task Title</th>
                             <th scope="col" class="table-header">Task Description</th>
                             <th scope="col" class="table-header">Employee</th>
@@ -124,22 +163,30 @@
         </div>
         <!-- Assign New Task Center -->
         <div class="center-section" style="display: none;">
-            <div id="manager-assign" class="manager-task py-3 d-flex justify-content-center">
+            <div id="manager-assign" class="manager-task py-3 d-flex justify-content-start">
                 <div class="manager-task-assign">
-                    <h4 class="mb-4 table-title">Assign New Task Center</h4>
+                    <h4 class="mb-4 table-title"><i class="fa-solid fa-notes-medical"></i>  Assign New Task Center</h4>
                     <label for="employee-assign-task-selector" class="form-label">Choose Employee</label>
-                    <select class="form-select manager-task-assign-employee my-1 mb-4" id="employee-assign-task-selector"
-                        aria-label="Default select example">
+                    <select class="form-select manager-task-assign-employee my-1 mb-4"
+                        id="employee-assign-task-selector" aria-label="Default select example">
                         <option selected value="">Choose Employee</option>
+                    </select>
+                    <label for="employee-assign-task-selector" class="form-label">Choose Priority</label>
+                    <select class="form-select manager-task-assign-employee my-1 mb-4"
+                        id="employee-assign-task-priority" aria-label="Default select example">
+                        <option value="3">Low</option>
+                        <option value="2">Medium</option>
+                        <option value="1">High</option>
                     </select>
                     <label for="new-task-title" class="form-label">Task Title</label>
                     <input type="text" class="form-control manager-task-assign-employee my-1 mb-4" id="new-task-title"
                         placeholder="Task title">
                     <label for="new-task-description" class="form-label">Task Description</label>
-                    <input type="text" class="form-control manager-task-assign-employee my-1 mb-4" id="new-task-description"
-                        placeholder="Task Description">
+                    <input type="text" class="form-control manager-task-assign-employee my-1 mb-4"
+                        id="new-task-description" placeholder="Task Description">
                     <label for="new-task-date" class="form-label">Task Due Date</label>
-                    <input type="date" class="form-control manager-task-assign-employee my-1 mb-4 mx-auto" id="new-task-date">
+                    <input type="date" class="form-control manager-task-assign-employee my-1 mb-4 mx-auto"
+                        id="new-task-date">
                     <a id="assign-task-btn" class="btn btn-success">Assign Task</a>
                 </div>
             </div>

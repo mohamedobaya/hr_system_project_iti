@@ -1,7 +1,7 @@
 import { paginationEnable } from "../components/pagination.js";
-import { loadDataFromStorage, onPageLoad } from "../components/reusableFunctions.js";
+import { loadDataFromStorage, onPageLoad, searchAttendanceByEmployeeDepartment, searchAttendanceByEmployeeName, searchRequestByEmployeeDepartment, searchRequestByEmployeeName, searchTaskByEmployeeName, searchTaskByEmployeeDepartment, filterTasksByPriorities } from "../components/reusableFunctions.js";
 import { getEmployeeByID, getRequestByID, updateRequestByStatus, getAttendanceRecordsByID, getTaskByID } from "../components/reusableFunctions.js";
-
+import { searchEmployeeByName, searchEmployeeByDepartment } from "../components/reusableFunctions.js";
 
 let Data = {
     employees: [],
@@ -11,17 +11,26 @@ let Data = {
     payrolls: []
 };
 let loggedEmployee = {}
+let viewedApprovals = [];
+let viewedAttendances = [];
+let viewedTasks = [];
 
 // automatically load when window is ready
 window.addEventListener("load", async () => {
     Data = await loadDataFromStorage();
     loggedEmployee = getEmployeeByID(localStorage.getItem("loggedEmployeeID"));
     onPageLoad(loggedEmployee);
-    
+
     // role-based call functions
+    viewedApprovals = Data.requests;
     loadApprovalTable();
+
+    viewedAttendances = Data.attendanceRecords;
     loadAttendanceTable();
+
+    viewedTasks = Data.tasks;
     loadTaskTable();
+
     loadAssignTaskForm();
 });
 
@@ -63,7 +72,9 @@ const createApprovalRow = (reqID) => {
 const loadApprovalTable = () => {
     const approvalTable = document.getElementById("approval-table");
     approvalTable.innerHTML = "";
-    for (let req of Data.requests) {
+
+    // adding to html logic
+    for (let req of viewedApprovals) {
         const row = createApprovalRow(req.id);
         approvalTable.innerHTML += row;
     }
@@ -109,7 +120,7 @@ const createAttendancelRow = (attendanceRecordID) => {
 const loadAttendanceTable = () => {
     const attendanceTable = document.getElementById("attendance-table");
     attendanceTable.innerHTML = "";
-    for (let ar of Data.attendanceRecords) {
+    for (let ar of viewedAttendances) {
         const row = createAttendancelRow(ar.id);
         attendanceTable.innerHTML += row;
     }
@@ -121,10 +132,27 @@ const creatTaskRow = (taskID) => {
     let task = getTaskByID(taskID);
 
     const emp = getEmployeeByID(task.employeeId);
+    // console.log(task);
+
+    let taskPriority = "";
+    switch (task.priority) {
+        case 1:
+            taskPriority = "High";
+            break;
+        case 2:
+            taskPriority = "Medium";
+            break;
+        default:
+            taskPriority = "Low";
+    }
 
     return `
     <tr>
-        <td scope="row" id="task-${taskID}">${task.id}</td>
+        <td scope="row" id="task-level-${taskID}">
+            <span class="task-level-${taskPriority.toLowerCase()} p-1">
+                ${taskPriority}
+            </span>
+        </td>
         <td id="title-${taskID}">${task.title}</td>
         <td id="description-${taskID}">${task.description}</td>
         <td id="employee-${taskID}">${emp.name}</td>
@@ -138,7 +166,7 @@ const creatTaskRow = (taskID) => {
 const loadTaskTable = () => {
     const taskTable = document.getElementById("task-table");
     taskTable.innerHTML = "";
-    for (let task of Data.tasks) {
+    for (let task of viewedTasks) {
         const row = creatTaskRow(task.id);
         taskTable.innerHTML += row;
     }
@@ -149,6 +177,7 @@ const loadTaskTable = () => {
 const loadAssignTaskForm = () => {
     // const form = document.getElementById("manager-assign");
     const employeeSelector = document.getElementById("employee-assign-task-selector");
+    const newTaskPriority = document.getElementById("employee-assign-task-priority");
     const newTaskTitle = document.getElementById("new-task-title");
     const newTaskDescription = document.getElementById("new-task-description");
     const newTaskDate = document.getElementById("new-task-date");
@@ -174,6 +203,10 @@ const loadAssignTaskForm = () => {
             alert("Please select an employee.");
             return;
         }
+        if (!newTaskPriority.value) {
+            alert("Please select a priority.");
+            return;
+        }
         if (!newTaskTitle.value) {
             alert("Please enter a task title.");
             return;
@@ -194,7 +227,8 @@ const loadAssignTaskForm = () => {
             title: newTaskTitle.value,
             description: newTaskDescription.value,
             status: "Pending",
-            dueDate: newTaskDate.value
+            dueDate: newTaskDate.value,
+            priority: Number(newTaskPriority.value)
         };
 
         // save to local storage
@@ -205,8 +239,93 @@ const loadAssignTaskForm = () => {
         // alert that a new task have been assigned
         const selectedEmployee = getEmployeeByID(employeeSelector.value);
         alert(`Task assigned to ${selectedEmployee.name} successfully!`);
+
+        employeeSelector.value = "";
+        newTaskPriority.value = "3"
+        newTaskTitle.value = "";
+        newTaskDescription.value = "";
     });
 }
 
+// search-apporval logic
+const searchApprovalInput = document.getElementById("approval-search");
+const searchApprovalSelect = document.getElementById("approval-search-by");
 
+searchApprovalInput.addEventListener('keyup', () => {
+    if (searchApprovalSelect.value == "search-name") {
+        viewedApprovals = searchRequestByEmployeeName(searchApprovalInput.value);
+        console.log(viewedApprovals);
+        loadApprovalTable();
+    }
+    if (searchApprovalSelect.value == "search-department") {
+        viewedApprovals = searchRequestByEmployeeDepartment(searchApprovalInput.value);
+        loadApprovalTable();
+    }
+});
 
+// search-attendance logic
+const searchAttendanceInput = document.getElementById("attendance-search");
+const searchAttendanceSelect = document.getElementById("attendance-search-by");
+
+searchAttendanceInput.addEventListener('keyup', () => {
+    if (searchAttendanceSelect.value == "search-name") {
+        viewedAttendances = searchAttendanceByEmployeeName(searchAttendanceInput.value);
+        loadAttendanceTable();
+    }
+    if (searchAttendanceSelect.value == "search-department") {
+        viewedAttendances = searchAttendanceByEmployeeDepartment(searchAttendanceInput.value);
+        loadAttendanceTable();
+    }
+});
+
+// search-task and filter logic
+const searchTaskInput = document.getElementById("task-search");
+const searchTaskSelect = document.getElementById("task-search-by");
+const filterTasksByPriortiesSelect = document.getElementById("task-priority");
+
+// Update view with search + filter applied
+const updateTasTable = () => {
+    let filtered = [...Data.tasks];
+
+    // apply search
+    const keyword = searchTaskInput.value.trim();
+    if (keyword !== "") {
+        if (searchTaskSelect.value == "search-name") {
+            filtered = searchTaskByEmployeeName(filtered, keyword);
+        } else if (searchTaskSelect.value == "search-department") {
+            filtered = searchTaskByEmployeeDepartment(filtered, keyword);
+        }
+    }
+
+    // apply priority filter
+    switch (filterTasksByPriortiesSelect.value) {
+        case "high-priorities":
+            filtered = filterTasksByPriorities(filtered, 1);
+            break;
+        case "meduim-priorities":
+            filtered = filterTasksByPriorities(filtered, 2);
+            console.log(filtered);
+
+            break;
+        case "low-priorities":
+            filtered = filterTasksByPriorities(filtered, 3);
+            break;
+        default: // all
+            filtered = filterTasksByPriorities(filtered, 4);
+            break;
+    }
+
+    // save & render
+    viewedTasks = filtered;
+    loadTaskTable();
+}
+
+searchTaskInput.addEventListener("keyup", () => {
+    updateTasTable()
+});
+searchTaskSelect.addEventListener("change", () => {
+    updateTasTable()
+});
+filterTasksByPriortiesSelect.addEventListener("change", () => {
+    updateTasTable()
+});

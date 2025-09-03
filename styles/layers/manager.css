@@ -27,7 +27,6 @@
 }
 
 body {
-  font-family: monospace !important;
   background-color: var(--base-color) !important;
   color: var(--text-color);
 }
@@ -105,9 +104,8 @@ hr {
   background-color: var(--base-variant);
   margin-inline: auto;
   width: 100%;
-  border: 1px solid var(--base-color) !important;
-  border: none;
   border-collapse: collapse;
+  border-radius: 10em !important;
   /* ensures proper border rendering */
 }
 .manager .table-title {
@@ -148,4 +146,28 @@ hr {
 }
 .manager tr:last-child td:last-child {
   border-bottom-right-radius: 1em !important;
+}
+.manager-input-container .form-control {
+  width: 10em;
+  background-color: var(--base-color);
+  color: var(--text-color);
+  border-color: var(--base-color);
+}
+.manager-input-container .form-control::-moz-placeholder {
+  color: var(--secondary-text);
+}
+.manager-input-container .form-control::placeholder {
+  color: var(--secondary-text);
+}
+.manager-input-container .form-select {
+  width: 10em;
+  background-color: var(--base-color);
+  color: var(--text-color);
+  border-color: var(--base-color);
+}
+.manager-input-container .form-select::-moz-placeholder {
+  color: var(--secondary-text);
+}
+.manager-input-container .form-select::placeholder {
+  color: var(--secondary-text);
 }/*# sourceMappingURL=manager.css.map */

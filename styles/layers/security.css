@@ -257,4 +257,12 @@ textarea::placeholder {
 }
 .security .form-select {
   padding-right: 2rem !important;
+}
+@media screen and (max-width: 767px) {
+  .security .search-input {
+    width: 100% !important;
+  }
+  .security .emp-name {
+    display: none;
+  }
 }/*# sourceMappingURL=security.css.map */
