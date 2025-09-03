@@ -186,9 +186,8 @@ export const searchAttendanceByEmployeeDepartment = (keyword) => {
     });
 }
 
-export const searchTaskByEmployeeName = (keyword) => {
+export const searchTaskByEmployeeName = (tasks, keyword) => {
     keyword = keyword.toLowerCase();
-    const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
 
     return tasks.filter(task => {
         const emp = getEmployeeByID(task.employeeId);
@@ -197,13 +196,19 @@ export const searchTaskByEmployeeName = (keyword) => {
     });
 }
 
-export const searchTaskByEmployeeDepartment = (keyword) => {
+export const searchTaskByEmployeeDepartment = (tasks, keyword) => {
     keyword = keyword.toLowerCase();
-    const tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
-
     return tasks.filter(task => {
         const emp = getEmployeeByID(task.employeeId);
         if (emp.department.toLowerCase().startsWith(keyword.toLowerCase()))
             return task;
     });
+}
+
+export const filterTasksByPriorities = (tasks, priority) => {
+
+    if (priority == 4)
+        return tasks;
+
+    return tasks.filter(task => task.priority == Number(priority));
 }

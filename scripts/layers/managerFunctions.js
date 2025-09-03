@@ -1,5 +1,5 @@
 import { paginationEnable } from "../components/pagination.js";
-import { loadDataFromStorage, onPageLoad, searchAttendanceByEmployeeDepartment, searchAttendanceByEmployeeName, searchRequestByEmployeeDepartment, searchRequestByEmployeeName, searchTaskByEmployeeName, searchTaskByEmployeeDepartment } from "../components/reusableFunctions.js";
+import { loadDataFromStorage, onPageLoad, searchAttendanceByEmployeeDepartment, searchAttendanceByEmployeeName, searchRequestByEmployeeDepartment, searchRequestByEmployeeName, searchTaskByEmployeeName, searchTaskByEmployeeDepartment, filterTasksByPriorities } from "../components/reusableFunctions.js";
 import { getEmployeeByID, getRequestByID, updateRequestByStatus, getAttendanceRecordsByID, getTaskByID } from "../components/reusableFunctions.js";
 import { searchEmployeeByName, searchEmployeeByDepartment } from "../components/reusableFunctions.js";
 
@@ -132,10 +132,23 @@ const creatTaskRow = (taskID) => {
     let task = getTaskByID(taskID);
 
     const emp = getEmployeeByID(task.employeeId);
+    // console.log(task);
+
+    let taskPriority = "";
+    switch (task.priority) {
+        case 1:
+            taskPriority = "High";
+            break;
+        case 2:
+            taskPriority = "Meduim";
+            break;
+        default:
+            taskPriority = "Low";
+    }
 
     return `
     <tr>
-        <td scope="row" id="task-${taskID}">${task.id}</td>
+        <td scope="row" id="task-${taskID}">${taskPriority}</td>
         <td id="title-${taskID}">${task.title}</td>
         <td id="description-${taskID}">${task.description}</td>
         <td id="employee-${taskID}">${emp.name}</td>
@@ -205,7 +218,8 @@ const loadAssignTaskForm = () => {
             title: newTaskTitle.value,
             description: newTaskDescription.value,
             status: "Pending",
-            dueDate: newTaskDate.value
+            dueDate: newTaskDate.value,
+            priority: 3
         };
 
         // save to local storage
@@ -227,11 +241,11 @@ searchApprovalInput.addEventListener('keyup', () => {
     if (searchApprovalSelect.value == "search-name") {
         viewedApprovals = searchRequestByEmployeeName(searchApprovalInput.value);
         console.log(viewedApprovals);
-        loadApprovalTable(); 
+        loadApprovalTable();
     }
     if (searchApprovalSelect.value == "search-department") {
         viewedApprovals = searchRequestByEmployeeDepartment(searchApprovalInput.value);
-        loadApprovalTable(); 
+        loadApprovalTable();
     }
 });
 
@@ -242,27 +256,62 @@ const searchAttendanceSelect = document.getElementById("attendance-search-by");
 searchAttendanceInput.addEventListener('keyup', () => {
     if (searchAttendanceSelect.value == "search-name") {
         viewedAttendances = searchAttendanceByEmployeeName(searchAttendanceInput.value);
-        loadAttendanceTable(); 
+        loadAttendanceTable();
     }
     if (searchAttendanceSelect.value == "search-department") {
         viewedAttendances = searchAttendanceByEmployeeDepartment(searchAttendanceInput.value);
-        loadAttendanceTable(); 
+        loadAttendanceTable();
     }
 });
 
-// search-task logic
+// search-task and filter logic
 const searchTaskInput = document.getElementById("task-search");
 const searchTaskSelect = document.getElementById("task-search-by");
+const filterTasksByPriortiesSelect = document.getElementById("task-priority");
 
-searchTaskInput.addEventListener('keyup', () => {
-    if (searchTaskSelect.value == "search-name") {
-        viewedTasks = searchTaskByEmployeeName(searchTaskInput.value);
-        loadTaskTable(); 
+// Update view with search + filter applied
+const updateTasTable = () => {
+    let filtered = [...Data.tasks];
+
+    // 1. Apply search
+    const keyword = searchTaskInput.value.trim();
+    if (keyword !== "") {
+        if (searchTaskSelect.value === "search-name") {
+            filtered = searchTaskByEmployeeName(filtered, keyword);
+        } else if (searchTaskSelect.value === "search-department") {
+            filtered = searchEmployeeByDepartment(filtered, keyword);
+        }
     }
-    if (searchTaskSelect.value == "search-department") {
-        viewedTasks = searchTaskByEmployeeDepartment(searchTaskInput.value);
-        loadTaskTable(); 
+
+    // 2. Apply priority filter
+    switch (filterTasksByPriortiesSelect.value) {
+        case "high-priorities":
+            filtered = filterTasksByPriorities(filtered, 1);
+            break;
+        case "meduim-priorities":
+            filtered = filterTasksByPriorities(filtered, 2);
+            console.log(filtered);
+            
+            break;
+        case "low-priorities":
+            filtered = filterTasksByPriorities(filtered, 3);
+            break;
+        default: // all
+            filtered = filterTasksByPriorities(filtered, 4);
+            break;
     }
+
+    // 3. Save & render
+    viewedTasks = filtered;
+    loadTaskTable();
+}
+
+searchTaskInput.addEventListener("keyup", () => {
+    updateTasTable()
 });
-
-
+searchTaskSelect.addEventListener("change", () => {
+    updateTasTable()
+});
+filterTasksByPriortiesSelect.addEventListener("change", () => {
+    updateTasTable()
+});

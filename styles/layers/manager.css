@@ -104,9 +104,8 @@ hr {
   background-color: var(--base-variant);
   margin-inline: auto;
   width: 100%;
-  border: 1px solid var(--base-color) !important;
-  border: none;
   border-collapse: collapse;
+  border-radius: 10em !important;
   /* ensures proper border rendering */
 }
 .manager .table-title {
@@ -161,7 +160,6 @@ hr {
   color: var(--secondary-text);
 }
 .manager-input-container .form-select {
-  margin-left: 1em;
   width: 10em;
   background-color: var(--base-color);
   color: var(--text-color);
