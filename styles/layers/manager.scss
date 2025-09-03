@@ -122,22 +122,18 @@ hr {
         background-color: var(--base-variant);
         margin-inline: auto;
         width: 100%;
-        border: 1px solid var(--base-color) !important;
-        border: none;
+        // border: 1px solid var(--base-color) !important;
         border-collapse: collapse;
-        // border-radius: 10em !important;
+        border-radius: 10em !important;
         /* ensures proper border rendering */
     }
-
     .table-title {
         color: var(--accent-color);
     }
-
     .table-header {
         background-color: var(--accent-color) !important;
         color: var(--base-color) !important;
     }
-
     tr {
         th {
             background-color: var(--primary-color);
@@ -196,7 +192,7 @@ hr {
             }
 
             &-select {
-                margin-left: 1em;
+                // margin-left: 1em;
                 width: 10em;
                 background-color: var(--base-color);
                 color: var(--text-color);
