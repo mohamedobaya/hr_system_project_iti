@@ -27,7 +27,6 @@
 }
 
 body {
-  font-family: monospace !important;
   background-color: var(--base-color) !important;
   color: var(--text-color);
 }
@@ -163,106 +162,108 @@ textarea::placeholder {
   color: var(--accent-color) !important;
 }
 
-.security {
-  background-color: var(--base-color);
+#main-security {
+  background-color: var(--base-variant);
+  border-radius: 1em;
+  padding: 2em !important;
 }
-.security ::-webkit-scrollbar {
+#main-security ::-webkit-scrollbar {
   width: 3px;
   height: 3px;
 }
-.security ::-webkit-scrollbar-thumb {
+#main-security ::-webkit-scrollbar-thumb {
   background: var(--secondary-text);
   border-radius: 10px;
 }
-.security .cursor {
+#main-security .cursor {
   cursor: pointer;
 }
-.security #main-security {
+#main-security #main-security {
   position: relative;
   background-color: var(--base-color);
 }
-.security #main-security .table-responsive {
+#main-security #main-security .table-responsive {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
-.security #main-security .card-security {
+#main-security #main-security .card-security {
   background-color: var(--base-variant) !important;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   margin-top: 5em !important;
   width: 90%;
 }
-.security #main-security .card-security .search-input {
+#main-security #main-security .card-security .search-input {
   border: none;
   outline: none;
   background-color: var(--base-color);
   color: var(--text-color);
 }
-.security #main-security .card-security .table {
+#main-security #main-security .card-security .table {
   background-color: var(--base-variant) !important;
 }
-.security #main-security .card-security .table thead,
-.security #main-security .card-security .table .submit .btn {
+#main-security #main-security .card-security .table thead,
+#main-security #main-security .card-security .table .submit .btn {
   white-space: nowrap;
 }
-.security #main-security .card-security .table tbody th {
+#main-security #main-security .card-security .table tbody th {
   font-weight: unset !important;
 }
-.security input[type=time] {
+#main-security input[type=time] {
   border: 1px solid #ccc;
   background-color: var(--base-variant);
   color: var(--text-color);
 }
-.security .submit .btn,
-.security th {
+#main-security .submit .btn,
+#main-security th {
   white-space: nowrap;
 }
-.security #content {
+#main-security #content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.security .dropdown-menu.show {
+#main-security .dropdown-menu.show {
   z-index: 100000000 !important;
 }
-.security .dropdown .btn {
+#main-security .dropdown .btn {
   padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid #ccc;
   background-color: #fff;
 }
-.security .calendar label {
+#main-security .calendar label {
   font-weight: 600;
 }
-.security .calendar input[type=date] {
+#main-security .calendar input[type=date] {
   padding: 7px 12px;
   border-radius: 8px;
   border: 1px solid #ccc;
 }
-.security input[type=time],
-.security select,
-.security textarea {
+#main-security input[type=time],
+#main-security select,
+#main-security textarea {
   border: 1px solid #ccc;
   border-radius: 6px;
   padding: 5px 8px;
   font-size: 14px;
 }
-.security textarea {
+#main-security textarea {
   resize: none;
 }
-.security #myAlert,
-.security #alertsubmit {
+#main-security #myAlert,
+#main-security #alertsubmit {
   font-weight: 500;
   border-radius: 8px;
   padding: 10px 20px;
   font-size: 14px;
 }
-.security .form-select {
+#main-security .form-select {
   padding-right: 2rem !important;
 }
 @media screen and (max-width: 767px) {
-  .security .search-input {
+  #main-security .search-input {
     width: 100% !important;
   }
-  .security .emp-name {
+  #main-security .emp-name {
     display: none;
   }
 }/*# sourceMappingURL=security.css.map */

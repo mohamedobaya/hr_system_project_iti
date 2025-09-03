@@ -28,7 +28,7 @@
 }
 
 body {
-    font-family: monospace !important;
+    // font-family: monospace !important;
     background-color: var(--base-color) !important;
     color: var(--text-color);
 }
@@ -195,8 +195,10 @@ textarea {
 
 ////////////////////////////
 
-.security {
-    background-color: var(--base-color);
+#main-security {
+    background-color: var(--base-variant);
+    border-radius: 1em;
+    padding: 2em !important;
 
     ::-webkit-scrollbar {
         width: 3px;
@@ -224,7 +226,7 @@ textarea {
             background-color: var(--base-variant) !important;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             margin-top: 5em !important;
-          
+
             width: 90%;
 
             .search-input {
@@ -314,14 +316,15 @@ textarea {
         padding-right: 2rem !important;
     }
 
-@media screen and (max-width:767px) {
-.search-input {
-    width: 100% !important ;
-}
-.emp-name{
-    display: none ;
-}
-    
-}
+    @media screen and (max-width:767px) {
+        .search-input {
+            width: 100% !important;
+        }
+
+        .emp-name {
+            display: none;
+        }
+
+    }
 
 }

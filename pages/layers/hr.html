@@ -14,7 +14,10 @@
 
 <body>
     <div id="navbar-elm"></div>
-
+    <div class="center-section my-5">
+        <h4 class="my-2 table-title"><i class="fa-solid fa-user"></i> Profile</h4>
+        <div id="profile"></div>
+    </div>
     <div class="hr container-fluid">
         <ul class="nav nav-tabs py-4" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -68,7 +71,7 @@
                                             <th scope="col" class="table-header">Leave Balance</th>
                                             <th scope="col" id="increase" class="table-header">Increase</th>
                                             <th scope="col" id="descrese" class="table-header">DeCrease</th>
-                                            <th  scope="col" id="awards" class="table-header">Awards</th>
+                                            <th scope="col" id="awards" class="table-header">Awards</th>
                                         </tr>
                                     </thead>
                                     <tbody id="employee-table-body"></tbody>
@@ -130,20 +133,20 @@
                     <button id="exportPDF" class="btn btn-danger">Export to PDF</button>
                 </div>
 
-               
+
                 <div class="table-responsive rounded-2">
-                     <table class="table table-striped">
-                    <thead class="sticky-top">
-                        <tr>
-                            <th scope="col" class="table-header">Name</th>
-                            <th scope="col" class="table-header">Department</th>
-                            <th scope="col" class="table-header">Date</th>
-                            <th scope="col" class="table-header">Status</th>
-                            <th scope="col" class="table-header">Notes</th>
-                        </tr>
-                    </thead>
-                    <tbody id="reportTableBody"></tbody>
-                </table>
+                    <table class="table table-striped">
+                        <thead class="sticky-top">
+                            <tr>
+                                <th scope="col" class="table-header">Name</th>
+                                <th scope="col" class="table-header">Department</th>
+                                <th scope="col" class="table-header">Date</th>
+                                <th scope="col" class="table-header">Status</th>
+                                <th scope="col" class="table-header">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportTableBody"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
