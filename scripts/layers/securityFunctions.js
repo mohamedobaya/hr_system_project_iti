@@ -207,7 +207,7 @@ function enableBulkAction() {
             const r = cb.closest("tr");
             if (r === row) return;
 
-            const el = r.querySelector(`[name="${target.name}"]`);
+            const el = r.querySelector([name="${target.name}"]);
             if (!el) return;
 
             if (el.type === "checkbox") el.checked = target.checked;
@@ -236,7 +236,7 @@ function searchEmployees() {
     function renderRecords(records) {
         tablebody.innerHTML = "";
         if (records.length === 0) {
-            tablebody.innerHTML = `<tr><td colspan="9" style="text-align:center;color:red;font-weight:bold;">No employee found</td></tr>`;
+            tablebody.innerHTML = <tr><td colspan="9" style="text-align:center;color:red;font-weight:bold;">No employee found</td></tr>;
             return;
         }
 
@@ -424,7 +424,7 @@ function renderAttendance(date) {
 
     const records = Data.attendanceRecords.filter(r => r.date === date);
     if (records.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="9" style="text-align:center;color:red;font-weight:bold;">No employee found</td></tr>`;
+        tableBody.innerHTML = <tr><td colspan="9" style="text-align:center;color:red;font-weight:bold;">No employee found</td></tr>;
         return;
     }
 

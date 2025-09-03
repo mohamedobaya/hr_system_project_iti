@@ -101,8 +101,10 @@
 }
 
 ul.list-unstyled {
-  min-height: 150px;
+  height: 100%;
   padding: 10px;
   border: 2px solid transparent;
   border-radius: 10px;
+    width: 100%;
+
 }/*# sourceMappingURL=employee.css.map */
