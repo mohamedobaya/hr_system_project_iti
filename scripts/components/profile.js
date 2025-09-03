@@ -37,7 +37,7 @@ const getProfileIcon = (role) => {
             return `<i class="fa-solid fa-user-tie"></i>`;
         case "Security":
             return `<i class="fa-solid fa-user-shield"></i>`;
-        case "Manager":
+        case "HR":
             return `<i class="fa-solid fa-user-pen"></i>`;
         default:
             return `<i class="fa-solid fa-user"></i>`;

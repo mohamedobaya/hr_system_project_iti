@@ -1,0 +1,173 @@
+:root {
+  --base-color: #F9FAFB;
+  --base-variant: #E5E7EB;
+  --base-variant2: #EBEEF3;
+  --text-color: #1F2937;
+  --secondary-text: #6B7280;
+  --primary-color: #2563EB;
+  --accent-color: #10B981;
+}
+
+.darkmode {
+  --base-color: #111827;
+  --base-variant: #374151;
+  --base-variant2: #1E2639;
+  --text-color: #F3F4F6;
+  --secondary-text: #9CA3AF;
+  --primary-color: #3B82F6;
+  --accent-color: #34D399;
+}
+
+.btn {
+  border-radius: 1em;
+}
+.btn-theme {
+  border: none;
+  color: var(--text-color);
+}
+
+body {
+  background-color: var(--base-color) !important;
+  color: var(--text-color);
+}
+
+hr {
+  color: var(--primary-color);
+  border: 0.07em solid var(--primary-color);
+  border-radius: 1em;
+}
+
+.emp-title {
+  color: var(--primary-color);
+}
+.emp-name {
+  color: var(--accent-color);
+}
+
+.navbar {
+  background-color: var(--base-variant) !important;
+}
+
+.nav {
+  border: none;
+}
+@media (max-width: 768px) {
+  .nav {
+    font-size: 0.7em;
+    margin: 0em;
+  }
+}
+.nav-item {
+  background-color: var(--base-variant) !important;
+  border-radius: 1em;
+  margin: 0.5em;
+}
+.nav-item:first-child {
+  margin-inline-start: 0;
+}
+.nav-item:hover {
+  border: none;
+}
+.nav-link {
+  color: var(--text-color);
+  border-radius: 1em !important;
+}
+.nav-link:hover {
+  color: var(--text-color);
+  background-color: var(--accent-color);
+  border-color: var(--accent-color) !important;
+  border-radius: 1em;
+}
+.nav .active {
+  background-color: var(--primary-color) !important;
+  color: var(--base-color) !important;
+  border: none;
+}
+
+.hr {
+  background-color: var(--base-variant) !important;
+  border-radius: 1em;
+  padding: 2em !important;
+}
+.hr-task-assign-employee {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  width: 20em;
+}
+.hr-btns {
+  text-align: center;
+}
+.hr-btns .btns {
+  margin-inline: auto;
+}
+.hr table {
+  background-color: var(--base-variant);
+  margin-inline: auto;
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10em !important;
+  /* ensures proper border rendering */
+}
+.hr .table-title {
+  color: var(--accent-color);
+}
+.hr .table-header {
+  background-color: var(--accent-color) !important;
+  color: var(--base-color) !important;
+}
+.hr tr th {
+  background-color: var(--primary-color);
+  color: var(--base-color) !important;
+}
+.hr tr th,
+.hr tr td {
+  border: 0.01em solid var(--base-variant) !important;
+  padding: 8px;
+  text-align: center;
+  /* horizontal centering */
+  vertical-align: middle;
+  /* vertical centering */
+}
+.hr tr td {
+  background-color: var(--base-color);
+  color: var(--text-color) !important;
+}
+.hr tr:nth-child(even) td {
+  background-color: var(--base-variant2);
+}
+.hr tr:first-child th:first-child {
+  border-top-left-radius: 1em !important;
+}
+.hr tr:first-child th:last-child {
+  border-top-right-radius: 1em !important;
+}
+.hr tr:last-child td:first-child {
+  border-bottom-left-radius: 1em !important;
+}
+.hr tr:last-child td:last-child {
+  border-bottom-right-radius: 1em !important;
+}
+.hr-input-container .form-control {
+  width: 10em;
+  background-color: var(--base-color);
+  color: var(--text-color);
+  border-color: var(--base-color);
+}
+.hr-input-container .form-control::-moz-placeholder {
+  color: var(--secondary-text);
+}
+.hr-input-container .form-control::placeholder {
+  color: var(--secondary-text);
+}
+.hr-input-container .form-select {
+  width: 10em;
+  background-color: var(--base-color);
+  color: var(--text-color);
+  border-color: var(--base-color);
+}
+.hr-input-container .form-select::-moz-placeholder {
+  color: var(--secondary-text);
+}
+.hr-input-container .form-select::placeholder {
+  color: var(--secondary-text);
+}/*# sourceMappingURL=hrUpdated.css.map */
