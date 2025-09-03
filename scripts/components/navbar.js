@@ -17,12 +17,12 @@ export const getNavbar = (empRole, empName, empTheme = 'light') => {
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto me-md-0 me-auto mb-2 mb-lg-0">
-                    <li class="nav-item me-md-1 me-auto mx-auto my-1">
+                    <li class="nav-item mx-auto my-1">
                         <a class="btn btn-theme" id="btn-theme">
                             ${empTheme == 'light' ? `dark ${darkIcon}`: `light ${lightIcon}`}
                         </a>
                     </li>
-                    <li class="nav-item mx-md-2 mx-auto my-1">
+                    <li class="nav-item mx-auto my-1">
                         <a class="btn btn-reset" onclick="{localStorage.clear()}">
                             reset server ${serverIcon}
                         </a>
