@@ -76,7 +76,21 @@ function renderTasks() {
   myTasks.forEach((task) => {
     let li = document.createElement("li");
     li.className = "bg-primary-subtle rounded p-2 my-2";
+    let taskPriority = "Low";
+    switch (task.priority) {
+      case 1:
+        taskPriority = "High";
+        break;
+      case 2:
+        taskPriority = "Medium";
+        break;
+      default:
+        taskPriority = "Low";
+    }
     li.innerHTML = `
+      <h6 class="fw-bold emp-title task-level-${taskPriority.toLowerCase()}">
+        ${taskPriority}
+      </h6>
       <h5 class="fw-bold emp-title">${task.title}</h5>
       <h6 class="mb-2 fst-italic">${task.dueDate}</h6>
       <p>${task.description}</p>`;
@@ -127,7 +141,6 @@ function renderTasks() {
       ul.style.backgroundColor = "";
     });
   });
-  updateTaskView();
   paginationEnable("pagination-requests", "requests-table-body", 5);
 }
 
@@ -253,64 +266,64 @@ const getCompletedTasks = (empID) => {
     .sort((taskA, taskB) => taskA.priorty - taskB.priorty);;
 }
 
-const updateTaskView = () => {
-  orderTasksInStatusContainer("Pending");
-  orderTasksInStatusContainer("In Progress");
-  orderTasksInStatusContainer("Completed");
-}
+// const updateTaskView = () => {
+//   orderTasksInStatusContainer("Pending");
+//   orderTasksInStatusContainer("In Progress");
+//   orderTasksInStatusContainer("Completed");
+// }
 
-const orderTasksInStatusContainer = (containerID) => {
-  let taskContainer = "";
-  let viewedTasks = [];
+// const orderTasksInStatusContainer = (containerID) => {
+//   let taskContainer = "";
+//   let viewedTasks = [];
   
-  switch (containerID) {
-    case "Pending":
-      taskContainer = document.getElementById("Pending");
-      viewedTasks = getPendingTasks(loggedEmployee.id);
-      break;
-    case "In Progress":
-      taskContainer = document.getElementById("In Progress");
-      viewedTasks = getInProgressTasks(loggedEmployee.id);
-      break;
-    case "Completed":
-      taskContainer = document.getElementById("Completed");
-      viewedTasks = getCompletedTasks(loggedEmployee.id);
-      break;
-    default:
-      taskContainer = document.getElementById("Pending");
-      viewedTasks = getPendingTasks(loggedEmployee.id);
-  }
+//   switch (containerID) {
+//     case "Pending":
+//       taskContainer = document.getElementById("Pending");
+//       viewedTasks = getPendingTasks(loggedEmployee.id);
+//       break;
+//     case "In Progress":
+//       taskContainer = document.getElementById("In Progress");
+//       viewedTasks = getInProgressTasks(loggedEmployee.id);
+//       break;
+//     case "Completed":
+//       taskContainer = document.getElementById("Completed");
+//       viewedTasks = getCompletedTasks(loggedEmployee.id);
+//       break;
+//     default:
+//       taskContainer = document.getElementById("Pending");
+//       viewedTasks = getPendingTasks(loggedEmployee.id);
+//   }
 
-  // sort tasks by priority (1 = high, 3 = low)
-  viewedTasks.sort((a, b) => a.priority - b.priority);
+//   // sort tasks by priority (1 = high, 3 = low)
+//   viewedTasks.sort((a, b) => a.priority - b.priority);
 
-  taskContainer.innerHTML = "";
+//   taskContainer.innerHTML = "";
   
-  viewedTasks.forEach((task) => {
-    let taskPriority = "";
-    switch (task.priority) {
-      case 1:
-        taskPriority = "High";
-        break;
-      case 2:
-        taskPriority = "Medium";
-        break;
-      default:
-        taskPriority = "Low";
-    }
+//   viewedTasks.forEach((task) => {
+//     let taskPriority = "";
+//     switch (task.priority) {
+//       case 1:
+//         taskPriority = "High";
+//         break;
+//       case 2:
+//         taskPriority = "Medium";
+//         break;
+//       default:
+//         taskPriority = "Low";
+//     }
 
-    let li = document.createElement("li");
-    li.className = "bg-primary-subtle rounded p-2 my-2";
-    li.innerHTML = `
-      <h6 class="fw-bold emp-title task-level-${taskPriority.toLowerCase()}">${taskPriority}</h6>
-      <h5 class="fw-bold emp-title">${task.title}</h5>
-      <h6 class="mb-2 fst-italic">${task.dueDate}</h6>
-      <p>${task.description}</p>`;
+//     let li = document.createElement("li");
+//     li.className = "bg-primary-subtle rounded p-2 my-2";
+//     li.innerHTML = `
+//       <h6 class="fw-bold emp-title task-level-${taskPriority.toLowerCase()}">${taskPriority}</h6>
+//       <h5 class="fw-bold emp-title">${task.title}</h5>
+//       <h6 class="mb-2 fst-italic">${task.dueDate}</h6>
+//       <p>${task.description}</p>`;
 
-    li.setAttribute("data-id", task.id);
+//     li.setAttribute("data-id", task.id);
 
-    makeDraggable(li);
+//     makeDraggable(li);
 
-    taskContainer.appendChild(li);
-  });
-}
+//     taskContainer.appendChild(li);
+//   });
+// }
