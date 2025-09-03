@@ -49,6 +49,8 @@ export const onPageLoad = (loggedEmployee) => {
             onPageLoad(loggedEmployee);
         }
     });
+
+    // localStorage.getItem("employees");
 }
 
 
