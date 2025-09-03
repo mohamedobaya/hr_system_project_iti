@@ -18,7 +18,7 @@ export const getProfile = (emp) => {
                     </li>
                     <li class="profile-info-salary">
                         <span class="emp-title">Salary</span> 
-                        <span class="">${emp.monthlySalary}</span>
+                        <span class="">${emp.monthlySalary}$</span>
                     </li>
                     <li class="profile-info-vacation">
                         <span class="emp-title">Vacation days left</span> 
