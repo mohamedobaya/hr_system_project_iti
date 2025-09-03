@@ -16,12 +16,17 @@ let loggedEmployee = {};
 window.addEventListener("load", async () => {
     Data = await loadDataFromStorage();
     loggedEmployee = getEmployeeByID(localStorage.getItem("loggedEmployeeID"));
+
     onPageLoad(loggedEmployee);
     showAttendanceByDate();
 
     Data.attendanceRecords.forEach((emp) => calculateAttendance(emp));
-    paginationEnable("pagination-security", "table-security", 8);
 });
+
+//sava to localstorage
+function saveAttendanceToStorage() {
+    localStorage.setItem("attendanceRecords", JSON.stringify(Data.attendanceRecords));
+}
 
 
 // Styling status select
@@ -54,28 +59,43 @@ function createNewRow(emp) {
     NewRow.dataset.checkout = emp.checkOut;
     NewRow.dataset.notes = emp.notes;
 
+
     NewRow.innerHTML = `
         <td scope="row"><input type="checkbox" class="cursor"></td>
         <td scope="row">${allemp.id}</td>
         <td scope="row">${allemp.name}</td>
         <td scope="row">${allemp.department}</td>
         <td scope="row">
-            <select class="cursor form-select" name="status" >
-                <option selected>${emp.status}</option>
-                <option value="Late">Late</option>
-                <option value="Absent">Absent</option>
-                <option value="Present">Present</option>
-                <option value="Leave">Leave</option>
-                <option value="WFH">WFH</option>
-            </select>
+        <select class="cursor form-select" name="status">
+        <option value="Present" ${emp.status === "Present" ? "selected" : ""}>Present</option>
+        <option value="Late" ${emp.status === "Late" ? "selected" : ""}>Late</option>
+        <option value="Absent" ${emp.status === "Absent" ? "selected" : ""}>Absent</option>
+        <option value="Leave" ${emp.status === "Leave" ? "selected" : ""}>Leave</option>
+        <option value="WFH" ${emp.status === "WFH" ? "selected" : ""}>WFH</option>
+        </select>
         </td>
         <td scope="row"><input type="time" name="checkIn" value="${emp.checkIn}" class="rounded-2"></td>
         <td scope="row"><input type="time" name="checkOut" value="${emp.checkOut}" class="rounded-2"></td>
         <td scope="row" id='min'>${emp.minutesLate} min</td>
         <td scope="row" class="text-capitalize">
-            <textarea name="notes" class="form-control" rows="1" placeholder="Enter Your Notes">${emp.notes}</textarea>
+        <textarea name="notes" class="form-control" rows="1" placeholder="Enter Your Notes">${emp.notes}</textarea>
         </td>
     `;
+
+
+    const approvedRequest = Data.requests.find(r =>
+        r.employeeId == emp.employeeId &&
+        r.date === emp.date &&
+        (r.type === "WFH" || r.type === "Leave") &&
+        r.status === "Approved"
+    );
+
+    if (approvedRequest) {
+        emp.status = approvedRequest.type;
+        const select = NewRow.querySelector("select");
+        select.value = approvedRequest.type;
+        updateSelectColor(select);
+    }
 
     const select = NewRow.querySelector("select");
     const alertBox = document.getElementById("myAlert");
@@ -86,29 +106,72 @@ function createNewRow(emp) {
     select.addEventListener("change", function (e) {
         const oldStatus = emp.status;
         const newStatus = e.target.value;
-        //check wfh leave
-        if ((newStatus === "WFH" && !emp.isWFH) || (newStatus === "Leave" && !emp.isLeave)) {
-            alertBox.textContent = "Manager approval required!";
-            alertBox.classList.add("alert-danger");
-            e.target.value = oldStatus;
-            updateSelectColor(e.target);
-            alertBox.classList.remove("d-none");
-            setTimeout(() => alertBox.classList.add("d-none"), 2000);
-            return;
+        if (newStatus === "WFH" || newStatus === "Leave") {
+            const approvedRequest = Data.requests.find(r =>
+                r.employeeId == emp.employeeId &&
+                r.date === emp.date &&
+                r.type === newStatus &&
+                r.status === "Approved"
+            );
+
+            if (!approvedRequest) {
+                alertBox.textContent = "Manager approval required!";
+                alertBox.classList.add("alert-danger");
+                e.target.value = oldStatus;
+                updateSelectColor(e.target);
+                alertBox.classList.remove("d-none");
+                setTimeout(() => alertBox.classList.add("d-none"), 2000);
+                return;
+            }
+
         }
 
-        updateSelectColor(e.target);
+
+
+
         emp.status = newStatus;
+        updateSelectColor(e.target);
+        saveAttendanceToStorage();
     });
 
     const checkInInput = NewRow.querySelector('input[name="checkIn"]');
     checkInInput.addEventListener("change", function (e) {
         emp.checkIn = e.target.value;
+
         calculateAttendance(emp);
-        NewRow.querySelector("th:nth-child(8)").textContent = `${emp.minutesLate} min`;
-        select.value = emp.status;
-        updateSelectColor(select);
-        NewRow.dataset.status = emp.status;
+
+        const statusSelect = NewRow.querySelector("select");
+        statusSelect.value = emp.status;
+        updateSelectColor(statusSelect);
+
+        NewRow.querySelector("#min").innerText = emp.minutesLate + " min";
+        NewRow.querySelector('textarea[name="notes"]').value = emp.notes;
+
+
+        saveAttendanceToStorage();
+    });
+
+    const checkOutInput = NewRow.querySelector('input[name="checkOut"]');
+    checkOutInput.addEventListener("change", function (e) {
+        emp.checkOut = e.target.value;
+
+        calculateAttendance(emp);
+
+        const statusSelect = NewRow.querySelector("select");
+        statusSelect.value = emp.status;
+        updateSelectColor(statusSelect);
+
+        NewRow.querySelector("#min").innerText = emp.minutesLate + " min";
+        NewRow.querySelector('textarea[name="notes"]').value = emp.notes;
+
+
+        saveAttendanceToStorage();
+    });
+
+    const notesInput = NewRow.querySelector('textarea[name="notes"]');
+    notesInput.addEventListener("input", function (e) {
+        emp.notes = e.target.value;
+        saveAttendanceToStorage();
     });
 
     return NewRow;
@@ -144,7 +207,7 @@ function enableBulkAction() {
             const r = cb.closest("tr");
             if (r === row) return;
 
-            const el = r.querySelector(`[name="${target.name}"]`);
+            const el = r.querySelector([name="${target.name}"]);
             if (!el) return;
 
             if (el.type === "checkbox") el.checked = target.checked;
@@ -154,7 +217,7 @@ function enableBulkAction() {
         });
 
         isBulkUpdating = false;
-        localStorage.setItem("attendanceRecords", JSON.stringify(Data.attendanceRecords));
+        saveAttendanceToStorage();
     });
 }
 enableBulkAction();
@@ -173,7 +236,7 @@ function searchEmployees() {
     function renderRecords(records) {
         tablebody.innerHTML = "";
         if (records.length === 0) {
-            tablebody.innerHTML = `<tr><td colspan="9" style="text-align:center;color:red;font-weight:bold;">No employee found</td></tr>`;
+            tablebody.innerHTML = <tr><td colspan="9" style="text-align:center;color:red;font-weight:bold;">No employee found</td></tr>;
             return;
         }
 
@@ -223,6 +286,8 @@ function updateChanges() {
     savebtn.addEventListener("click", function () {
         const tableRows = document.querySelectorAll("tbody tr");
         let anyChange = false;
+        let hasError = false;
+
         for (let row of tableRows) {
             const newStatus = row.querySelector("select").value;
             const newCheckIn = row.querySelector('input[name="checkIn"]').value;
@@ -239,46 +304,55 @@ function updateChanges() {
                 emp.notes !== newNotes
             );
 
-            if (!changed) continue;
-
-            anyChange = true;
-
             if (!newCheckIn && newCheckOut) {
                 alertBox.innerText = "Check-Out cannot be set without Check-In!";
                 alertBox.classList.remove("d-none");
                 alertBox.classList.add("alert-danger");
                 row.querySelector('input[name="checkOut"]').value = "";
                 setTimeout(() => alertBox.classList.add("d-none"), 2000);
-                return;
+                hasError = true;
+                continue;
             }
 
-            if (newCheckIn && !newCheckOut) newCheckOut = "17:00";
+            if (newCheckIn && (newCheckOut === "" || !newCheckOut)) {
+                newCheckOut = "17:00";
+                row.querySelector('input[name="checkOut"]').value = newCheckOut;
+            }
 
             emp.status = newStatus;
             emp.checkIn = newCheckIn;
             emp.checkOut = newCheckOut;
             emp.notes = newNotes;
 
-            row.querySelector('input[name="checkOut"]').value = newCheckOut;
-            row.querySelector("select").value = newStatus;
+            calculateAttendance(emp);
+
+            row.querySelector('input[name="checkOut"]').value = emp.checkOut;
+            row.querySelector("select").value = emp.status;
             updateSelectColor(row.querySelector("select"));
+            row.querySelector("#min").innerText = emp.minutesLate + " min";
+
+            if (changed) anyChange = true;
         }
 
+        if (hasError) return;
+
+        saveAttendanceToStorage();
+
         if (anyChange) {
-            localStorage.setItem("attendanceRecords", JSON.stringify(Data.attendanceRecords));
-            alertBox.innerText = "Changes have been saved successfully";
-            alertBox.classList.remove('alert-danger', 'alert-success');
-            alertBox.classList.add('alert-success')
+            alertBox.innerText = " Changes have been saved successfully";
+            alertBox.classList.remove("alert-danger");
+            alertBox.classList.add("alert-success");
         } else {
-            alertBox.innerText = "No changes detected!";
-            alertBox.classList.add('alert-danger')
+            alertBox.innerText = " No changes detected!";
+            alertBox.classList.remove("alert-success");
+            alertBox.classList.add("alert-danger");
         }
 
         alertBox.classList.remove("d-none");
         setTimeout(() => alertBox.classList.add("d-none"), 2000);
     });
 }
-updateChanges();
+updateChanges()
 
 // Filter by Status
 function filterByStatus() {
@@ -288,10 +362,10 @@ function filterByStatus() {
     filterOptions.forEach((option) => {
         option.addEventListener("click", function (e) {
             e.preventDefault();
-            const status = this.dataset.status;
+            const status = this.dataset.status.trim();
             tbody.querySelectorAll("tr").forEach((row) => {
                 const empStatus = row.dataset.status.trim();
-                row.style.display = (status === "All" || empStatus === status) ? "" : "none";
+                row.style.display = (status === "All" || empStatus.toLowerCase() === status.toLowerCase()) ? "" : "none";
             });
         });
     });
@@ -303,28 +377,33 @@ function calculateAttendance(emp) {
     if (!emp.checkIn) {
         emp.status = "Absent";
         emp.minutesLate = 0;
-        return emp;
-    }
-
-    const [hours, minutes] = emp.checkIn.split(":").map(Number);
-    const totalMinutes = hours * 60 + minutes;
-    const officialStart = 9 * 60;
-    const lateThreshold = 11 * 60;
-
-    if (totalMinutes <= officialStart) {
-        emp.status = "Present";
-        emp.minutesLate = 0;
-    } else if (totalMinutes < lateThreshold) {
-        emp.status = "Late";
-        emp.minutesLate = totalMinutes - officialStart;
-        emp.notes = "Arrived late";
     } else {
-        emp.status = "Absent";
-        emp.minutesLate = 0;
+        if (!emp.checkOut || emp.checkOut === "") {
+            emp.checkOut = "17:00";
+        }
+
+        const [hours, minutes] = emp.checkIn.split(":").map(Number);
+        const totalMinutes = hours * 60 + minutes;
+        const officialStart = 9 * 60;
+        const lateThreshold = 11 * 60;
+
+        if (totalMinutes <= officialStart) {
+            emp.status = "Present";
+            emp.minutesLate = 0;
+        } else if (totalMinutes < lateThreshold) {
+            emp.status = "Late";
+            emp.minutesLate = totalMinutes - officialStart;
+            emp.notes = "Arrived late";
+        } else {
+            emp.status = "Absent";
+            emp.minutesLate = 0;
+        }
     }
 
+    saveAttendanceToStorage();
     return emp;
 }
+
 
 // Attendance by Date
 function showAttendanceByDate() {
@@ -350,7 +429,7 @@ function renderAttendance(date) {
 
     const records = Data.attendanceRecords.filter(r => r.date === date);
     if (records.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="9" style="text-align:center;color:red;font-weight:bold;">No employee found</td></tr>`;
+        tableBody.innerHTML = <tr><td colspan="9" style="text-align:center;color:red;font-weight:bold;">No employee found</td></tr>;
         return;
     }
 
@@ -365,6 +444,8 @@ function renderAttendance(date) {
         row.querySelectorAll("select, input, textarea, input[type='checkbox']").forEach(el => el.disabled = !isToday);
         tableBody.appendChild(row);
     });
+        paginationEnable("pagination-security", "table-security", 8);
+
 }
 
 function showAttendanceForDate(date) {
@@ -374,7 +455,7 @@ function showAttendanceForDate(date) {
         const exists = Data.attendanceRecords.find(row => row.employeeId == emp.id && row.date === date);
         if (!exists) {
             Data.attendanceRecords.push({
-                id: today,
+                id: date + "-" + emp.id,
                 employeeId: emp.id,
                 date: date,
                 checkIn: "",
@@ -387,4 +468,8 @@ function showAttendanceForDate(date) {
             });
         }
     });
+
+    saveAttendanceToStorage();
+    
+
 }

@@ -96,13 +96,11 @@
   border-color: var(--base-variant);
 }
 
-
-/*# sourceMappingURL=employee.css.map */
-
 ul.list-unstyled {
   min-height: 150px;
   padding: 10px;
   border: 2px solid transparent;
   border-radius: 10px;
 }
+
 
