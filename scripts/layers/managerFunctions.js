@@ -140,7 +140,7 @@ const creatTaskRow = (taskID) => {
             taskPriority = "High";
             break;
         case 2:
-            taskPriority = "Meduim";
+            taskPriority = "Medium";
             break;
         default:
             taskPriority = "Low";
@@ -148,7 +148,11 @@ const creatTaskRow = (taskID) => {
 
     return `
     <tr>
-        <td scope="row" id="task-${taskID}">${taskPriority}</td>
+        <td scope="row" id="task-level-${taskID}">
+            <span class="task-level-${taskPriority.toLowerCase()} p-1">
+                ${taskPriority}
+            </span>
+        </td>
         <td id="title-${taskID}">${task.title}</td>
         <td id="description-${taskID}">${task.description}</td>
         <td id="employee-${taskID}">${emp.name}</td>
@@ -173,6 +177,7 @@ const loadTaskTable = () => {
 const loadAssignTaskForm = () => {
     // const form = document.getElementById("manager-assign");
     const employeeSelector = document.getElementById("employee-assign-task-selector");
+    const newTaskPriority = document.getElementById("employee-assign-task-priority");
     const newTaskTitle = document.getElementById("new-task-title");
     const newTaskDescription = document.getElementById("new-task-description");
     const newTaskDate = document.getElementById("new-task-date");
@@ -198,6 +203,10 @@ const loadAssignTaskForm = () => {
             alert("Please select an employee.");
             return;
         }
+        if (!newTaskPriority.value) {
+            alert("Please select a priority.");
+            return;
+        }
         if (!newTaskTitle.value) {
             alert("Please enter a task title.");
             return;
@@ -219,7 +228,7 @@ const loadAssignTaskForm = () => {
             description: newTaskDescription.value,
             status: "Pending",
             dueDate: newTaskDate.value,
-            priority: 3
+            priority: Number(newTaskPriority.value)
         };
 
         // save to local storage
@@ -230,6 +239,11 @@ const loadAssignTaskForm = () => {
         // alert that a new task have been assigned
         const selectedEmployee = getEmployeeByID(employeeSelector.value);
         alert(`Task assigned to ${selectedEmployee.name} successfully!`);
+
+        employeeSelector.value = "";
+        newTaskPriority.value = "3"
+        newTaskTitle.value = "";
+        newTaskDescription.value = "";
     });
 }
 
@@ -291,7 +305,7 @@ const updateTasTable = () => {
         case "meduim-priorities":
             filtered = filterTasksByPriorities(filtered, 2);
             console.log(filtered);
-            
+
             break;
         case "low-priorities":
             filtered = filterTasksByPriorities(filtered, 3);

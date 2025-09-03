@@ -39,13 +39,16 @@
         border-radius: 10em !important;
         /* ensures proper border rendering */
     }
+
     .table-title {
         color: var(--accent-color);
     }
+
     .table-header {
         background-color: var(--accent-color) !important;
         color: var(--base-color) !important;
     }
+
     tr {
         th {
             background-color: var(--primary-color);
@@ -96,10 +99,14 @@
     .form-label {
         color: var(--accent-color) !important;
     }
-    input, select, textArea {
+
+    input,
+    select,
+    textArea {
         background-color: var(--base-color);
         color: var(--text-color);
         border: var(--base-color);
+
         &::placeholder {
             color: var(--secondary-text) !important;
         }
@@ -113,8 +120,9 @@
 }
 
 ul.list-unstyled {
-  min-height: 150px;
-  padding: 10px;
-  border: 2px solid transparent;
-  border-radius: 10px;
+    min-height: 150px;
+    padding: 10px;
+    border: 2px solid transparent;
+    border-radius: 10px;
 }
+

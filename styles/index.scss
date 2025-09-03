@@ -173,3 +173,31 @@ hr {
         }
     }
 }
+
+.task {
+    &-level {
+        &-high {
+            display: inline-block;
+            background-color: #9e2b2b !important;
+            border-radius: 1em;
+            color: white;
+            padding: 0.5em;
+        }
+
+        &-medium {
+            display: inline-block;
+            background-color: #d8d02f !important;
+            border-radius: 1em;
+            color: white;
+            padding: 0.5em;
+        }
+
+        &-low {
+            display: inline-block;
+            background-color: #10B981 !important;
+            border-radius: 1em;
+            color: white;
+            padding: 0.5em;
+        }
+    }
+}

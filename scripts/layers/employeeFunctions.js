@@ -127,7 +127,7 @@ function renderTasks() {
       ul.style.backgroundColor = "";
     });
   });
-
+  updateTaskView();
   paginationEnable("pagination-requests", "requests-table-body", 5);
 }
 
@@ -230,5 +230,87 @@ if (requestForm) {
     renderQuota();
 
     requestForm.reset();
+  });
+}
+
+// functions to sort according to priorty, status (omar)
+// pending employee-tasks
+const getPendingTasks = (empID) => {
+  return Data.tasks.filter(task => task.employeeId == empID)
+    .filter(task => task.status == "Pending")
+    .sort((taskA, taskB) => taskA.priorty - taskB.priorty);
+}
+// in-progress employee-tasks
+const getInProgressTasks = (empID) => {
+  return Data.tasks.filter(task => task.employeeId == empID)
+    .filter(task => task.status == "In Progress")
+    .sort((taskA, taskB) => taskA.priorty - taskB.priorty);;
+}
+// completed employee-tasks
+const getCompletedTasks = (empID) => {
+  return Data.tasks.filter(task => task.employeeId == empID)
+    .filter(task => task.status == "Completed")
+    .sort((taskA, taskB) => taskA.priorty - taskB.priorty);;
+}
+
+const updateTaskView = () => {
+  orderTasksInStatusContainer("Pending");
+  orderTasksInStatusContainer("In Progress");
+  orderTasksInStatusContainer("Completed");
+}
+
+const orderTasksInStatusContainer = (containerID) => {
+  let taskContainer = "";
+  let viewedTasks = [];
+  
+  switch (containerID) {
+    case "Pending":
+      taskContainer = document.getElementById("Pending");
+      viewedTasks = getPendingTasks(loggedEmployee.id);
+      break;
+    case "In Progress":
+      taskContainer = document.getElementById("In Progress");
+      viewedTasks = getInProgressTasks(loggedEmployee.id);
+      break;
+    case "Completed":
+      taskContainer = document.getElementById("Completed");
+      viewedTasks = getCompletedTasks(loggedEmployee.id);
+      break;
+    default:
+      taskContainer = document.getElementById("Pending");
+      viewedTasks = getPendingTasks(loggedEmployee.id);
+  }
+
+  // sort tasks by priority (1 = high, 3 = low)
+  viewedTasks.sort((a, b) => a.priority - b.priority);
+
+  taskContainer.innerHTML = "";
+  
+  viewedTasks.forEach((task) => {
+    let taskPriority = "";
+    switch (task.priority) {
+      case 1:
+        taskPriority = "High";
+        break;
+      case 2:
+        taskPriority = "Medium";
+        break;
+      default:
+        taskPriority = "Low";
+    }
+
+    let li = document.createElement("li");
+    li.className = "bg-primary-subtle rounded p-2 my-2";
+    li.innerHTML = `
+      <h6 class="fw-bold emp-title task-level-${taskPriority.toLowerCase()}">${taskPriority}</h6>
+      <h5 class="fw-bold emp-title">${task.title}</h5>
+      <h6 class="mb-2 fst-italic">${task.dueDate}</h6>
+      <p>${task.description}</p>`;
+
+    li.setAttribute("data-id", task.id);
+
+    makeDraggable(li);
+
+    taskContainer.appendChild(li);
   });
 }
