@@ -13,7 +13,9 @@
                 "dateFormat": "DD-MM-YYYY"
             },
             "username": "omar1",
-            "password": "Pass@1001"
+            "password": "Pass@1001",
+            "lateRequestsLeft": 2,
+            "wfhRequestsLeft": 2
         },
         {
             "id": 2,
@@ -28,7 +30,9 @@
                 "dateFormat": "YYYY/MM/DD"
             },
             "username": "mariam2",
-            "password": "Pass@1002"
+            "password": "Pass@1002",
+            "lateRequestsLeft": 2,
+            "wfhRequestsLeft": 2
         },
         {
             "id": 3,
@@ -43,7 +47,9 @@
                 "dateFormat": "MM/DD/YYYY"
             },
             "username": "adel3",
-            "password": "Pass@1003"
+            "password": "Pass@1003",
+            "lateRequestsLeft": 2,
+            "wfhRequestsLeft": 2
         },
         {
             "id": 4,
@@ -58,7 +64,9 @@
                 "dateFormat": "YYYY-MM-DD"
             },
             "username": "dina4",
-            "password": "Pass@1004"
+            "password": "Pass@1004",
+            "lateRequestsLeft": 2,
+            "wfhRequestsLeft": 2
         },
         {
             "id": 5,
@@ -73,7 +81,9 @@
                 "dateFormat": "DD/MM/YYYY"
             },
             "username": "samir5",
-            "password": "Pass@1005"
+            "password": "Pass@1005",
+            "lateRequestsLeft": 2,
+            "wfhRequestsLeft": 2
         },
         {
             "id": 6,
@@ -88,7 +98,9 @@
                 "dateFormat": "MM-YYYY-DD"
             },
             "username": "heba6",
-            "password": "Pass@1006"
+            "password": "Pass@1006",
+            "lateRequestsLeft": 2,
+            "wfhRequestsLeft": 2
         },
         {
             "id": 7,
@@ -103,7 +115,9 @@
                 "dateFormat": "YYYY-DD-MM"
             },
             "username": "mostafa7",
-            "password": "Pass@1007"
+            "password": "Pass@1007",
+            "lateRequestsLeft": 2,
+            "wfhRequestsLeft": 2
         },
         {
             "id": 8,
@@ -118,7 +132,9 @@
                 "dateFormat": "DD/MM/YYYY"
             },
             "username": "ibrahim8",
-            "password": "Pass@1008"
+            "password": "Pass@1008",
+            "lateRequestsLeft": 2,
+            "wfhRequestsLeft": 2
         },
         {
             "id": 9,
@@ -133,7 +149,9 @@
                 "dateFormat": "YYYY/MM/DD"
             },
             "username": "tarek9",
-            "password": "Pass@1009"
+            "password": "Pass@1009",
+            "lateRequestsLeft": 2,
+            "wfhRequestsLeft": 2
         },
         {
             "id": 10,
@@ -148,7 +166,9 @@
                 "dateFormat": "MM-DD-YYYY"
             },
             "username": "nader10",
-            "password": "Pass@1010"
+            "password": "Pass@1010",
+            "lateRequestsLeft": 2,
+            "wfhRequestsLeft": 2
         },
         {
             "id": 11,
@@ -163,7 +183,9 @@
                 "dateFormat": "YYYY-MM-DD"
             },
             "username": "amal11",
-            "password": "Pass@1011"
+            "password": "Pass@1011",
+            "lateRequestsLeft": 2,
+            "wfhRequestsLeft": 2
         },
         {
             "id": 12,
@@ -178,7 +200,9 @@
                 "dateFormat": "DD-MM-YYYY"
             },
             "username": "karima12",
-            "password": "Pass@1012"
+            "password": "Pass@1012",
+            "lateRequestsLeft": 2,
+            "wfhRequestsLeft": 2
         },
         {
             "id": 13,
@@ -193,7 +217,9 @@
                 "dateFormat": "MM/DD/YYYY"
             },
             "username": "ali13",
-            "password": "Pass@1013"
+            "password": "Pass@1013",
+            "lateRequestsLeft": 2,
+            "wfhRequestsLeft": 2
         },
         {
             "id": 14,
@@ -208,7 +234,9 @@
                 "dateFormat": "YYYY/MM/DD"
             },
             "username": "rasha14",
-            "password": "Pass@1014"
+            "password": "Pass@1014",
+            "lateRequestsLeft": 2,
+            "wfhRequestsLeft": 2
         },
         {
             "id": 15,
@@ -223,7 +251,9 @@
                 "dateFormat": "YYYY-DD-MM"
             },
             "username": "hossam15",
-            "password": "Pass@1015"
+            "password": "Pass@1015",
+            "lateRequestsLeft": 2,
+            "wfhRequestsLeft": 2
         },
         {
             "id": 16,
@@ -238,7 +268,9 @@
                 "dateFormat": "DD/MM/YYYY"
             },
             "username": "nourhan16",
-            "password": "Pass@1016"
+            "password": "Pass@1016",
+            "lateRequestsLeft": 2,
+            "wfhRequestsLeft": 2
         }
     ],
     "attendanceRecords": [

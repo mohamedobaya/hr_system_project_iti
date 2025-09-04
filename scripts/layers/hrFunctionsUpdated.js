@@ -321,23 +321,3 @@ function exportToPDF() {
     console.log("pdf downloadeded");
     
 }
-// function exportToPDF() {
-//     window.jsPDF = window.jspdf.jsPDF;
-
-//     const doc = new window.jsPDF('p', 'pt', 'a4');
-//     const element = document.getElementById('reportTable');
-
-//     if (!element) {
-//         showMessage('Reports table not found. Make sure the HTML table has id="reportTable".', 'danger');
-//         return;
-//     }
-
-//     doc.html(element, {
-//         callback: function (pdf) {
-//             pdf.save('company_reports.pdf');
-//         },
-//         x: 10,
-//         y: 10,
-//         html2canvas: { scale: 0.8 }
-//     });
-// }
