@@ -273,7 +273,7 @@
             "wfhRequestsLeft": 2
         }
     ],
-    "attendanceRecords": [
+        "attendanceRecords": [
         {
             "id": 1,
             "employeeId": 1,
