@@ -32,7 +32,7 @@ export const calculateIdealEmployee = (data) => {
       idealEmployee = emp;
     }
   }
-  console.log(getEmployeeByID(idealEmployee.id));
+  // console.log(getEmployeeByID(idealEmployee.id));
   return getEmployeeByID(idealEmployee.id);
 };
 
