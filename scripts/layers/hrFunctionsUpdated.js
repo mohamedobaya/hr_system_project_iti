@@ -1,6 +1,8 @@
 import { loadDataFromStorage, onPageLoad } from "../components/reusableFunctions.js";
 import { getEmployeeByID, getRequestByID, updateRequestByStatus, getAttendanceRecordsByID, getTaskByID } from "../components/reusableFunctions.js";
 import { paginationEnable } from "../components/pagination.js";
+import { getProfile } from "../components/profile.js";
+import { calculateIdealEmployee } from "./systemFunctions.js";
 
 let Data = {
     employees: [],
@@ -22,6 +24,7 @@ const filterStatus = document.getElementById('filterStatus');
 const exportExcelBtn = document.getElementById('exportExcel');
 const exportPDFBtn = document.getElementById('exportPDF');
 
+const getIdealEmployeeByID =document.getElementById('ideal-Employee');
 
 window.addEventListener("load", async () => {
     Data = await loadDataFromStorage();
@@ -31,7 +34,7 @@ window.addEventListener("load", async () => {
     updateEmployeeStatusAndLeaveBalance();
     renderEmployeeTable();
     setupReportsSection();
-
+    getIdealEmployeeByID.innerHTML= getProfile(calculateIdealEmployee(Data));
 
     searchInput.addEventListener("keyup", renderEmployeeTable);
 });
@@ -321,3 +324,4 @@ function exportToPDF() {
     console.log("pdf downloadeded");
     
 }
+
