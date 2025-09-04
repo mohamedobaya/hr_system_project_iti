@@ -28,52 +28,52 @@ export const calculateIdealEmployee = (data) => {
 
 
 //  taskqueue  (Raneem)
-window.onload = function () {
+// window.onload = function () {
 
-    //     const taskqueue = [
-    //     {
-    //         "low":5,
-    //         "medium":8,
-    //         "high":12,
-    //         "critical":15
-    //     }
-    // ]
+//     //     const taskqueue = [
+//     //     {
+//     //         "low":5,
+//     //         "medium":8,
+//     //         "high":12,
+//     //         "critical":15
+//     //     }
+//     // ]
 
-    const taskQuota = localStorage.getItem("taskQuota")
-
-
-    function taskQueue() {
-        let stored = JSON.parse(localStorage.getItem("taskQuota"));
-
-        let valueRate = stored || taskQuota;
-
-        document.getElementById('settings-low').value = valueRate.low;
-        document.getElementById('settings-medium').value = valueRate.medium;
-        document.getElementById('settings-high').value = valueRate.high;
-        document.getElementById('settings-critical').value = valueRate.critical;
-    }
+//     const taskQuota = localStorage.getItem("taskQuota")
 
 
-    function saveTaskQueue() {
-        let newValuerate = [
-            {
-                "low": document.getElementById('settings-low').value,
-                "medium": document.getElementById('settings-medium').value,
-                "high": document.getElementById('settings-high').value,
-                "critical": document.getElementById('settings-critical').value
+//     function taskQueue() {
+//         let stored = JSON.parse(localStorage.getItem("taskQuota"));
 
-            }
-        ];
-        localStorage.setItem('taskQueue', JSON.stringify(newValuerate));
-    }
+//         let valueRate = stored || taskQuota;
+
+//         document.getElementById('settings-low').value = valueRate.low;
+//         document.getElementById('settings-medium').value = valueRate.medium;
+//         document.getElementById('settings-high').value = valueRate.high;
+//         document.getElementById('settings-critical').value = valueRate.critical;
+//     }
 
 
-    document.querySelectorAll('#settings-low , #settings-medium , #settings-high , #settings-critical')
-        .forEach(input => {
-            input.addEventListener("input", saveTaskQueue)
-        });
+//     function saveTaskQueue() {
+//         let newValuerate = [
+//             {
+//                 "low": document.getElementById('settings-low').value,
+//                 "medium": document.getElementById('settings-medium').value,
+//                 "high": document.getElementById('settings-high').value,
+//                 "critical": document.getElementById('settings-critical').value
 
-    taskQueue();
+//             }
+//         ];
+//         localStorage.setItem('taskQueue', JSON.stringify(newValuerate));
+//     }
 
 
-}
+//     document.querySelectorAll('#settings-low , #settings-medium , #settings-high , #settings-critical')
+//         .forEach(input => {
+//             input.addEventListener("input", saveTaskQueue)
+//         });
+
+//     taskQueue();
+
+
+// }
