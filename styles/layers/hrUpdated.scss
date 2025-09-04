@@ -206,6 +206,28 @@ hr {
     }
 }
 
+.settings {
+    &-card {
+        background-color: var(--base-color);
+        border-radius: 1em !important;
+        padding: 2em;
+
+        .settings-input {
+            label {
+                color: var(--accent-color);
+            }
+            input, select {
+                background-color: var(--base-variant);
+                border-color: var(--base-variant);
+                color: var(--text-color);
+                width: 9em;
+            }
+        }
+    }
+}
+
+
+
 .status-present {
   background-color: #0d6efd; 
   color: white;
