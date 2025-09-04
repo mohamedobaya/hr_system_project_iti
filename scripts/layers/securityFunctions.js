@@ -387,7 +387,7 @@ function calculateAttendance(emp) {
         if (totalMinutes <= officialStart) {
             emp.status = "Present";
             emp.minutesLate = 0;
-        } else if (totalMinutes < lateThreshold) {
+        } else if (totalMinutes <= lateThreshold) {
             emp.status = "Late";
             emp.minutesLate = totalMinutes - officialStart;
             emp.notes = "Arrived late";
