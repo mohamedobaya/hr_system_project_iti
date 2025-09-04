@@ -195,7 +195,7 @@ const loadTaskTable = () => {
             }
         });
     });
-    paginationEnable("pagination-task", "task-table", 10);
+    paginationEnable("pagination-task", "task-table", 7);
 }
 
 // Assign New Tasks
