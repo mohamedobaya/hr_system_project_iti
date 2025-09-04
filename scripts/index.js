@@ -144,8 +144,8 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
                 window.location.href = "/pages/layers/security.html";
                 break;
             case "HR":
-                window.location.href = "/pages/layers/hr.html";
-                // window.location.href = "/pages/layers/hrUpdated.html";
+                // window.location.href = "/pages/layers/hr.html";
+                window.location.href = "/pages/layers/hrUpdated.html";
                 break;
             default:
                 alert("Please select a valid role!");

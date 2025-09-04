@@ -26,7 +26,7 @@
 
     <!-- html here -->
 
-    <div class="hr container bg-body-secondary mt-5 mx-auto">
+    <div class="hr container bg-body-secondary my-5 mx-auto">
         <div class="hr-welcome py-3 emp-title">
             <h3>HR Portal</h3>
             <p><span class="emp-name">Welcome, HR!</span></p>
@@ -52,11 +52,108 @@
             <h4 class="my-2 table-title"><i class="fa-solid fa-user"></i> Profile</h4>
             <div id="profile"></div>
         </div>
-       
+        <!-- Dashboard -->
+        <div class="center-section my-5" style="display: none;">
+            <div style="overflow-x:auto;" class="py-3">
+                <h4 class="mb-0 table-title"><i class="fa-solid fa-table-columns"></i> Dashboard</h4>
+                <div class="hr-input-container mt-5 mb-3 d-flex ">
+                    <input id="searchInput" type="text" class="form-control p-2 me-2" placeholder="search...">
+                </div>
+                <table class="table mb-5">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="table-header">ID</th>
+                            <th scope="col" class="table-header">Name</th>
+                            <th scope="col" class="table-header">Department</th>
+                            <th scope="col" class="table-header">Status</th>
+                            <th scope="col" class="table-header">Leave Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="employee-table-body"></tbody>
+                </table>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="pagination" id="pagination-dashboard"></div>
+            </div>
+        </div>
+        <!-- Reports -->
+        <div class="center-section my-5" style="display: none;">
+            <div style="overflow-x:auto;" class="py-3">
+                <h4 class="mb-0 table-title">
+                    <i class="fa-solid fa-chart-pie"></i> Reports
+                </h4>
+                <div class="text-start  mt-3">
+                    <h4 class="fw-bold emp-title">Total Employees <span id="totalEmployees">0</span></h4>
+                </div>
+
+
+                <div class="row text-center mb-5 py-5 ">
+                    <div class="col-md-4 my-2 mx-auto">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                    <div class="col-md-4 my-2 mx-auto">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                    <div class="col-md-4 my-2 mx-auto">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+                <div class="row mb-3 py-5">
+                    <div class="col-md-4">
+                        <label class="form-label">Department</label>
+                        <select id="filterDepartment" class="form-select">
+                            <option value="">All</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Month</label>
+                        <select id="filterMonth" class="form-select">
+                            <option value="">All</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Status</label>
+                        <select id="filterStatus" class="form-select">
+                            <option value="">All</option>
+                            <option value="Present">Present</option>
+                            <option value="Late">Late</option>
+                            <option value="Absent">Absent</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="text-end mb-3">
+                    <button id="exportExcel" class="btn btn-success me-2">Export as CSV</button>
+                    <button id="exportPDF" class="btn btn-danger">Export as PDF</button>
+                </div>
+                <table class="table" id="reportTable">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="table-header">Name</th>
+                            <th scope="col" class="table-header">Department</th>
+                            <th scope="col" class="table-header">Date</th>
+                            <th scope="col" class="table-header">Status</th>
+                            <th scope="col" class="table-header">Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reportTableBody"></tbody>
+                </table>
+                <div class="d-flex justify-content-center">
+                    <div class="pagination" id="pagination-reports-hr"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Settings -->
 
     </div>
     <!-- JS Tags -->
     <script src="../../frameworks/bootstrap/js/bootstrap.bundle.js"></script> <!-- Bootstrap JS -->
+    <!-- PDF plugins -->
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- jsPDF AutoTable plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
     <script type="module" src="../../scripts/layers/hrFunctionsUpdated.js"></script> <!-- HR JS -->
     <!-- Navigation of Content -->
     <script>
@@ -75,6 +172,8 @@
             });
         });
     </script>
+    <!-- Charts JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 
 </html>
