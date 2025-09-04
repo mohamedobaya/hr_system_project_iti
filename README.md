@@ -7,7 +7,7 @@ A role‑based HR frontend application (HTML5, CSS3, JavaScript, Bootstrap) for 
 <ul>
     <li><a href="https://drive.google.com/file/d/1ZltFVeFiV2HG9WZSED6wvYwdEf-QkG9r/view?usp=sharing">Task Managment Report</a></li>
     <li><a href="https://drive.google.com/file/d/12m1Ul49XkWOYq_y9mRvzmIV0mUUzaJ1S/view?usp=sharing">HR/Attendance Report</a></li>
-    <li><a href="https://docs.google.com/spreadsheets/d/1ZL4p5lRbuKPlT4dezsP7CAuHnNJAQzH8tPhTd40aqPU/edit?usp=sharing"> Acceptance Test Sheet</a></li>
+    <li><a href="https://www.figma.com/design/rJ98ReBZzBweVJYzwRwyiE/Hr--System-iti-G4?node-id=0-1&p=f&t=e9vAOFpjdMAyCFkD-0">Wireframe</a></li>
     <li><a href="https://docs.google.com/spreadsheets/d/1ZL4p5lRbuKPlT4dezsP7CAuHnNJAQzH8tPhTd40aqPU/edit?usp=sharing"> Acceptance Test Sheet</a></li>
 </ul>
 
