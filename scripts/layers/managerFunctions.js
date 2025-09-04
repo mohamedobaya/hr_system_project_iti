@@ -189,7 +189,7 @@ const loadTaskTable = () => {
             const newTasks = removeTaskByID(Data.tasks, btn.dataset.id);
             localStorage.setItem("tasks", JSON.stringify(newTasks));
             window.location.reload();
-        });
+        });//
     });
     paginationEnable("pagination-task", "task-table", 10);
 }
