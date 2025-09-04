@@ -43,6 +43,9 @@
                 <a class="nav-link"><i class="fa-solid fa-id-card-clip"></i> Attendance</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link"><i class="fa-solid fa-chart-column"></i> Workload</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link"><i class="fa-solid fa-clipboard-list"></i> Tasks</a>
             </li>
             <li class="nav-item">
@@ -122,6 +125,15 @@
                 <div class="pagination" id="pagination-attendance"></div>
             </div>
         </div>
+        <!-- Workload Center -->
+         <div class="center-section" style="display: none;">
+            <div style="overflow-x:auto;" class="py-3">
+                <h4 class="mb-0 table-title"><i class="fa-solid fa-chart-column"></i> Workload Center</h4>
+                <div class="manager-input-container mt-5 mb-3 d-flex ">
+                    
+                </div>
+            </div>
+        </div>
         <!-- Task Center -->
         <div class="center-section" style="display: none;">
             <div style="overflow-x:auto;" class="py-3">
@@ -176,9 +188,10 @@
                     <label for="employee-assign-task-selector" class="form-label">Choose Priority</label>
                     <select class="form-select manager-task-assign-employee my-1 mb-4"
                         id="employee-assign-task-priority" aria-label="Default select example">
-                        <option value="3">Low</option>
-                        <option value="2">Medium</option>
-                        <option value="1">High</option>
+                        <option value="4">Low</option>
+                        <option value="3">Medium</option>
+                        <option value="2">High</option>
+                        <option value="1">Critical</option>
                     </select>
                     <label for="new-task-title" class="form-label">Task Title</label>
                     <input type="text" class="form-control manager-task-assign-employee my-1 mb-4" id="new-task-title"
@@ -216,6 +229,8 @@
             });
         });
     </script>
+    <!-- Charts JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 
 </html>

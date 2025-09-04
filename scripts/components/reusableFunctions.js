@@ -222,3 +222,12 @@ export const filterTasksByPriorities = (tasks, priority) => {
 export const removeTaskByID = (tasks, taskID) => {
     return tasks.filter(task => task.id != taskID);
 }
+
+// get task number by employees
+export const getTaskLoad = (tasks, empID) => {
+    return tasks.reduce((acc, task) => {
+        if (task.employeeId == empID)
+            acc += 1;
+        return acc;
+    }, 0);
+}

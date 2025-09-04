@@ -1,5 +1,5 @@
 import { paginationEnable } from "../components/pagination.js";
-import { loadDataFromStorage, onPageLoad, searchAttendanceByEmployeeDepartment, searchAttendanceByEmployeeName, searchRequestByEmployeeDepartment, searchRequestByEmployeeName, searchTaskByEmployeeName, searchTaskByEmployeeDepartment, filterTasksByPriorities, removeTaskByID } from "../components/reusableFunctions.js";
+import { loadDataFromStorage, onPageLoad, searchAttendanceByEmployeeDepartment, searchAttendanceByEmployeeName, searchRequestByEmployeeDepartment, searchRequestByEmployeeName, searchTaskByEmployeeName, searchTaskByEmployeeDepartment, filterTasksByPriorities, removeTaskByID, getTaskLoad } from "../components/reusableFunctions.js";
 import { getEmployeeByID, getRequestByID, updateRequestByStatus, getAttendanceRecordsByID, getTaskByID } from "../components/reusableFunctions.js";
 import { searchEmployeeByName, searchEmployeeByDepartment } from "../components/reusableFunctions.js";
 
@@ -32,6 +32,8 @@ window.addEventListener("load", async () => {
     loadTaskTable();
 
     loadAssignTaskForm();
+
+    loadWorkloadGraph(Data.employees, Data.tasks);
 });
 
 // Approval Center logic
@@ -355,3 +357,20 @@ searchTaskSelect.addEventListener("change", () => {
 filterTasksByPriortiesSelect.addEventListener("change", () => {
     updateTasTable()
 });
+
+
+// workload graph
+
+const loadWorkloadGraph = (employees, tasks) => {
+    // Destroy previous chart instances to avoid conflicts
+    Chart.getChart('barChart')?.destroy();
+    const totalTaskNumber = tasks.length;
+    let employeesWithTaskLoad = [];
+    for (let emp of employees) {
+        employeesWithTaskLoad.push({
+            employee: emp.name, 
+            taskLoad: getTaskLoad(tasks, emp.id)
+        });
+    }
+    console.log(employeesWithTaskLoad);
+}
