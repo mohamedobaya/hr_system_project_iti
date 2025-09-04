@@ -185,11 +185,13 @@ const loadTaskTable = () => {
     // Add event listener for each button
     buttons.forEach((btn) => {
         btn.addEventListener("click", () => {
-            console.log(`Button with id="${btn.dataset.id}" was clicked!`);
-            const newTasks = removeTaskByID(Data.tasks, btn.dataset.id);
-            localStorage.setItem("tasks", JSON.stringify(newTasks));
-            window.location.reload();
-        });//
+            // console.log(`Button with id="${btn.dataset.id}" was clicked!`);
+            if (confirm("Are you sure you want to remove this task ?")) {
+                const newTasks = removeTaskByID(Data.tasks, btn.dataset.id);
+                localStorage.setItem("tasks", JSON.stringify(newTasks));
+                window.location.reload();
+            }
+        });
     });
     paginationEnable("pagination-task", "task-table", 10);
 }
