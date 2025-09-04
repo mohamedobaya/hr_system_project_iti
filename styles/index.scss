@@ -135,6 +135,7 @@ hr {
     ul {
         list-style: none;
     }
+
     &-avatar {
         font-size: 10em;
     }
@@ -175,6 +176,18 @@ hr {
 }
 
 .task {
+    &-remove-btn {
+        cursor: pointer;
+        display: inline-block;
+        background-color: #9e2b2b !important;
+        border-radius: 1em;
+        color: white !important;
+        padding: 0.5em 0.6em;
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+
     &-level {
         &-critical {
             display: inline-block;

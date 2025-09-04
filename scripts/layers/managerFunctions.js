@@ -1,5 +1,5 @@
 import { paginationEnable } from "../components/pagination.js";
-import { loadDataFromStorage, onPageLoad, searchAttendanceByEmployeeDepartment, searchAttendanceByEmployeeName, searchRequestByEmployeeDepartment, searchRequestByEmployeeName, searchTaskByEmployeeName, searchTaskByEmployeeDepartment, filterTasksByPriorities } from "../components/reusableFunctions.js";
+import { loadDataFromStorage, onPageLoad, searchAttendanceByEmployeeDepartment, searchAttendanceByEmployeeName, searchRequestByEmployeeDepartment, searchRequestByEmployeeName, searchTaskByEmployeeName, searchTaskByEmployeeDepartment, filterTasksByPriorities, removeTaskByID } from "../components/reusableFunctions.js";
 import { getEmployeeByID, getRequestByID, updateRequestByStatus, getAttendanceRecordsByID, getTaskByID } from "../components/reusableFunctions.js";
 import { searchEmployeeByName, searchEmployeeByDepartment } from "../components/reusableFunctions.js";
 
@@ -137,9 +137,12 @@ const creatTaskRow = (taskID) => {
     let taskPriority = "";
     switch (task.priority) {
         case 1:
-            taskPriority = "High";
+            taskPriority = "Critical";
             break;
         case 2:
+            taskPriority = "High";
+            break;
+        case 3:
             taskPriority = "Medium";
             break;
         default:
@@ -159,6 +162,11 @@ const creatTaskRow = (taskID) => {
         <td id="department-${taskID}">${emp.department}</td>
         <td id="status-${taskID}">${task.status}</td>
         <td id="dueDate-${taskID}">${task.dueDate}</td>
+        <td id="remove-${taskID}">
+            <a class="task-remove-btn" id="remove-task-${taskID}" data-id="${taskID}">
+                <i class="fa-solid fa-trash-can"></i>
+            </a>
+        </td>
     </tr>
     `;
 }
@@ -170,6 +178,19 @@ const loadTaskTable = () => {
         const row = creatTaskRow(task.id);
         taskTable.innerHTML += row;
     }
+
+    // Select all buttons that have an ID
+    const buttons = document.querySelectorAll(".task-remove-btn");
+
+    // Add event listener for each button
+    buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            console.log(`Button with id="${btn.dataset.id}" was clicked!`);
+            const newTasks = removeTaskByID(Data.tasks, btn.dataset.id);
+            localStorage.setItem("tasks", JSON.stringify(newTasks));
+            window.location.reload();
+        });
+    });
     paginationEnable("pagination-task", "task-table", 10);
 }
 
@@ -299,19 +320,22 @@ const updateTasTable = () => {
 
     // apply priority filter
     switch (filterTasksByPriortiesSelect.value) {
-        case "high-priorities":
+        case "critical-priorities":
             filtered = filterTasksByPriorities(filtered, 1);
             break;
-        case "meduim-priorities":
+        case "high-priorities":
             filtered = filterTasksByPriorities(filtered, 2);
+            break;
+        case "meduim-priorities":
+            filtered = filterTasksByPriorities(filtered, 3);
             console.log(filtered);
 
             break;
         case "low-priorities":
-            filtered = filterTasksByPriorities(filtered, 3);
+            filtered = filterTasksByPriorities(filtered, 4);
             break;
         default: // all
-            filtered = filterTasksByPriorities(filtered, 4);
+            filtered = filterTasksByPriorities(filtered, 5);
             break;
     }
 
