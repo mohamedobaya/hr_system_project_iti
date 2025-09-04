@@ -23,7 +23,7 @@ export const getNavbar = (empRole, empName, empTheme = 'light') => {
                         </a>
                     </li>
                     <li class="nav-item mx-auto my-1">
-                        <a class="btn btn-reset" onclick="{localStorage.clear()}">
+                        <a class="btn btn-reset" onclick="{localStorage.clear();}">
                             reset server ${serverIcon}
                         </a>
                     </li>
