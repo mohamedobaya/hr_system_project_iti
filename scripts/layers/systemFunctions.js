@@ -25,15 +25,38 @@ export const calculateIdealEmployee = (data) => {
     return getEmployeeByID(idealEmployee.id);
 };
 
+// Task OverTime
+document.querySelectorAll(".OverTime").forEach((input) => {
+  const key = input.id.replace("settings-", "");
+  const stored = JSON.parse(localStorage.getItem("overTimeQuota")) || {};
 
-// Task Daily Deductions 
-document.querySelectorAll('.TaskQouta').forEach(input => {
-    const key = input.id.replace("settings-", "");
-    const stored = JSON.parse(localStorage.getItem("taskQueue")) || {};
-    if (stored[key] !== undefined) input.value = stored[key];
+  if (stored[key] !== undefined) input.value = stored[key];
 
-    input.addEventListener("change", () => {
-        stored[key] = Number(input.value);
-        localStorage.setItem("taskQueue", JSON.stringify(stored));
-    });
+  input.addEventListener("input", () => {
+    stored[key] = input.value;
+    localStorage.setItem("overTimeQuota", JSON.stringify(stored));
+  });
+});
+
+// Task leave
+document.querySelectorAll(".TaskLeave").forEach((input) => {
+  const key = input.id.replace("settings-", "");
+  const stored = JSON.parse(localStorage.getItem("leaveQuota")) || {};
+  if (stored[key] !== undefined) input.value = stored[key];
+
+  input.addEventListener("change", () => {
+    stored[key] = Number(input.value);
+    localStorage.setItem("leaveQuota", JSON.stringify(stored));
+  });
+});
+// Task Daily Deductions
+document.querySelectorAll(".TaskQouta").forEach((input) => {
+  const key = input.id.replace("settings-", "");
+  const stored = JSON.parse(localStorage.getItem("taskQouta")) || {};
+  if (stored[key] !== undefined) input.value = stored[key];
+
+  input.addEventListener("change", () => {
+    stored[key] = Number(input.value);
+    localStorage.setItem("taskQouta", JSON.stringify(stored));
+  });
 });
