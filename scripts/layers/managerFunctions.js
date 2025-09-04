@@ -362,15 +362,39 @@ filterTasksByPriortiesSelect.addEventListener("change", () => {
 // workload graph
 
 const loadWorkloadGraph = (employees, tasks) => {
-    // Destroy previous chart instances to avoid conflicts
-    Chart.getChart('barChart')?.destroy();
-    const totalTaskNumber = tasks.length;
+    // const totalTaskNumber = tasks.length;
     let employeesWithTaskLoad = [];
     for (let emp of employees) {
         employeesWithTaskLoad.push({
-            employee: emp.name, 
+            employee: emp.name,
             taskLoad: getTaskLoad(tasks, emp.id)
         });
     }
-    console.log(employeesWithTaskLoad);
+    // console.log(employeesWithTaskLoad);
+
+    // Destroy previous chart instances to avoid conflicts
+    Chart.getChart('workload-graph')?.destroy();
+    const workLoadChart = document.getElementById('workload-graph');
+    console.log(workLoadChart);
+    const empNames = employeesWithTaskLoad.map(e => e.employee);
+    const taskLoads = employeesWithTaskLoad.map(e => e.taskLoad);
+    console.log(empNames, taskLoads);
+    
+    new Chart(workLoadChart, {
+        type: 'bar',
+        data: {
+            labels: empNames,  // employee names
+            datasets: [{
+                label: 'Task Load',
+                data: taskLoads, // task counts
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
 }
