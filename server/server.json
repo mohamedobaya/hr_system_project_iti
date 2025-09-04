@@ -3102,5 +3102,18 @@
         "medium":8,
         "high":12,
         "critical":15
+    },
+    "leaveQuota": {
+        "leaveLevel1": 5,
+        "leaveLevel2": 10,
+        "leaveLevel3": 20,
+        "leaveLevel4": 100,
+        "maxDeduction": 25
+    },
+    "overTimeQuota": {
+        "bonusWorkDay": 1.25,
+        "bonusHoliday": 1.5,
+        "holiday1": "fri",
+        "holiday2": "sat"
     }
 }
