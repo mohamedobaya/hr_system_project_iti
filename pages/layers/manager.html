@@ -126,11 +126,13 @@
             </div>
         </div>
         <!-- Workload Center -->
-         <div class="center-section" style="display: none;">
+        <div class="center-section" style="display: none;">
             <div style="overflow-x:auto;" class="py-3">
                 <h4 class="mb-0 table-title"><i class="fa-solid fa-chart-column"></i> Workload Center</h4>
                 <div class="manager-input-container mt-5 mb-3 d-flex ">
-                    
+                    <div class="w-100 my-2 mx-auto">
+                        <canvas class="mx-auto" id="workload-graph"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -179,7 +181,7 @@
         <div class="center-section" style="display: none;">
             <div id="manager-assign" class="manager-task py-3 d-flex justify-content-start">
                 <div class="manager-task-assign">
-                    <h4 class="mb-4 table-title"><i class="fa-solid fa-notes-medical"></i>  Assign New Task Center</h4>
+                    <h4 class="mb-4 table-title"><i class="fa-solid fa-notes-medical"></i> Assign New Task Center</h4>
                     <label for="employee-assign-task-selector" class="form-label">Choose Employee</label>
                     <select class="form-select manager-task-assign-employee my-1 mb-4"
                         id="employee-assign-task-selector" aria-label="Default select example">
@@ -211,7 +213,10 @@
     </div>
     <!-- JS Tags -->
     <script src="../../frameworks/bootstrap/js/bootstrap.bundle.js"></script> <!-- Bootstrap JS -->
+    <!-- Charts JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="../../scripts/layers/managerFunctions.js"></script> <!-- Manager JS -->
+          
     <!-- Navigation of Content -->
     <script>
         const tabs = document.querySelectorAll("#center-tabs .nav-link");
@@ -226,11 +231,14 @@
 
                 tab.classList.add("active");
                 sections[index].style.display = "block";
+                if (tab.textContent.includes("Workload")) {
+                    const chart = Chart.getChart("workload-chart");
+                    chart?.resize();
+                }
             });
         });
     </script>
-    <!-- Charts JS -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
 </body>
 
 </html>
