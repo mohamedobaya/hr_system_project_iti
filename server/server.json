@@ -3097,7 +3097,7 @@
             "netSalary": 9630
         }
     ],
-    "taskquota":  {
+    "taskQuota":  {
         "low":5,
         "medium":8,
         "high":12,

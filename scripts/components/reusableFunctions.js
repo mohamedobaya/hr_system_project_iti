@@ -211,8 +211,14 @@ export const searchTaskByEmployeeDepartment = (tasks, keyword) => {
 
 export const filterTasksByPriorities = (tasks, priority) => {
 
-    if (priority == 4)
+    if (priority == 5)
         return tasks;
 
     return tasks.filter(task => task.priority == Number(priority));
+}
+
+
+// remove task by id
+export const removeTaskByID = (tasks, taskID) => {
+    return tasks.filter(task => task.id != taskID);
 }

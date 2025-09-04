@@ -1,6 +1,6 @@
 import { getEmployeeByID } from "../components/reusableFunctions.js";
 export const calculateIdealEmployee = (data) => {
-    let getFirstEmployee = [];
+    let getFirstEmployee = [];//
 
     for (const emp of data.employees) {
         const attendance = data.attendanceRecords.filter(r => r.employeeId === emp.id && r.status === "Present").length
