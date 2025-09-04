@@ -21,102 +21,126 @@
 
 <body>
   <!--   alert for submit  -->
-  <div class="security">
+  <div>
     <div id="myAlert" class="alert d-none position-fixed top-0 start-50 translate-middle-x mt-3 w-50 text-center"
-      role="alert" style="z-index: 9999"></div>
+      role="alert" style="z-index: 9999">
+    </div>
     <div id="alertsubmit"
       class="alert alert-success d-none position-fixed top-0 start-50 translate-middle-x mt-3 w-50 text-center"
-      role="alert" style="z-index: 9999"></div>
+      role="alert" style="z-index: 9999">
+    </div>
 
     <div id="content">
       <div id="navbar-elm"></div>
       <!-- html here -->
       <!-- body -->
-      <section id="main-security">
-        <div class="card-security m-auto bg-light p-4 gap-4 d-flex flex-column rounded-2">
-          <!-- title -->
-          <h5 class="text-capitalize text-start emp-title">
-            daily attendance
-          </h5>
-          <div class="search w-100 mx-auto align-items-center d-flex flex-md-row flex-column justify-content-between">
-            <input type="search" placeholder="Search By Name/ID" class=" d-flex p-2 search-input rounded-2" />
-            <div class="d-flex align-items-center justify-content-center gap-lg-3  gap-md-3 gap-5  mt-3 mt-md-0  small-filterd">
-              <div class="calendar d-flex justify-content-center align-items-center">
-                <label for="attendance-date" class="me-2 fw-bold emp-name">Attendance for:</label>
-                <input type="date" id="attendance-date" />
-              </div>
+      <section id="main-security" class="container my-5 mx-auto p-1">
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs mb-2" id="center-tabs">
+          <li class="nav-item">
+            <a class="nav-link active"><i class="fa-solid fa-user"></i> Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"><i class="fa-solid fa-id-card-clip"></i> Attendance</a>
+          </li>
+        </ul>
+        <hr>
+        <!-- User Profile -->
+        <div class="center-section">
+          <div class="card-security m-auto p-4 gap-4 d-flex flex-column rounded-2 my-5">
+            <h4 class="my-2 table-title emp-title"><i class="fa-solid fa-user"></i> Profile</h4>
+            <div id="profile"></div>
+          </div>
+        </div>
+        <!-- Attendance Center -->
+        <div class="center-section" style="display: none;">
+          <div class="card-security m-auto p-4 gap-4 d-flex flex-column rounded-2">
+            <!-- title -->
+            <h5 class="text-capitalize text-start emp-title">
+              <i class="fa-solid fa-id-card-clip"></i>
+              daily attendance
+            </h5>
+            <div class="search w-100 mx-auto align-items-center d-flex flex-md-row flex-column justify-content-between">
+              <input type="search" placeholder="Search By Name/ID" class=" d-flex p-2 search-input rounded-2" />
+              <div
+                class="d-flex align-items-center justify-content-center gap-lg-3  gap-md-3 gap-5  mt-3 mt-md-0  small-filterd">
+                <div class="calendar d-flex justify-content-center align-items-center">
+                  <label for="attendance-date" class="me-2 fw-bold emp-name">Attendance for:</label>
+                  <input type="date" id="attendance-date" />
+                </div>
 
-              <div class="dropdown">
-                <button class="btn" type="button" id="filterMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="fa-solid fa-filter"></i>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="filterMenu">
-                  <li>
-                    <a class="dropdown-item filter-option" data-status="All" href="#">All</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item filter-option" data-status="Present" href="#">Present</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item filter-option" data-status="Late" href="#">Late</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item filter-option" data-status="Absent" href="#">Absent</a>
-                  </li>
-                  <!-- <li>
+                <div class="dropdown">
+                  <button class="btn" type="button" id="filterMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-filter"></i>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="filterMenu">
+                    <li>
+                      <a class="dropdown-item filter-option" data-status="All" href="#">All</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item filter-option" data-status="Present" href="#">Present</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item filter-option" data-status="Late" href="#">Late</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item filter-option" data-status="Absent" href="#">Absent</a>
+                    </li>
+                    <!-- <li>
                     <a class="dropdown-item filter-option" data-status="WFH" href="#">WFH</a>
                   </li>
                   <li>
                     <a class="dropdown-item filter-option" data-status="Leave" href="#">Leave</a>
                   </li> -->
-                </ul>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- table -->
-          <div class="table-responsive rounded-2">
-            <table class="table table-striped table-hover">
-              <thead class="sticky-top">
-                <tr class="text-center">
-                  <th scope="col" class="table-header">
-                    <input type="checkbox" class="cursor" id="checkall" />
-                  </th>
-                  <th scope="col" class="table-header text-capitalize">
-                    emp ID
-                  </th>
-                  <th scope="col" class="table-header text-capitalize">
-                    name
-                  </th>
-                  <th scope="col" class="table-header text-capitalize">
-                    dept
-                  </th>
-                  <th scope="col" class="table-header text-capitalize">
-                    status
-                  </th>
-                  <th scope="col" class="table-header text-capitalize">
-                    check-in
-                  </th>
-                  <th scope="col" class="table-header text-capitalize">
-                    check-out
-                  </th>
-                  <th scope="col" class="table-header text-capitalize">
-                    minutesLate
-                  </th>
-                  <th scope="col" class="table-header text-capitalize">
-                    notes
-                  </th>
-                </tr>
-              </thead>
-              <tbody id="table-security"></tbody>
-            </table>
-            <div class="my-2 d-flex justify-content-center">
-              <div class="pagination" id="pagination-security"></div>
+            <!-- table -->
+            <div class="table-responsive rounded-2">
+              <table class="table table-striped table-hover">
+                <thead class="sticky-top">
+                  <tr class="text-center">
+                    <th scope="col" class="table-header">
+                      <input type="checkbox" class="cursor" id="checkall" />
+                    </th>
+                    <th scope="col" class="table-header text-capitalize">
+                      emp ID
+                    </th>
+                    <th scope="col" class="table-header text-capitalize">
+                      name
+                    </th>
+                    <th scope="col" class="table-header text-capitalize">
+                      dept
+                    </th>
+                    <th scope="col" class="table-header text-capitalize">
+                      status
+                    </th>
+                    <th scope="col" class="table-header text-capitalize">
+                      check-in
+                    </th>
+                    <th scope="col" class="table-header text-capitalize">
+                      check-out
+                    </th>
+                    <th scope="col" class="table-header text-capitalize">
+                      minutesLate
+                    </th>
+                    <th scope="col" class="table-header text-capitalize">
+                      notes
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="table-security"></tbody>
+              </table>
+              <div class="my-2 d-flex justify-content-center">
+                <div class="pagination" id="pagination-security"></div>
+              </div>
             </div>
-          </div>
-          <!-- button submit -->
-          <div class="submit w-25">
-            <button class="btn btn-primary" id="Updata">Submit Change</button>
+            <!-- button submit -->
+            <div class="submit w-25">
+              <button class="btn btn-primary" id="Updata">Submit Change</button>
+            </div>
           </div>
         </div>
       </section>
@@ -126,8 +150,24 @@
   <!-- JS Tags -->
   <script src="../../frameworks/bootstrap/js/bootstrap.bundle.js"></script>
   <!-- Bootstrap JS -->
-  <script type="module" src="../../scripts/layers/securityFunctions.js"></script>
-  <!-- Security JS -->
+  <script type="module" src="../../scripts/layers/securityFunctions.js"></script><!-- Security JS -->
+  <!-- Navigation of Content -->
+  <script>
+    const tabs = document.querySelectorAll("#center-tabs .nav-link");
+    const sections = document.querySelectorAll(".center-section");
+
+    tabs.forEach((tab, index) => {
+      tab.style.cursor = "pointer";
+
+      tab.addEventListener("click", () => {
+        sections.forEach(sec => sec.style.display = "none");
+        tabs.forEach(t => t.classList.remove("active"));
+
+        tab.classList.add("active");
+        sections[index].style.display = "block";
+      });
+    });
+  </script>
 </body>
 
 </html>

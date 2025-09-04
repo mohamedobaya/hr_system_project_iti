@@ -1,6 +1,7 @@
 // Function to load data from localStorage
 import { getNavbar } from "./navbar.js";
 import { getProfile } from "./profile.js";
+import { calculateIdealEmployee } from "../layers/systemFunctions.js";
 
 const url = "./server/server.json";
 const navbar = document.getElementById("navbar-elm");
@@ -49,6 +50,9 @@ export const onPageLoad = (loggedEmployee) => {
             onPageLoad(loggedEmployee);
         }
     });
+    calculateIdealEmployee(loadDataFromStorage());
+
+    // localStorage.getItem("employees");
 }
 
 

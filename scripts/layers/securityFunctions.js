@@ -20,6 +20,8 @@ window.addEventListener("load", async () => {
     onPageLoad(loggedEmployee);
     showAttendanceByDate();
 
+    console.log(Data);
+    
     Data.attendanceRecords.forEach((emp) => calculateAttendance(emp));
 });
 
@@ -236,7 +238,7 @@ function searchEmployees() {
     function renderRecords(records) {
         tablebody.innerHTML = "";
         if (records.length === 0) {
-            tablebody.innerHTML = <tr><td colspan="9" style="text-align:center;color:red;font-weight:bold;">No employee found</td></tr>;
+            tablebody.innerHTML = `<tr><td colspan="9" style="text-align:center;color:red;font-weight:bold;">No employee found</td></tr>`;
             return;
         }
 
@@ -424,7 +426,7 @@ function renderAttendance(date) {
 
     const records = Data.attendanceRecords.filter(r => r.date === date);
     if (records.length === 0) {
-        tableBody.innerHTML = <tr><td colspan="9" style="text-align:center;color:red;font-weight:bold;">No employee found</td></tr>;
+        tableBody.innerHTML = `<tr><td colspan="9" style="text-align:center;color:red;font-weight:bold;">No employee found</td></tr>`;
         return;
     }
 
