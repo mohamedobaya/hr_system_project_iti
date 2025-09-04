@@ -26,54 +26,14 @@ export const calculateIdealEmployee = (data) => {
 };
 
 
+// Task Daily Deductions 
+document.querySelectorAll('.TaskQouta').forEach(input => {
+    const key = input.id.replace("settings-", "");
+    const stored = JSON.parse(localStorage.getItem("taskQueue")) || {};
+    if (stored[key] !== undefined) input.value = stored[key];
 
-//  taskqueue  (Raneem)
-// window.onload = function () {
-
-//     //     const taskqueue = [
-//     //     {
-//     //         "low":5,
-//     //         "medium":8,
-//     //         "high":12,
-//     //         "critical":15
-//     //     }
-//     // ]
-
-//     const taskQuota = localStorage.getItem("taskQuota")
-
-
-//     function taskQueue() {
-//         let stored = JSON.parse(localStorage.getItem("taskQuota"));
-
-//         let valueRate = stored || taskQuota;
-
-//         document.getElementById('settings-low').value = valueRate.low;
-//         document.getElementById('settings-medium').value = valueRate.medium;
-//         document.getElementById('settings-high').value = valueRate.high;
-//         document.getElementById('settings-critical').value = valueRate.critical;
-//     }
-
-
-//     function saveTaskQueue() {
-//         let newValuerate = [
-//             {
-//                 "low": document.getElementById('settings-low').value,
-//                 "medium": document.getElementById('settings-medium').value,
-//                 "high": document.getElementById('settings-high').value,
-//                 "critical": document.getElementById('settings-critical').value
-
-//             }
-//         ];
-//         localStorage.setItem('taskQueue', JSON.stringify(newValuerate));
-//     }
-
-
-//     document.querySelectorAll('#settings-low , #settings-medium , #settings-high , #settings-critical')
-//         .forEach(input => {
-//             input.addEventListener("input", saveTaskQueue)
-//         });
-
-//     taskQueue();
-
-
-// }
+    input.addEventListener("input", () => {
+        stored[key] = Number(input.value);
+        localStorage.setItem("taskQueue", JSON.stringify(stored));
+    });
+});
