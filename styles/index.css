@@ -142,24 +142,31 @@ hr {
   cursor: not-allowed;
 }
 
+.task-level-critical {
+  display: inline-block;
+  background-color: #511a1a !important;
+  border-radius: 1em;
+  color: white !important;
+  padding: 0.5em;
+}
 .task-level-high {
   display: inline-block;
   background-color: #9e2b2b !important;
   border-radius: 1em;
-  color: white;
+  color: white !important;
   padding: 0.5em;
 }
 .task-level-medium {
   display: inline-block;
   background-color: #d8d02f !important;
   border-radius: 1em;
-  color: white;
+  color: white !important;
   padding: 0.5em;
 }
 .task-level-low {
   display: inline-block;
   background-color: #10B981 !important;
   border-radius: 1em;
-  color: white;
+  color: white !important;
   padding: 0.5em;
 }/*# sourceMappingURL=index.css.map */
