@@ -170,4 +170,40 @@ hr {
 }
 .hr-input-container .form-select::placeholder {
   color: var(--secondary-text);
+}
+
+.status-present {
+  background-color: #0d6efd;
+  color: white;
+  border-color: #0d6efd;
+}
+.status-present:hover {
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+}
+
+.status-late {
+  background-color: #ffc107;
+  color: #000;
+  border-color: #ffc107;
+}
+.status-late:hover {
+  background-color: #ffca2c;
+  border-color: #ffc720;
+}
+
+.status-absent {
+  background-color: #dc3545;
+  color: white;
+  border-color: #dc3545;
+}
+.status-absent:hover {
+  background-color: #bb2d3b;
+  border-color: #b02a37;
+}
+
+.status-default {
+  background-color: #6c757d;
+  color: white;
+  border-color: #6c757d;
 }/*# sourceMappingURL=hrUpdated.css.map */

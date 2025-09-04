@@ -26,7 +26,7 @@
 
     <!-- html here -->
 
-    <div class="hr container bg-body-secondary mt-5 mx-auto">
+    <div class="hr container bg-body-secondary my-5 mx-auto">
         <div class="hr-welcome py-3 emp-title">
             <h3>HR Portal</h3>
             <p><span class="emp-name">Welcome, HR!</span></p>
@@ -52,7 +52,32 @@
             <h4 class="my-2 table-title"><i class="fa-solid fa-user"></i> Profile</h4>
             <div id="profile"></div>
         </div>
-       
+        <!-- Dashboard -->
+        <div class="center-section my-5" style="display: none;">
+            <div style="overflow-x:auto;" class="py-3">
+                <h4 class="mb-0 table-title"><i class="fa-solid fa-table-columns"></i> Dashboard</h4>
+                <div class="hr-input-container mt-5 mb-3 d-flex ">
+                    <input id="searchInput" type="text" class="form-control p-2 me-2" placeholder="search...">
+                </div>
+                <table class="table mb-5">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="table-header">ID</th>
+                            <th scope="col" class="table-header">Name</th>
+                            <th scope="col" class="table-header">Department</th>
+                            <th scope="col" class="table-header">Status</th>
+                            <th scope="col" class="table-header">Leave Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="employee-table-body"></tbody>
+                </table>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="pagination" id="pagination-dashboard"></div>
+            </div>
+        </div>
+        <!-- Reports -->
+        <!-- Settings -->
 
     </div>
     <!-- JS Tags -->
