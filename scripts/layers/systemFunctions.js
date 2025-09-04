@@ -32,7 +32,7 @@ document.querySelectorAll('.TaskQouta').forEach(input => {
     const stored = JSON.parse(localStorage.getItem("taskQueue")) || {};
     if (stored[key] !== undefined) input.value = stored[key];
 
-    input.addEventListener("input", () => {
+    input.addEventListener("change", () => {
         stored[key] = Number(input.value);
         localStorage.setItem("taskQueue", JSON.stringify(stored));
     });
