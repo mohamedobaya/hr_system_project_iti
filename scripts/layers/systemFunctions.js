@@ -1,4 +1,5 @@
 import { getEmployeeByID } from "../components/reusableFunctions.js";
+
 export const calculateIdealEmployee = (data) => {
   let getFirstEmployee = [];
 
@@ -32,42 +33,48 @@ export const calculateIdealEmployee = (data) => {
       idealEmployee = emp;
     }
   }
-  // console.log(getEmployeeByID(idealEmployee.id));
+
   return getEmployeeByID(idealEmployee.id);
 };
 
 // Task OverTime
+let overTimeStored = JSON.parse(localStorage.getItem("overTimeQuota")) || {};
+
 document.querySelectorAll(".OverTime").forEach((input) => {
   const key = input.id.replace("settings-", "");
-  const stored = JSON.parse(localStorage.getItem("overTimeQuota")) || {};
 
-  if (stored[key] !== undefined) input.value = stored[key];
+  if (overTimeStored[key] !== undefined) input.value = overTimeStored[key];
 
   input.addEventListener("change", () => {
-    stored[key] = input.value;
-    localStorage.setItem("overTimeQuota", JSON.stringify(stored));
+    overTimeStored[key] = input.value;
+    localStorage.setItem("overTimeQuota", JSON.stringify(overTimeStored));
   });
 });
 
 // Task leave
+let leaveStored = JSON.parse(localStorage.getItem("leaveQuota")) || {};
+
 document.querySelectorAll(".TaskLeave").forEach((input) => {
   const key = input.id.replace("settings-", "");
-  const stored = JSON.parse(localStorage.getItem("leaveQuota")) || {};
-  if (stored[key] !== undefined) input.value = stored[key];
+
+  if (leaveStored[key] !== undefined) input.value = leaveStored[key];
 
   input.addEventListener("change", () => {
-    stored[key] = Number(input.value);
-    localStorage.setItem("leaveQuota", JSON.stringify(stored));
+    leaveStored[key] = Number(input.value);
+    localStorage.setItem("leaveQuota", JSON.stringify(leaveStored));
   });
 });
+
 // Task Daily Deductions
+let taskStored = JSON.parse(localStorage.getItem("taskQouta")) || {};
+
 document.querySelectorAll(".TaskQouta").forEach((input) => {
   const key = input.id.replace("settings-", "");
-  const stored = JSON.parse(localStorage.getItem("taskQouta")) || {};
-  if (stored[key] !== undefined) input.value = stored[key];
+
+  if (taskStored[key] !== undefined) input.value = taskStored[key];
 
   input.addEventListener("change", () => {
-    stored[key] = Number(input.value);
-    localStorage.setItem("taskQouta", JSON.stringify(stored));
+    taskStored[key] = Number(input.value);
+    localStorage.setItem("taskQouta", JSON.stringify(taskStored));
   });
 });
