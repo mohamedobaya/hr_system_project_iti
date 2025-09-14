@@ -1,6 +1,9 @@
 // import { getNavbar } from "../components/navbar.js";
 import { paginationEnable } from "../components/pagination.js";
-import { loadDataFromStorage, onPageLoad } from "../components/reusableFunctions.js";
+import {
+  loadDataFromStorage,
+  onPageLoad,
+} from "../components/reusableFunctions.js";
 import { getEmployeeByID } from "../components/reusableFunctions.js";
 
 let Data = {
@@ -31,15 +34,15 @@ const sections = document.querySelectorAll(".center-section");
 tabs.forEach((tab, index) => {
   tab.style.cursor = "pointer";
   tab.addEventListener("click", () => {
-    sections.forEach(sec => sec.style.display = "none");
-    tabs.forEach(t => t.classList.remove("active"));
+    sections.forEach((sec) => (sec.style.display = "none"));
+    tabs.forEach((t) => t.classList.remove("active"));
 
     tab.classList.add("active");
     sections[index].style.display = "block";
   });
 });
 
-// Save Data 
+// Save Data
 const saveDataToStorage = () => {
   localStorage.setItem("requests", JSON.stringify(Data.requests));
   localStorage.setItem("tasks", JSON.stringify(Data.tasks));
@@ -63,27 +66,34 @@ function makeDraggable(li) {
 
 //   Tasks  (waled)
 const sortByPriority = (a, b) => {
-  const priorityA = a.priority || 3; 
-  const priorityB = b.priority || 3;
+  const priorityA = a.priority || 4;
+  const priorityB = b.priority || 4;
   return priorityA - priorityB;
 };
 
 const getTasksByStatus = (empID, status) => {
   return Data.tasks
-    .filter(t => t.employeeId == empID && t.status === status)
+    .filter((t) => t.employeeId == empID && t.status === status)
     .sort(sortByPriority);
 };
 const renderTasks = () => {
   const loggedEmployeeID = parseInt(localStorage.getItem("loggedEmployeeID"));
-  ["Pending", "In Progress", "Completed"].forEach(status => {
+  ["Pending", "In Progress", "Completed"].forEach((status) => {
     const container = document.getElementById(status);
     if (!container) return;
     container.innerHTML = "";
-    getTasksByStatus(loggedEmployeeID, status).forEach(task => {
+    getTasksByStatus(loggedEmployeeID, status).forEach((task) => {
       const li = document.createElement("li");
       li.className = "bg-primary-subtle rounded p-2 my-2";
 
-      let taskPriority = task.priority === 1 ? "High" : task.priority === 2 ? "Medium" : "Low";
+      let taskPriority =
+        task.priority === 1
+          ? "Critical"
+          : task.priority === 2
+          ? "High"
+          : task.priority === 3
+          ? "Medium"
+          : "Low";
 
       li.innerHTML = `
         <h6 class="fw-bold emp-title task-level-${taskPriority.toLowerCase()}">${taskPriority}</h6>
@@ -104,7 +114,7 @@ const renderTasks = () => {
       e.preventDefault();
       ul.style.backgroundColor = "#e0f7fa";
     });
-    ul.addEventListener("dragleave", () => ul.style.backgroundColor = "");
+    ul.addEventListener("dragleave", () => (ul.style.backgroundColor = ""));
     ul.addEventListener("drop", (e) => {
       e.preventDefault();
       if (dragged) {
@@ -112,7 +122,7 @@ const renderTasks = () => {
         makeDraggable(dragged);
 
         const taskId = parseInt(dragged.getAttribute("data-id"));
-        const task = Data.tasks.find(t => t.id === taskId);
+        const task = Data.tasks.find((t) => t.id === taskId);
         if (task) {
           task.status = ul.id;
           saveDataToStorage();
@@ -129,10 +139,12 @@ function renderAttendance() {
   const tbody = document.querySelector("#attendance-table tbody");
   if (!tbody) return;
   const loggedEmployeeID = parseInt(localStorage.getItem("loggedEmployeeID"));
-  const records = Data.attendanceRecords.filter(r => r.employeeId === loggedEmployeeID);
+  const records = Data.attendanceRecords.filter(
+    (r) => r.employeeId === loggedEmployeeID
+  );
 
   tbody.innerHTML = "";
-  records.forEach(record => {
+  records.forEach((record) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${record.employeeId}</td>
@@ -152,10 +164,12 @@ function renderRequests() {
   const tbody = document.querySelector("#requests-table tbody");
   if (!tbody) return;
   const loggedEmployeeID = parseInt(localStorage.getItem("loggedEmployeeID"));
-  const myRequests = Data.requests.filter(r => r.employeeId === loggedEmployeeID);
+  const myRequests = Data.requests.filter(
+    (r) => r.employeeId === loggedEmployeeID
+  );
 
   tbody.innerHTML = "";
-  myRequests.forEach(req => {
+  myRequests.forEach((req) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${req.type}</td>
@@ -172,13 +186,15 @@ function renderQuota() {
   const ul = document.getElementById("quota-list");
   if (!ul) return;
   const loggedEmployeeID = parseInt(localStorage.getItem("loggedEmployeeID"));
-  const myRequests = Data.requests.filter(r => r.employeeId === loggedEmployeeID);
+  const myRequests = Data.requests.filter(
+    (r) => r.employeeId === loggedEmployeeID
+  );
 
   const counts = {};
-  myRequests.forEach(r => counts[r.type] = (counts[r.type] || 0) + 1);
+  myRequests.forEach((r) => (counts[r.type] = (counts[r.type] || 0) + 1));
 
   ul.innerHTML = "";
-  Object.keys(counts).forEach(type => {
+  Object.keys(counts).forEach((type) => {
     const li = document.createElement("li");
     li.className = "list-group-item request";
     li.innerHTML = `<span class="emp-name">${type}:</span> ${counts[type]} requests`;
@@ -188,7 +204,8 @@ function renderQuota() {
 
 // New Request  (omar)
 const currentDate = document.getElementById("request-date");
-if (currentDate) currentDate.setAttribute("min", new Date().toISOString().split("T")[0]);
+if (currentDate)
+  currentDate.setAttribute("min", new Date().toISOString().split("T")[0]);
 
 const requestForm = document.getElementById("request-form");
 if (requestForm) {
@@ -204,7 +221,7 @@ if (requestForm) {
       type,
       date,
       notes,
-      status: "Pending"
+      status: "Pending",
     };
 
     Data.requests.push(newRequest);
