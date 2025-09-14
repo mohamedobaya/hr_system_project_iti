@@ -260,7 +260,6 @@ function enableBulkAction() {
     saveAttendanceToStorage();
   });
 }
-
 enableBulkAction();
 
 // Search Employees
@@ -307,16 +306,18 @@ function searchEmployees() {
     let filtered = [];
 
     if (!isNaN(Number(value))) {
-      filtered = records.filter((row) => row.employeeId == value);
+      //if security enter number
+      filtered = records.filter((row) => row.employeeId == value); //filter by id
     } else {
+      //if security enter string
       const low = value.toLowerCase();
       const matchingIds = Data.employees
-        .filter((emp) => (emp.name || "").toLowerCase().includes(low))
+        .filter((emp) => (emp.name || "").toLowerCase().includes(low)) //filter by name
         .map((emp) => emp.id);
       filtered = records.filter((r) => matchingIds.includes(r.employeeId));
     }
 
-    renderRecords(filtered);
+    renderRecords(filtered); //view filterd data
   });
 }
 searchEmployees();
@@ -328,46 +329,49 @@ function updateChanges() {
 
   savebtn.addEventListener("click", function () {
     const tableRows = document.querySelectorAll("tbody tr");
-    let anyChange = false;
-    let hasError = false;
+    let anyChange = false; //flag for changes
+    let hasError = false; //flag for Error
 
     for (let row of tableRows) {
+      //loop for tr in table
       const newStatus = row.querySelector("select").value;
       const newCheckIn = row.querySelector('input[name="checkIn"]').value;
       let newCheckOut = row.querySelector('input[name="checkOut"]').value;
       const newNotes = row.querySelector("textarea").value;
-      const emp = Data.attendanceRecords.find((e) => e.id == row.dataset.id);
+      const emp = Data.attendanceRecords.find((e) => e.id == row.dataset.id); //find employee to match id
 
       if (!emp) continue;
 
-      const changed =
+      const changed = //check for any change in data
         emp.status !== newStatus ||
         emp.checkIn !== newCheckIn ||
         emp.checkOut !== newCheckOut ||
         emp.notes !== newNotes;
 
       if (!newCheckIn && newCheckOut) {
-        alertBox.innerText = "Check-Out cannot be set without Check-In!";
+        //if emp have check out and haven't check in
+        alertBox.innerText = "Check-Out cannot be set without Check-In!"; //error
         alertBox.classList.remove("d-none");
         alertBox.classList.add("alert-danger");
-        row.querySelector('input[name="checkOut"]').value = "";
+        row.querySelector('input[name="checkOut"]').value = ""; //checkout = 00:00
         setTimeout(() => alertBox.classList.add("d-none"), 2000);
         hasError = true;
         continue;
       }
 
       if (newCheckIn && (newCheckOut === "" || !newCheckOut)) {
+        //if emp have checkin without checkout
         newCheckOut = "17:00";
-        row.querySelector('input[name="checkOut"]').value = newCheckOut;
+        row.querySelector('input[name="checkOut"]').value = newCheckOut; //check out become 5:00 pm
       }
-
+      //update changes
       emp.status = newStatus;
       emp.checkIn = newCheckIn;
       emp.checkOut = newCheckOut;
       emp.notes = newNotes;
 
       calculateAttendance(emp);
-
+      //update data in row
       row.querySelector('input[name="checkOut"]').value = emp.checkOut;
       row.querySelector("select").value = emp.status;
       updateSelectColor(row.querySelector("select"));
@@ -377,7 +381,7 @@ function updateChanges() {
     }
 
     if (hasError) return;
-
+    //save new data to localStorage
     saveAttendanceToStorage();
 
     alertBox.innerText = " Changes have been saved successfully";
@@ -397,7 +401,6 @@ function filterByStatus() {
 
   filterOptions.forEach((option) => {
     option.addEventListener("click", function (e) {
-      e.preventDefault();
       const status = this.dataset.status.trim();
       tbody.querySelectorAll("tr").forEach((row) => {
         const empStatus = row.dataset.status.trim();
@@ -413,6 +416,7 @@ filterByStatus();
 
 // Calculate Attendance
 function calculateAttendance(emp) {
+  //if emp dont record checkin :
   if (!emp.checkIn) {
     emp.status = "Absent";
     emp.minutesLate = 0;
@@ -420,18 +424,18 @@ function calculateAttendance(emp) {
     if (!emp.checkOut || emp.checkOut === "") {
       emp.checkOut = "17:00";
     }
-
+    //split time to hours and minutes
     const [hours, minutes] = emp.checkIn.split(":").map(Number);
     const totalMinutes = hours * 60 + minutes;
-    const officialStart = 9 * 60;
-    const lateThreshold = 11 * 60;
+    const officialStart = 9 * 60; //  present time 9:00
+    const lateThreshold = 11 * 60; // late time 11:00
 
     if (totalMinutes <= officialStart) {
       emp.status = "Present";
       emp.minutesLate = 0;
     } else if (totalMinutes <= lateThreshold) {
       emp.status = "Late";
-      emp.minutesLate = totalMinutes - officialStart;
+      emp.minutesLate = totalMinutes - officialStart; //calc mins late
       emp.notes = "Arrived late";
     } else {
       emp.status = "Absent";
@@ -464,12 +468,8 @@ function showAttendanceByDate() {
 function renderAttendance(date) {
   const tableBody = document.querySelector("tbody");
   tableBody.innerHTML = "";
-
+  //show attendance by date
   const records = Data.attendanceRecords.filter((r) => r.date === date);
-  if (records.length === 0) {
-    tableBody.innerHTML = `<tr><td colspan="9" style="text-align:center;color:red;font-weight:bold;">No employee found</td></tr>`;
-    return;
-  }
 
   const today = new Date().toISOString().split("T")[0];
   const isToday = date === today;
@@ -482,6 +482,7 @@ function renderAttendance(date) {
 
     const row = createNewRow(record);
 
+    // Disable inputs (select, input, textarea, checkbox) if the date is not today
     row
       .querySelectorAll("select, input, textarea, input[type='checkbox']")
       .forEach((el) => (el.disabled = !isToday));
@@ -500,9 +501,11 @@ function showAttendanceForDate(date) {
   const today = new Date().toISOString().split("T")[0];
 
   Data.employees.forEach((emp) => {
+    // Check if there is already an attendance record for this employee on the given date
     const exists = Data.attendanceRecords.find(
       (row) => row.employeeId == emp.id && row.date === date
     );
+    // if no record , create a new attendance record for this employee
     if (!exists) {
       Data.attendanceRecords.push({
         id: date + "-" + emp.id,
