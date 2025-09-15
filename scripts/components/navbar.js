@@ -1,14 +1,18 @@
-export const getNavbar = (empRole, empName, empTheme = 'light') => {
-    const lightIcon = `<i class="fa-regular fa-sun"></i>`;
-    const darkIcon = `<i class="fa-regular fa-moon"></i>`;
-    const serverIcon = `<i class="fa-solid fa-server"></i>`;
-    const logoutIcon = `<i class="fa-solid fa-power-off"></i>`;
+export const getNavbar = (empRole, empName, empTheme = "light") => {
+  const lightIcon = `<i class="fa-regular fa-sun"></i>`;
+  const darkIcon = `<i class="fa-regular fa-moon"></i>`;
+  const serverIcon = `<i class="fa-solid fa-server"></i>`;
+  const logoutIcon = `<i class="fa-solid fa-power-off"></i>`;
 
-    return `
+  return `
     <nav class="navbar navbar-expand-lg" ">
         <div class="container d-flex">
             <a class="navbar-brand" href="#">
-                <span class="emp-title">${empRole || 'Not found'} /</span> <span class="emp-name">${empName || 'Not found'}</span>
+                <span class="emp-title">${
+                  empRole || "Not found"
+                } /</span> <span class="emp-name">${
+    empName || "Not found"
+  }</span>
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +23,11 @@ export const getNavbar = (empRole, empName, empTheme = 'light') => {
                 <ul class="navbar-nav ms-auto me-md-0 me-auto mb-2 mb-lg-0">
                     <li class="nav-item mx-auto my-1">
                         <a class="btn btn-theme" id="btn-theme">
-                            ${empTheme == 'light' ? `dark ${darkIcon}`: `light ${lightIcon}`}
+                            ${
+                              empTheme == "light"
+                                ? `dark ${darkIcon}`
+                                : `light ${lightIcon}`
+                            }
                         </a>
                     </li>
                     <li class="nav-item mx-auto my-1">
@@ -36,6 +44,5 @@ export const getNavbar = (empRole, empName, empTheme = 'light') => {
             </div>
         </div>
     </nav>
-    `
+    `;
 };
-
