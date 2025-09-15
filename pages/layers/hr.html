@@ -1,160 +1,437 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HR</title>
 
-    <link rel="stylesheet" href="../../frameworks/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../frameworks/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="../../frameworks/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="../../styles/layers/hr.css"> 
-</head>
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="../../frameworks/bootstrap/css/bootstrap.min.css"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="../../frameworks/fontawesome/css/fontawesome.min.css"
+    />
+    <!-- FontAwesome CSS -->
+    <link
+      rel="stylesheet"
+      href="../../frameworks/fontawesome/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../styles/layers/hrUpdated.css" />
+    <!-- Base CSS style -->
+    <link rel="stylesheet" href="../../styles/index.css" />
+  </head>
 
-<body>
-    <div id="navbar-elm"></div>
-    <div class="center-section my-5">
-        <h4 class="my-2 table-title"><i class="fa-solid fa-user"></i> Profile</h4>
+  <!-- <body class="darkmode"> -->
+
+  <body>
+    <div class="mx-auto">
+      <div id="navbar-elm" class="mx-auto"></div>
+    </div>
+
+    <!-- html here -->
+
+    <div class="hr container bg-body-secondary my-5 mx-auto">
+      <div class="hr-welcome py-3 emp-title">
+        <h3>HR Portal</h3>
+        <p><span class="emp-name">Welcome, HR!</span></p>
+      </div>
+      <!-- Navigation Tabs -->
+      <ul class="nav nav-tabs mb-2" id="center-tabs">
+        <li class="nav-item">
+          <a class="nav-link active"
+            ><i class="fa-solid fa-user"></i> Profile</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"
+            ><i class="fa-solid fa-table-columns"></i> Dashboard</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"><i class="fa-solid fa-chart-pie"></i> Reports</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"><i class="fa-solid fa-gear"></i> Settings</a>
+        </li>
+      </ul>
+      <hr />
+      <!-- User Profile -->
+      <div class="center-section my-5">
+        <h4 class="my-2 table-title">
+          <i class="fa-solid fa-user"></i> Profile
+        </h4>
         <div id="profile"></div>
-    </div>
-    <div class="hr container-fluid">
-        <ul class="nav nav-tabs py-4" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active text-black fw-bold fs-5" id="dashboard-tab" data-bs-toggle="tab"
-                    data-bs-target="#dashboard-section" type="button" role="tab" aria-controls="dashboard-section"
-                    aria-selected="true">Dashboard</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link text-black fw-bold fs-5" id="reports-tab" data-bs-toggle="tab"
-                    data-bs-target="#reports-section" type="button" role="tab" aria-controls="reports-section"
-                    aria-selected="false">Reports</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link text-black fw-bold fs-5" id="reports-tab" data-bs-toggle="tab"
-                    data-bs-target="#reports-section" type="button" role="tab" aria-controls="reports-section"
-                    aria-selected="false">setting</button>
-            </li>
-        </ul>
-
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="dashboard-section" role="tabpanel"
-                aria-labelledby="dashboard-tab">
-                <div class="row">
-                    <div id="employee-management-section" class="col-12 mb-3">
-                        <div class="p-3 border rounded w-100">
-                            <h4 class="mb-3 fw-bold fs-1 text-center py-4">Employee Management</h4>
-                            <div class="d-flex justify-content-around gap-4 align-items-center mb-5">
-                                <input id="searchInput" type="text" class="form-control   p-2"
-                                    placeholder="Search employee...">
-
-
-                                <select id="searchCriteria" class="form-select w-50  me-2">
-                                    <option value="name">Name</option>
-                                    <option value="department">Department</option>
-                                </select>
-
-
-
-
-                            </div>
-
-                            <div class="table-responsive rounded-2">
-                                <table class="table table-striped ">
-                                    <thead class="sticky-top">
-                                        <tr>
-
-                                            <th scope="col" class="table-header">Emp ID</th>
-                                            <th scope="col" class="table-header">Name</th>
-                                            <th scope="col" class="table-header">Department</th>
-                                            <th scope="col" class="table-header">Status</th>
-                                            <th scope="col" class="table-header">Leave Balance</th>
-                                            <th scope="col" id="increase" class="table-header">Increase</th>
-                                            <th scope="col" id="descrese" class="table-header">DeCrease</th>
-                                            <th scope="col" id="awards" class="table-header">Awards</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="employee-table-body"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-
-            <div class="tab-pane fade" id="reports-section" role="tabpanel" aria-labelledby="reports-tab">
-                <h2 class="text-center py-5 fw-bold fs-1 mb-4">Company Reports</h2>
-
-                <div class="text-start  mt-3">
-                    <h4 class="fw-bold fs-1">Total Employees: <span id="totalEmployees">0</span></h4>
-                </div>
-
-                <div class="row mb-3 py-5">
-                    <div class="col-md-4">
-                        <label class="form-label">Department</label>
-                        <select id="filterDepartment" class="form-select">
-                            <option value="">All</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Month</label>
-                        <select id="filterMonth" class="form-select">
-                            <option value="">All</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Status</label>
-                        <select id="filterStatus" class="form-select">
-                            <option value="">All</option>
-                            <option value="Present">Present</option>
-                            <option value="Late">Late</option>
-                            <option value="Absent">Absent</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row text-center mb-5 py-5 ">
-                    <div class="col-md-4">
-                        <canvas id="barChart"></canvas>
-                    </div>
-                    <div class="col-md-4">
-                        <canvas id="pieChart"></canvas>
-                    </div>
-                    <div class="col-md-4">
-                        <canvas id="lineChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="text-end mb-3">
-                    <button id="exportExcel" class="btn btn-success me-2">Export to Excel</button>
-                    <button id="exportPDF" class="btn btn-danger">Export to PDF</button>
-                </div>
-
-
-                <div class="table-responsive rounded-2">
-                    <table class="table table-striped">
-                        <thead class="sticky-top">
-                            <tr>
-                                <th scope="col" class="table-header">Name</th>
-                                <th scope="col" class="table-header">Department</th>
-                                <th scope="col" class="table-header">Date</th>
-                                <th scope="col" class="table-header">Status</th>
-                                <th scope="col" class="table-header">Notes</th>
-                            </tr>
-                        </thead>
-                        <tbody id="reportTableBody"></tbody>
-                    </table>
-                </div>
-            </div>
+      </div>
+      <!-- Dashboard -->
+      <div class="center-section my-5" style="display: none">
+        <div style="overflow-x: auto" class="py-3">
+          <h4 class="mb-0 table-title">
+            <i class="fa-solid fa-table-columns"></i> Dashboard
+          </h4>
+          <div class="hr-input-container mt-5 mb-3 d-flex">
+            <input
+              id="searchInput"
+              type="text"
+              class="form-control p-2 me-2"
+              placeholder="search..."
+            />
+          </div>
+          <table class="table mb-5">
+            <thead>
+              <tr>
+                <th scope="col" class="table-header">ID</th>
+                <th scope="col" class="table-header">Name</th>
+                <th scope="col" class="table-header">Department</th>
+                <th scope="col" class="table-header">Status</th>
+                <th scope="col" class="table-header">Leave Balance</th>
+              </tr>
+            </thead>
+            <tbody id="employee-table-body"></tbody>
+          </table>
         </div>
+        <div class="d-flex justify-content-center">
+          <div class="pagination" id="pagination-dashboard"></div>
+        </div>
+      </div>
+      <!-- Reports -->
+      <div class="center-section my-5" style="display: none">
+        <div style="overflow-x: auto" class="py-3">
+          <h4 class="mb-0 table-title">
+            <i class="fa-solid fa-chart-pie"></i> Reports
+          </h4>
+          <div class="text-start mt-3">
+            <h4 class="fw-bold emp-title">
+              Total Employees <span id="totalEmployees">0</span>
+            </h4>
+          </div>
+
+          <div class="row text-center mb-5 py-5">
+            <div class="col-md-4 my-2 mx-auto">
+              <canvas id="barChart"></canvas>
+            </div>
+            <div class="col-md-4 my-2 mx-auto">
+              <canvas id="lineChart"></canvas>
+            </div>
+            <div class="col-md-4 my-2 mx-auto">
+              <canvas id="pieChart"></canvas>
+            </div>
+          </div>
+          <div class="row mb-3 py-5">
+            <div class="col-md-4">
+              <label class="form-label">Department</label>
+              <select id="filterDepartment" class="form-select">
+                <option value="">All</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Month</label>
+              <select id="filterMonth" class="form-select">
+                <option value="">All</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Status</label>
+              <select id="filterStatus" class="form-select">
+                <option value="">All</option>
+                <option value="Present">Present</option>
+                <option value="Late">Late</option>
+                <option value="Absent">Absent</option>
+              </select>
+            </div>
+          </div>
+          <div class="text-end mb-3">
+            <button id="exportExcel" class="btn btn-success me-2">
+              Export as CSV
+            </button>
+            <button id="exportPDF" class="btn btn-danger">Export as PDF</button>
+          </div>
+          <table class="table" id="reportTable">
+            <thead>
+              <tr>
+                <th scope="col" class="table-header">Name</th>
+                <th scope="col" class="table-header">Department</th>
+                <th scope="col" class="table-header">Date</th>
+                <th scope="col" class="table-header">Status</th>
+                <th scope="col" class="table-header">Notes</th>
+              </tr>
+            </thead>
+            <tbody id="reportTableBody"></tbody>
+          </table>
+          <div class="d-flex justify-content-center">
+            <div class="pagination" id="pagination-reports-hr"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Settings -->
+      <div class="center-section my-5" style="display: none">
+        <div style="overflow-x: auto" class="py-3">
+          <h4 class="mb-0 table-title">
+            <i class="fa-solid fa-gear"></i> Settings
+          </h4>
+          <div class="settings-card my-5 mx-auto">
+            <h5 class="emp-title mb-5">
+              <i class="fa-solid fa-star"></i>
+              Ideal Employee Card
+            </h5>
+            <div id="ideal-Employee"></div>
+          </div>
+          <div class="settings-card my-5 mx-auto">
+            <h5 class="emp-title mb-5">
+              <i class="fa-solid fa-clock"></i>
+              Over Time Settings
+            </h5>
+            <div class="row mx-auto">
+              <div class="settings-input col mx-auto my-1">
+                <label for="bonus-workday"> Bonus % workday (rate/hour) </label>
+                <input
+                  id="bonus-workday"
+                  name="bonus-workday"
+                  type="number"
+                  class="form-control OverTime"
+                  min="0"
+                  max="5"
+                  step="0.01"
+                  value="1.25"
+                />
+              </div>
+              <div class="settings-input col mx-auto my-1">
+                <label for="bonus-holiday"> Bonus % holiday (rate/hour) </label>
+                <input
+                  id="bonus-holiday"
+                  name="bonus-holiday"
+                  type="number"
+                  class="form-control OverTime"
+                  min="0"
+                  max="5"
+                  step="0.01"
+                  value="1.25"
+                />
+              </div>
+              <div class="settings-input col mx-auto my-1">
+                <label for="settings-holiday1"> Holiday 1 </label>
+                <select
+                  id="settings-holiday1"
+                  name="settings-holiday1"
+                  class="form-select OverTime"
+                  aria-label="Default select example"
+                >
+                  <option value="fri" selected>Friday</option>
+                  <option value="sat">Saturday</option>
+                  <option value="sun">Sunday</option>
+                  <option value="mon">Monday</option>
+                  <option value="tue">Tuesday</option>
+                  <option value="wed">Wednesday</option>
+                  <option value="thu">Thursday</option>
+                </select>
+              </div>
+              <div class="settings-input col mx-auto my-1">
+                <label for="settings-holiday2"> Holiday 2 </label>
+                <select
+                  id="settings-holiday2"
+                  name="settings-holiday2"
+                  class="form-select OverTime"
+                  aria-label="Default select example"
+                >
+                  <option value="fri">Friday</option>
+                  <option value="sat" selected>Saturday</option>
+                  <option value="sun">Sunday</option>
+                  <option value="mon">Monday</option>
+                  <option value="tue">Tuesday</option>
+                  <option value="wed">Wednesday</option>
+                  <option value="thu">Thursday</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="settings-card my-5 mx-auto">
+            <h5 class="emp-title mb-5">
+              <i class="fa-solid fa-person-walking-arrow-right"></i>
+              Leave Settings
+            </h5>
+            <div class="row mx-auto">
+              <h6>Daily Deductions Rate %</h6>
+              <div class="settings-input col mx-auto my-1">
+                <label for="late-1"> 16→30 min late </label>
+                <input
+                  id="late-1"
+                  name="late-1"
+                  type="number"
+                  class="form-control TaskLeave"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="5"
+                />
+              </div>
+              <div class="settings-input col mx-auto my-1">
+                <label for="late-2"> 31→60 min late </label>
+                <input
+                  id="late-2"
+                  name="late-2"
+                  type="number"
+                  class="form-control TaskLeave"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="10"
+                />
+              </div>
+              <div class="settings-input col mx-auto my-1">
+                <label for="late-3"> 61→120 min late </label>
+                <input
+                  id="late-3"
+                  name="late-3"
+                  type="number"
+                  class="form-control TaskLeave"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="20"
+                />
+              </div>
+              <div class="settings-input col mx-auto my-1">
+                <label for="late-4"> Absent </label>
+                <input
+                  id="late-4"
+                  name="late-4"
+                  type="number"
+                  class="form-control TaskLeave"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="100"
+                />
+              </div>
+            </div>
+            <hr class="my-5" />
+            <div class="row mx-auto">
+              <h6>Max Salary Deduction</h6>
+              <div class="settings-input col mx-auto my-1">
+                <label for="max-month-deduction">
+                  Monthly Deduction % from total salary
+                </label>
+                <input
+                  id="max-month-deduction"
+                  name="max-month-deduction"
+                  type="number"
+                  class="form-control TaskLeave"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="25"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="settings-card my-5 mx-auto">
+            <h5 class="emp-title mb-5">
+              <i class="fa-solid fa-list-check"></i>
+              Task Settings
+            </h5>
+            <div class="row mx-auto">
+              <h6>Daily Deductions Rate %</h6>
+              <div class="settings-input col mx-auto my-1">
+                <label class="task-level-low mb-2" for="settings-low">
+                  Low
+                </label>
+                <input
+                  id="settings-low"
+                  name="settings-low"
+                  type="number"
+                  class="form-control TaskQouta"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="5"
+                />
+              </div>
+              <div class="settings-input col mx-auto my-1">
+                <label class="task-level-medium mb-2" for="settings-medium">
+                  Medium
+                </label>
+                <input
+                  id="settings-medium"
+                  name="settings-medium"
+                  type="number"
+                  class="form-control TaskQouta"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="8"
+                />
+              </div>
+              <div class="settings-input col mx-auto my-1">
+                <label class="task-level-high mb-2" for="settings-high">
+                  High
+                </label>
+                <input
+                  id="settings-high"
+                  name="settings-high"
+                  type="number"
+                  class="form-control TaskQouta"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="12"
+                />
+              </div>
+              <div class="settings-input col mx-auto my-1">
+                <label class="task-level-critical mb-2" for="settings-critical">
+                  Critical
+                </label>
+                <input
+                  id="settings-critical"
+                  name="settings-critical"
+                  type="number"
+                  class="form-control TaskQouta"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="15"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
+    <!-- JS Tags -->
     <script src="../../frameworks/bootstrap/js/bootstrap.bundle.js"></script>
-    <script type="module" src="../../scripts/layers/hrFunctions.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</body>
+    <!-- Bootstrap JS -->
+    <!-- PDF plugins -->
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+    <!-- jsPDF AutoTable plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+    <script
+      type="module"
+      src="../../scripts/layers/hrFunctionsUpdated.js"
+    ></script>
+    <!-- HR JS -->
+    <!-- Navigation of Content -->
+    <script>
+      const tabs = document.querySelectorAll("#center-tabs .nav-link");
+      const sections = document.querySelectorAll(".center-section");
+
+      tabs.forEach((tab, index) => {
+        tab.style.cursor = "pointer";
+
+        tab.addEventListener("click", () => {
+          sections.forEach((sec) => (sec.style.display = "none"));
+          tabs.forEach((t) => t.classList.remove("active"));
+
+          tab.classList.add("active");
+          sections[index].style.display = "block";
+        });
+      });
+    </script>
+    <!-- Charts JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </body>
 </html>
